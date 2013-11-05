@@ -2,112 +2,76 @@ define("tutor/Tutor", ["amber_vm/smalltalk", "amber_vm/nil", "amber_vm/_st", "am
 smalltalk.addPackage('Tutor');
 smalltalk.packages["Tutor"].transport = {"type":"amd","amdNamespace":"tutor"};
 
-smalltalk.addClass('TwiddlerTutor', smalltalk.Widget, ['count', 'header'], 'Tutor');
-smalltalk.TwiddlerTutor.comment="This is a trivial Widget example mimicking the classic Counter example in Seaside.\x0aIn order to play with it, just evaluate the doit below in a workspace.\x0aThen take a look in the HTML document above the IDE.\x0a\x0a\x09\x09Counter tryExample";
+smalltalk.addClass('Tutor', smalltalk.Widget, ['count', 'header', 'root'], 'Tutor');
 smalltalk.addMethod(
 smalltalk.method({
-selector: "decrease",
-category: 'actions',
+selector: "remove",
+category: 'not yet classified',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
-self["@count"]=_st(self["@count"]).__minus((1));
-_st(self["@header"])._contents_((function(html){
-return smalltalk.withContext(function($ctx2) {
-return _st(html)._with_(_st(self["@count"])._asString());
-}, function($ctx2) {$ctx2.fillBlock({html:html},$ctx1,1)})}));
-return self}, function($ctx1) {$ctx1.fill(self,"decrease",{},smalltalk.TwiddlerTutor)})},
+_st(_st(self["@root"])._asJQuery())._detach();
+return self}, function($ctx1) {$ctx1.fill(self,"remove",{},smalltalk.Tutor)})},
 args: [],
-source: "decrease\x0a\x09count := count - 1.\x0a\x09header contents: [:html | html with: count asString]",
-messageSends: ["-", "contents:", "with:", "asString"],
+source: "remove\x0a\x09\x22removes itself from the DOM\x22\x0a\x0a\x09root asJQuery detach.",
+messageSends: ["detach", "asJQuery"],
 referencedClasses: []
 }),
-smalltalk.TwiddlerTutor);
-
-smalltalk.addMethod(
-smalltalk.method({
-selector: "increase",
-category: 'actions',
-fn: function (){
-var self=this;
-return smalltalk.withContext(function($ctx1) { 
-self["@count"]=_st(self["@count"]).__plus((1));
-_st(self["@header"])._contents_((function(html){
-return smalltalk.withContext(function($ctx2) {
-return _st(html)._with_(_st(self["@count"])._asString());
-}, function($ctx2) {$ctx2.fillBlock({html:html},$ctx1,1)})}));
-return self}, function($ctx1) {$ctx1.fill(self,"increase",{},smalltalk.TwiddlerTutor)})},
-args: [],
-source: "increase\x0a\x09count := count + 1.\x0a\x09header contents: [:html | html with: count asString]",
-messageSends: ["+", "contents:", "with:", "asString"],
-referencedClasses: []
-}),
-smalltalk.TwiddlerTutor);
-
-smalltalk.addMethod(
-smalltalk.method({
-selector: "initialize",
-category: 'initialization',
-fn: function (){
-var self=this;
-return smalltalk.withContext(function($ctx1) { 
-smalltalk.TwiddlerTutor.superclass.fn.prototype._initialize.apply(_st(self), []);
-self["@count"]=(0);
-return self}, function($ctx1) {$ctx1.fill(self,"initialize",{},smalltalk.TwiddlerTutor)})},
-args: [],
-source: "initialize\x0a\x09super initialize.\x0a\x09count := 0",
-messageSends: ["initialize"],
-referencedClasses: []
-}),
-smalltalk.TwiddlerTutor);
+smalltalk.Tutor);
 
 smalltalk.addMethod(
 smalltalk.method({
 selector: "renderOn:",
-category: 'rendering',
+category: 'not yet classified',
 fn: function (html){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
-var $1,$2,$3,$4,$5,$6;
-$1=_st(html)._h1();
-_st($1)._with_(_st(self["@count"])._asString());
-$2=_st($1)._yourself();
-self["@header"]=$2;
-$3=_st(html)._button();
-_st($3)._with_("++");
-$4=_st($3)._onClick_((function(){
+var $1,$2;
+$1=_st(html)._div();
+_st($1)._id_("keypad");
+_st($1)._style_("border: 1px solid black; border-radius: 10px; width: 120px; height: 220px;");
+$2=_st($1)._with_((function(){
 return smalltalk.withContext(function($ctx2) {
-return self._increase();
+return _st(_st(html)._div())._with_((function(){
+return smalltalk.withContext(function($ctx3) {
+_st(_st(html)._button())._with_("");
+_st(_st(html)._button())._with_("");
+return _st(_st(html)._button())._with_("");
+}, function($ctx3) {$ctx3.fillBlock({},$ctx2,2)})}));
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
-$5=_st(html)._button();
-_st($5)._with_("--");
-$6=_st($5)._onClick_((function(){
-return smalltalk.withContext(function($ctx2) {
-return self._decrease();
-}, function($ctx2) {$ctx2.fillBlock({},$ctx1,2)})}));
-return self}, function($ctx1) {$ctx1.fill(self,"renderOn:",{html:html},smalltalk.TwiddlerTutor)})},
+self["@root"]=$2;
+return self}, function($ctx1) {$ctx1.fill(self,"renderOn:",{html:html},smalltalk.Tutor)})},
 args: ["html"],
-source: "renderOn: html\x0a\x09header := html h1\x0a\x09with: count asString;\x0a\x09yourself.\x0a\x09html button\x0a\x09with: '++';\x0a\x09onClick: [self increase].\x0a\x09html button\x0a\x09with: '--';\x0a\x09onClick: [self decrease]",
-messageSends: ["with:", "h1", "asString", "yourself", "button", "onClick:", "increase", "decrease"],
+source: "renderOn: html\x0a\x09\x22Draw the keypad\x22\x0a\x0a\x09root := html div\x0a\x09\x09id: 'keypad';\x0a\x09\x09style: 'border: 1px solid black; border-radius: 10px; width: 120px; height: 220px;' ;\x0a\x09\x09with: [ \x0a\x09\x09\x09html div with: [\x0a\x09\x09\x09\x0a\x09\x09\x09\x09html button with: ''.\x0a\x09\x09\x09\x09html button with: ''.\x0a\x09\x09\x09\x09html button with: ''.\x0a\x09\x09\x09]\x0a\x09\x09].\x0a\x09\x09",
+messageSends: ["id:", "div", "style:", "with:", "button"],
 referencedClasses: []
 }),
-smalltalk.TwiddlerTutor);
+smalltalk.Tutor);
 
 
+smalltalk.Tutor.klass.iVarNames = ['instance'];
 smalltalk.addMethod(
 smalltalk.method({
-selector: "tryExample",
-category: 'example',
+selector: "begin",
+category: 'not yet classified',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
-_st(self._new())._appendToJQuery_("body"._asJQuery());
-return self}, function($ctx1) {$ctx1.fill(self,"tryExample",{},smalltalk.TwiddlerTutor.klass)})},
+_st(_st("<button>Re-Create</button>"._asJQuery())._click_((function(){
+return smalltalk.withContext(function($ctx2) {
+_st(self["@instance"])._remove();
+self["@instance"]=self._new();
+self["@instance"];
+return _st(self["@instance"])._appendToJQuery_("body"._asJQuery());
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})})))._appendTo_("body"._asJQuery());
+self["@instance"]=self._new();
+_st(self["@instance"])._appendToJQuery_("body"._asJQuery());
+return self}, function($ctx1) {$ctx1.fill(self,"begin",{},smalltalk.Tutor.klass)})},
 args: [],
-source: "tryExample\x0a\x09\x22In order to play with the Counter, just select the\x0a\x09doit below and press the Do it button. Then take a\x0a\x09look in the HTML document above the IDE.\x22\x0a\x0a\x09\x22Counter tryExample\x22\x0a\x09\x09self new appendToJQuery: 'body' asJQuery",
-messageSends: ["appendToJQuery:", "new", "asJQuery"],
+source: "begin\x0a\x09\x22create the keypad and embed it into the page\x22\x0a\x09\x0a\x09('<button>Re-Create</button>' asJQuery click: [\x0a\x09\x09instance remove. \x0a\x09\x09instance := self new.\x0a\x09\x09instance appendToJQuery: 'body' asJQuery. \x0a\x09]) appendTo: 'body' asJQuery.\x0a\x09\x0a\x09instance := self new.\x0a\x09instance appendToJQuery: 'body' asJQuery. ",
+messageSends: ["appendTo:", "click:", "asJQuery", "remove", "new", "appendToJQuery:"],
 referencedClasses: []
 }),
-smalltalk.TwiddlerTutor.klass);
+smalltalk.Tutor.klass);
 
 });

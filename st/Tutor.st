@@ -1,55 +1,46 @@
 Smalltalk current createPackage: 'Tutor'!
-Widget subclass: #TwiddlerTutor
-	instanceVariableNames: 'count header'
+Widget subclass: #Tutor
+	instanceVariableNames: 'count header root'
 	package: 'Tutor'!
-!TwiddlerTutor commentStamp!
-This is a trivial Widget example mimicking the classic Counter example in Seaside.
-In order to play with it, just evaluate the doit below in a workspace.
-Then take a look in the HTML document above the IDE.
 
-		Counter tryExample!
+!Tutor methodsFor: 'not yet classified'!
 
-!TwiddlerTutor methodsFor: 'actions'!
+remove
+	"removes itself from the DOM"
 
-decrease
-	count := count - 1.
-	header contents: [:html | html with: count asString]
+	root asJQuery detach.
 !
 
-increase
-	count := count + 1.
-	header contents: [:html | html with: count asString]
-! !
-
-!TwiddlerTutor methodsFor: 'initialization'!
-
-initialize
-	super initialize.
-	count := 0
-! !
-
-!TwiddlerTutor methodsFor: 'rendering'!
-
 renderOn: html
-	header := html h1
-	with: count asString;
-	yourself.
-	html button
-	with: '++';
-	onClick: [self increase].
-	html button
-	with: '--';
-	onClick: [self decrease]
+	"Draw the keypad"
+
+	root := html div
+		id: 'keypad';
+		style: 'border: 1px solid black; border-radius: 10px; width: 120px; height: 220px;' ;
+		with: [ 
+			html div with: [
+			
+				html button with: ''.
+				html button with: ''.
+				html button with: ''.
+			]
+		].
 ! !
 
-!TwiddlerTutor class methodsFor: 'example'!
+Tutor class instanceVariableNames: 'instance'!
 
-tryExample
-	"In order to play with the Counter, just select the
-	doit below and press the Do it button. Then take a
-	look in the HTML document above the IDE."
+!Tutor class methodsFor: 'not yet classified'!
 
-	"Counter tryExample"
-		self new appendToJQuery: 'body' asJQuery
+begin
+	"create the keypad and embed it into the page"
+	
+	('<button>Re-Create</button>' asJQuery click: [
+		instance remove. 
+		instance := self new.
+		instance appendToJQuery: 'body' asJQuery. 
+	]) appendTo: 'body' asJQuery.
+	
+	instance := self new.
+	instance appendToJQuery: 'body' asJQuery.
 ! !
 
