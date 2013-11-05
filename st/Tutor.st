@@ -14,6 +14,10 @@ initialize
 	4 timesRepeat:[keys add: Array new.].
 !
 
+keys
+	^ keys.
+!
+
 remove
 	"removes itself from the DOM"
 
@@ -62,16 +66,14 @@ renderOn: html
 					html div class: 'mod-button'; style: 'left: 80px; top: 20px;'.
 					html div class: 'mod-button'; style: 'left: 100px; top: 40px;'.
 					
-
-					(keys at: 1 ifAbsent: 'Flo') at: l put: (html div class: 'key'; style: 'left: 20px; top: 100px').
-					(keys at: 1 ifAbsent: 'Flo') at: m put: (html div class: 'key'; style: 'left: 60px; top: 100px').
-					(keys at: 1 ifAbsent: 'Flo') at: l put: (html div class: 'key'; style: 'left: 100px; top: 100px').
+					
+					1 to: 4 do: [:row |  
+						l to: r do: [:col |
+							(keys at: row ifAbsent: 'Flo') at: col put: (html div class: 'key'; style: 'left:', (20 + (col - 1 * 40) asString), 'px; top:',  (100 + (row - 1 * 20) asString) , 'px').
+						].
+					].
 				].
 		].
-!
-
-keys
-	^ keys.
 ! !
 
 Tutor class instanceVariableNames: 'instance'!

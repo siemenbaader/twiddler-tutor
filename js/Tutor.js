@@ -68,7 +68,7 @@ category: 'not yet classified',
 fn: function (html){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
-var $1,$3,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$4,$2;
+var $1,$3,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$4,$2;
 $1=_st(html)._div();
 _st($1)._class_("keypad");
 $2=_st($1)._with_((function(){
@@ -94,26 +94,24 @@ $11=_st(html)._div();
 _st($11)._class_("mod-button");
 $12=_st($11)._style_("left: 100px; top: 40px;");
 $12;
+return (1)._to_do_((4),(function(row){
+return smalltalk.withContext(function($ctx4) {
+return _st(self["@l"])._to_do_(self["@r"],(function(col){
+return smalltalk.withContext(function($ctx5) {
 $13=_st(html)._div();
 _st($13)._class_("key");
-$14=_st($13)._style_("left: 20px; top: 100px");
-_st(_st(self["@keys"])._at_ifAbsent_((1),"Flo"))._at_put_(self["@l"],$14);
-$15=_st(html)._div();
-_st($15)._class_("key");
-$16=_st($15)._style_("left: 60px; top: 100px");
-_st(_st(self["@keys"])._at_ifAbsent_((1),"Flo"))._at_put_(self["@m"],$16);
-$17=_st(html)._div();
-_st($17)._class_("key");
-$18=_st($17)._style_("left: 100px; top: 100px");
-return _st(_st(self["@keys"])._at_ifAbsent_((1),"Flo"))._at_put_(self["@l"],$18);
+$14=_st($13)._style_(_st(_st(_st("left:".__comma((20).__plus(_st(_st(_st(col).__minus((1))).__star((40)))._asString()))).__comma("px; top:")).__comma((100).__plus(_st(_st(_st(row).__minus((1))).__star((20)))._asString()))).__comma("px"));
+return _st(_st(self["@keys"])._at_ifAbsent_(row,"Flo"))._at_put_(col,$14);
+}, function($ctx5) {$ctx5.fillBlock({col:col},$ctx4,4)})}));
+}, function($ctx4) {$ctx4.fillBlock({row:row},$ctx3,3)})}));
 }, function($ctx3) {$ctx3.fillBlock({},$ctx2,2)})}));
 return $4;
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
 self["@root"]=$2;
 return self}, function($ctx1) {$ctx1.fill(self,"renderOn:",{html:html},smalltalk.Tutor)})},
 args: ["html"],
-source: "renderOn: html\x0a\x09\x22Draw the keypad\x22\x0a\x0a\x09root := html div\x0a\x09\x09class: 'keypad' ;\x0a\x09\x09with: [\x0a\x09\x09\x09html style: \x0a\x09\x09\x09\x09'.keypad .border {\x0a\x09\x09\x09\x09\x09box-sizing: border-box;\x0a\x09\x09\x09\x09\x09border: 1px solid black;\x0a\x09\x09\x09\x09\x09border-radius: 10px; \x0a\x09\x09\x09\x09\x09width: 140px; height: 260px;\x0a\x09\x09\x09\x09\x09position: relative;\x0a\x09\x09\x09\x09}\x0a\x09\x09\x09\x09\x0a\x09\x09\x09\x09.keypad .mod-button {\x0a\x09\x09\x09\x09\x09box-sizing: border-box;\x0a\x09\x09\x09\x09\x09position: absolute;\x0a\x09\x09\x09\x09\x09border: 1px solid gray;\x0a\x09\x09\x09\x09\x09height: 20px;\x0a\x09\x09\x09\x09\x09width: 20px;\x0a\x09\x09\x09\x09\x09border-radius: 10px;\x0a\x09\x09\x09\x09}\x0a\x09\x09\x09\x09\x0a\x09\x09\x09\x09.keypad .key {\x0a\x09\x09\x09\x09\x09box-sizing: border-box;\x0a\x09\x09\x09\x09\x09position: absolute;\x0a\x09\x09\x09\x09\x09border: 1px solid black;\x0a\x09\x09\x09\x09\x09height: 20px;\x0a\x09\x09\x09\x09\x09width: 20px;\x0a\x09\x09\x09\x09\x09border-radius: 4px;\x0a\x09\x09\x09\x09}\x0a\x09\x09\x09\x09'.\x0a\x09\x09\x09\x09\x0a\x09\x09\x09html div \x0a\x09\x09\x09\x09class: 'border'; \x0a\x09\x09\x09\x09with: [ \x0a\x09\x09\x09\x09\x09html div class: 'mod-button'; style: 'left: 20px; top: 40px;'.\x0a\x09\x09\x09\x09\x09html div class: 'mod-button'; style: 'left: 40px; top: 20px;'.\x0a\x09\x09\x09\x09\x09html div class: 'mod-button'; style: 'left: 80px; top: 20px;'.\x0a\x09\x09\x09\x09\x09html div class: 'mod-button'; style: 'left: 100px; top: 40px;'.\x0a\x09\x09\x09\x09\x09\x0a\x0a\x09\x09\x09\x09\x09(keys at: 1 ifAbsent: 'Flo') at: l put: (html div class: 'key'; style: 'left: 20px; top: 100px').\x0a\x09\x09\x09\x09\x09(keys at: 1 ifAbsent: 'Flo') at: m put: (html div class: 'key'; style: 'left: 60px; top: 100px').\x0a\x09\x09\x09\x09\x09(keys at: 1 ifAbsent: 'Flo') at: l put: (html div class: 'key'; style: 'left: 100px; top: 100px').\x0a\x09\x09\x09\x09].\x0a\x09\x09].\x0a\x09\x09",
-messageSends: ["class:", "div", "with:", "style:", "at:put:", "at:ifAbsent:"],
+source: "renderOn: html\x0a\x09\x22Draw the keypad\x22\x0a\x0a\x09root := html div\x0a\x09\x09class: 'keypad' ;\x0a\x09\x09with: [\x0a\x09\x09\x09html style: \x0a\x09\x09\x09\x09'.keypad .border {\x0a\x09\x09\x09\x09\x09box-sizing: border-box;\x0a\x09\x09\x09\x09\x09border: 1px solid black;\x0a\x09\x09\x09\x09\x09border-radius: 10px; \x0a\x09\x09\x09\x09\x09width: 140px; height: 260px;\x0a\x09\x09\x09\x09\x09position: relative;\x0a\x09\x09\x09\x09}\x0a\x09\x09\x09\x09\x0a\x09\x09\x09\x09.keypad .mod-button {\x0a\x09\x09\x09\x09\x09box-sizing: border-box;\x0a\x09\x09\x09\x09\x09position: absolute;\x0a\x09\x09\x09\x09\x09border: 1px solid gray;\x0a\x09\x09\x09\x09\x09height: 20px;\x0a\x09\x09\x09\x09\x09width: 20px;\x0a\x09\x09\x09\x09\x09border-radius: 10px;\x0a\x09\x09\x09\x09}\x0a\x09\x09\x09\x09\x0a\x09\x09\x09\x09.keypad .key {\x0a\x09\x09\x09\x09\x09box-sizing: border-box;\x0a\x09\x09\x09\x09\x09position: absolute;\x0a\x09\x09\x09\x09\x09border: 1px solid black;\x0a\x09\x09\x09\x09\x09height: 20px;\x0a\x09\x09\x09\x09\x09width: 20px;\x0a\x09\x09\x09\x09\x09border-radius: 4px;\x0a\x09\x09\x09\x09}\x0a\x09\x09\x09\x09'.\x0a\x09\x09\x09\x09\x0a\x09\x09\x09html div \x0a\x09\x09\x09\x09class: 'border'; \x0a\x09\x09\x09\x09with: [ \x0a\x09\x09\x09\x09\x09html div class: 'mod-button'; style: 'left: 20px; top: 40px;'.\x0a\x09\x09\x09\x09\x09html div class: 'mod-button'; style: 'left: 40px; top: 20px;'.\x0a\x09\x09\x09\x09\x09html div class: 'mod-button'; style: 'left: 80px; top: 20px;'.\x0a\x09\x09\x09\x09\x09html div class: 'mod-button'; style: 'left: 100px; top: 40px;'.\x0a\x09\x09\x09\x09\x09\x0a\x09\x09\x09\x09\x09\x0a\x09\x09\x09\x09\x091 to: 4 do: [:row |  \x0a\x09\x09\x09\x09\x09\x09l to: r do: [:col |\x0a\x09\x09\x09\x09\x09\x09\x09(keys at: row ifAbsent: 'Flo') at: col put: (html div class: 'key'; style: 'left:', (20 + (col - 1 * 40) asString), 'px; top:',  (100 + (row - 1 * 20) asString) , 'px').\x0a\x09\x09\x09\x09\x09\x09].\x0a\x09\x09\x09\x09\x09].\x0a\x09\x09\x09\x09].\x0a\x09\x09].\x0a\x09\x09",
+messageSends: ["class:", "div", "with:", "style:", "to:do:", "at:put:", "at:ifAbsent:", ",", "+", "asString", "*", "-"],
 referencedClasses: []
 }),
 smalltalk.Tutor);
