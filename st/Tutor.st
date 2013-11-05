@@ -15,15 +15,50 @@ renderOn: html
 	"Draw the keypad"
 
 	root := html div
-		id: 'keypad';
-		style: 'border: 1px solid black; border-radius: 10px; width: 120px; height: 220px;' ;
-		with: [ 
-			html div with: [
-			
-				html button with: ''.
-				html button with: ''.
-				html button with: ''.
-			]
+		class: 'keypad' ;
+		with: [
+			html style: 
+				'.keypad .border {
+					box-sizing: border-box;
+					border: 1px solid black;
+					border-radius: 10px; 
+					width: 140px; height: 260px;
+					position: relative;
+				}
+				
+				.keypad .mod-button {
+					box-sizing: border-box;
+					position: absolute;
+					border: 1px solid gray;
+					height: 20px;
+					width: 20px;
+					border-radius: 10px;
+				}
+				
+				.keypad .key {
+					box-sizing: border-box;
+					position: absolute;
+					border: 1px solid black;
+					height: 20px;
+					width: 20px;
+					border-radius: 4px;
+				}
+				'.
+				
+			html div 
+				class: 'border'; 
+				with: [ 
+					html div class: 'mod-button'; style: 'left: 20px; top: 40px;'.
+					html div class: 'mod-button'; style: 'left: 40px; top: 20px;'.
+					html div class: 'mod-button'; style: 'left: 80px; top: 20px;'.
+					html div class: 'mod-button'; style: 'left: 100px; top: 40px;'.
+					
+
+					html div class: 'key'; style: 'left: 20px; top: 100px'.
+					html div class: 'key'; style: 'left: 60px; top: 100px'.
+					html div class: 'key'; style: 'left: 100px; top: 100px'.
+					
+				].
 		].
 ! !
 

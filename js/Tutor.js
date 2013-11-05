@@ -26,24 +26,52 @@ category: 'not yet classified',
 fn: function (html){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
-var $1,$2;
+var $1,$3,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$4,$2;
 $1=_st(html)._div();
-_st($1)._id_("keypad");
-_st($1)._style_("border: 1px solid black; border-radius: 10px; width: 120px; height: 220px;");
+_st($1)._class_("keypad");
 $2=_st($1)._with_((function(){
 return smalltalk.withContext(function($ctx2) {
-return _st(_st(html)._div())._with_((function(){
+_st(html)._style_(".keypad .border {\x0a\x09\x09\x09\x09\x09box-sizing: border-box;\x0a\x09\x09\x09\x09\x09border: 1px solid black;\x0a\x09\x09\x09\x09\x09border-radius: 10px; \x0a\x09\x09\x09\x09\x09width: 140px; height: 260px;\x0a\x09\x09\x09\x09\x09position: relative;\x0a\x09\x09\x09\x09}\x0a\x09\x09\x09\x09\x0a\x09\x09\x09\x09.keypad .mod-button {\x0a\x09\x09\x09\x09\x09box-sizing: border-box;\x0a\x09\x09\x09\x09\x09position: absolute;\x0a\x09\x09\x09\x09\x09border: 1px solid gray;\x0a\x09\x09\x09\x09\x09height: 20px;\x0a\x09\x09\x09\x09\x09width: 20px;\x0a\x09\x09\x09\x09\x09border-radius: 10px;\x0a\x09\x09\x09\x09}\x0a\x09\x09\x09\x09\x0a\x09\x09\x09\x09.keypad .key {\x0a\x09\x09\x09\x09\x09box-sizing: border-box;\x0a\x09\x09\x09\x09\x09position: absolute;\x0a\x09\x09\x09\x09\x09border: 1px solid black;\x0a\x09\x09\x09\x09\x09height: 20px;\x0a\x09\x09\x09\x09\x09width: 20px;\x0a\x09\x09\x09\x09\x09border-radius: 4px;\x0a\x09\x09\x09\x09}\x0a\x09\x09\x09\x09");
+$3=_st(html)._div();
+_st($3)._class_("border");
+$4=_st($3)._with_((function(){
 return smalltalk.withContext(function($ctx3) {
-_st(_st(html)._button())._with_("");
-_st(_st(html)._button())._with_("");
-return _st(_st(html)._button())._with_("");
+$5=_st(html)._div();
+_st($5)._class_("mod-button");
+$6=_st($5)._style_("left: 20px; top: 40px;");
+$6;
+$7=_st(html)._div();
+_st($7)._class_("mod-button");
+$8=_st($7)._style_("left: 40px; top: 20px;");
+$8;
+$9=_st(html)._div();
+_st($9)._class_("mod-button");
+$10=_st($9)._style_("left: 80px; top: 20px;");
+$10;
+$11=_st(html)._div();
+_st($11)._class_("mod-button");
+$12=_st($11)._style_("left: 100px; top: 40px;");
+$12;
+$13=_st(html)._div();
+_st($13)._class_("key");
+$14=_st($13)._style_("left: 20px; top: 100px");
+$14;
+$15=_st(html)._div();
+_st($15)._class_("key");
+$16=_st($15)._style_("left: 60px; top: 100px");
+$16;
+$17=_st(html)._div();
+_st($17)._class_("key");
+$18=_st($17)._style_("left: 100px; top: 100px");
+return $18;
 }, function($ctx3) {$ctx3.fillBlock({},$ctx2,2)})}));
+return $4;
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
 self["@root"]=$2;
 return self}, function($ctx1) {$ctx1.fill(self,"renderOn:",{html:html},smalltalk.Tutor)})},
 args: ["html"],
-source: "renderOn: html\x0a\x09\x22Draw the keypad\x22\x0a\x0a\x09root := html div\x0a\x09\x09id: 'keypad';\x0a\x09\x09style: 'border: 1px solid black; border-radius: 10px; width: 120px; height: 220px;' ;\x0a\x09\x09with: [ \x0a\x09\x09\x09html div with: [\x0a\x09\x09\x09\x0a\x09\x09\x09\x09html button with: ''.\x0a\x09\x09\x09\x09html button with: ''.\x0a\x09\x09\x09\x09html button with: ''.\x0a\x09\x09\x09]\x0a\x09\x09].\x0a\x09\x09",
-messageSends: ["id:", "div", "style:", "with:", "button"],
+source: "renderOn: html\x0a\x09\x22Draw the keypad\x22\x0a\x0a\x09root := html div\x0a\x09\x09class: 'keypad' ;\x0a\x09\x09with: [\x0a\x09\x09\x09html style: \x0a\x09\x09\x09\x09'.keypad .border {\x0a\x09\x09\x09\x09\x09box-sizing: border-box;\x0a\x09\x09\x09\x09\x09border: 1px solid black;\x0a\x09\x09\x09\x09\x09border-radius: 10px; \x0a\x09\x09\x09\x09\x09width: 140px; height: 260px;\x0a\x09\x09\x09\x09\x09position: relative;\x0a\x09\x09\x09\x09}\x0a\x09\x09\x09\x09\x0a\x09\x09\x09\x09.keypad .mod-button {\x0a\x09\x09\x09\x09\x09box-sizing: border-box;\x0a\x09\x09\x09\x09\x09position: absolute;\x0a\x09\x09\x09\x09\x09border: 1px solid gray;\x0a\x09\x09\x09\x09\x09height: 20px;\x0a\x09\x09\x09\x09\x09width: 20px;\x0a\x09\x09\x09\x09\x09border-radius: 10px;\x0a\x09\x09\x09\x09}\x0a\x09\x09\x09\x09\x0a\x09\x09\x09\x09.keypad .key {\x0a\x09\x09\x09\x09\x09box-sizing: border-box;\x0a\x09\x09\x09\x09\x09position: absolute;\x0a\x09\x09\x09\x09\x09border: 1px solid black;\x0a\x09\x09\x09\x09\x09height: 20px;\x0a\x09\x09\x09\x09\x09width: 20px;\x0a\x09\x09\x09\x09\x09border-radius: 4px;\x0a\x09\x09\x09\x09}\x0a\x09\x09\x09\x09'.\x0a\x09\x09\x09\x09\x0a\x09\x09\x09html div \x0a\x09\x09\x09\x09class: 'border'; \x0a\x09\x09\x09\x09with: [ \x0a\x09\x09\x09\x09\x09html div class: 'mod-button'; style: 'left: 20px; top: 40px;'.\x0a\x09\x09\x09\x09\x09html div class: 'mod-button'; style: 'left: 40px; top: 20px;'.\x0a\x09\x09\x09\x09\x09html div class: 'mod-button'; style: 'left: 80px; top: 20px;'.\x0a\x09\x09\x09\x09\x09html div class: 'mod-button'; style: 'left: 100px; top: 40px;'.\x0a\x09\x09\x09\x09\x09\x0a\x0a\x09\x09\x09\x09\x09html div class: 'key'; style: 'left: 20px; top: 100px'.\x0a\x09\x09\x09\x09\x09html div class: 'key'; style: 'left: 60px; top: 100px'.\x0a\x09\x09\x09\x09\x09html div class: 'key'; style: 'left: 100px; top: 100px'.\x0a\x09\x09\x09\x09\x09\x0a\x09\x09\x09\x09].\x0a\x09\x09].\x0a\x09\x09",
+messageSends: ["class:", "div", "with:", "style:"],
 referencedClasses: []
 }),
 smalltalk.Tutor);
