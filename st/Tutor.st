@@ -1,9 +1,18 @@
 Smalltalk current createPackage: 'Tutor'!
 Widget subclass: #Tutor
-	instanceVariableNames: 'count header root'
+	instanceVariableNames: 'count header root keys l m r'
 	package: 'Tutor'!
 
 !Tutor methodsFor: 'not yet classified'!
+
+initialize
+	"comment stating purpose of message"
+	l := 1.
+	m := 2.
+	r := 3.
+	keys := Array new.
+	4 timesRepeat:[keys add: Array new.].
+!
 
 remove
 	"removes itself from the DOM"
@@ -54,12 +63,15 @@ renderOn: html
 					html div class: 'mod-button'; style: 'left: 100px; top: 40px;'.
 					
 
-					html div class: 'key'; style: 'left: 20px; top: 100px'.
-					html div class: 'key'; style: 'left: 60px; top: 100px'.
-					html div class: 'key'; style: 'left: 100px; top: 100px'.
-					
+					(keys at: 1 ifAbsent: 'Flo') at: l put: (html div class: 'key'; style: 'left: 20px; top: 100px').
+					(keys at: 1 ifAbsent: 'Flo') at: m put: (html div class: 'key'; style: 'left: 60px; top: 100px').
+					(keys at: 1 ifAbsent: 'Flo') at: l put: (html div class: 'key'; style: 'left: 100px; top: 100px').
 				].
 		].
+!
+
+keys
+	^ keys.
 ! !
 
 Tutor class instanceVariableNames: 'instance'!
@@ -77,5 +89,9 @@ begin
 	
 	instance := self new.
 	instance appendToJQuery: 'body' asJQuery.
+!
+
+instance
+	^ instance
 ! !
 
