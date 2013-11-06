@@ -48,8 +48,9 @@ fn: function (){
 var self=this;
 function $Dictionary(){return smalltalk.Dictionary||(typeof Dictionary=="undefined"?nil:Dictionary)}
 function $Array(){return smalltalk.Array||(typeof Array=="undefined"?nil:Array)}
+function $Transcript(){return smalltalk.Transcript||(typeof Transcript=="undefined"?nil:Transcript)}
 return smalltalk.withContext(function($ctx1) { 
-var $1,$2,$3;
+var $1,$2,$3,$4;
 self["@columns"]=_st($Dictionary())._new();
 $1=self["@columns"];
 _st($1)._at_put_("l",(3));
@@ -60,6 +61,7 @@ self["@keys"]=_st($Array())._new();
 return smalltalk.withContext(function($ctx2) {
 return _st(self["@keys"])._add_(_st($Array())._new());
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
+self["@keyToChordMap"]=_st($Dictionary())._new();
 _st(self._keyConfiguration())._linesDo_((function(line){
 var trimmedLine,tokens;
 return smalltalk.withContext(function($ctx2) {
@@ -68,14 +70,19 @@ trimmedLine;
 $3=_st(trimmedLine).__eq_eq("");
 if(! smalltalk.assert($3)){
 tokens=_st(trimmedLine)._tokenize_("\x5cs+"._asRegexp());
-return tokens;
+tokens;
+$4=_st(_st(tokens)._at_((4)))._match_("\x22.+\x22");
+if(smalltalk.assert($4)){
+return _st(self["@keyToChordMap"])._at_put_(_st(_st(tokens)._at_((4)))._trimBoth_("\x22"),_st(tokens)._at_((2)));
+};
 };
 }, function($ctx2) {$ctx2.fillBlock({line:line,trimmedLine:trimmedLine,tokens:tokens},$ctx1,2)})}));
+_st($Transcript())._show_(self["@keyToChordMap"]);
 return self}, function($ctx1) {$ctx1.fill(self,"initialize",{},smalltalk.Tutor)})},
 args: [],
-source: "initialize\x0a\x09\x22comment stating purpose of message\x22\x0a\x09columns := Dictionary new.\x0a\x09columns\x0a\x09\x09at: 'l' put: 3;\x0a\x09\x09at: 'm' put: 2;\x0a\x09\x09at: 'r' put: 1.\x0a\x09\x0a\x09keys := Array new.\x0a\x094 timesRepeat:[keys add: Array new.].\x0a\x09\x0a\x09\x0a\x09self keyConfiguration linesDo: [:line | \x0a\x09\x09| trimmedLine tokens |\x0a\x09\x09trimmedLine := (line trimBoth tokenize: '#') at: 1.\x0a\x09\x09trimmedLine == '' ifFalse: [\x0a\x09\x09\x09tokens := trimmedLine tokenize: '\x5cs+' asRegexp\x0a\x09\x09\x09\x0a\x09\x09]\x0a\x09]",
-messageSends: ["new", "at:put:", "timesRepeat:", "add:", "linesDo:", "keyConfiguration", "at:", "tokenize:", "trimBoth", "ifFalse:", "==", "asRegexp"],
-referencedClasses: ["Dictionary", "Array"]
+source: "initialize\x0a\x09\x22comment stating purpose of message\x22\x0a\x09columns := Dictionary new.\x0a\x09columns\x0a\x09\x09at: 'l' put: 3;\x0a\x09\x09at: 'm' put: 2;\x0a\x09\x09at: 'r' put: 1.\x0a\x09\x0a\x09keys := Array new.\x0a\x094 timesRepeat:[keys add: Array new.].\x0a\x09\x0a\x09keyToChordMap := Dictionary new.\x0a\x09\x0a\x09self keyConfiguration linesDo: [:line | \x0a\x09\x09| trimmedLine tokens |\x0a\x09\x09trimmedLine := (line trimBoth tokenize: '#') at: 1.\x0a\x09\x09trimmedLine == '' ifFalse: [\x0a\x09\x09\x09tokens := trimmedLine tokenize: '\x5cs+' asRegexp.\x0a\x09\x09\x09((tokens at: 4) match: '\x22.+\x22') ifTrue: [\x0a\x09\x09\x09\x09keyToChordMap at: ((tokens at: 4)trimBoth: '\x22') put: (tokens at: 2 ).\x0a\x09\x09\x09]\x0a\x09\x09]\x0a\x09].\x0a\x09Transcript show: keyToChordMap.",
+messageSends: ["new", "at:put:", "timesRepeat:", "add:", "linesDo:", "keyConfiguration", "at:", "tokenize:", "trimBoth", "ifFalse:", "==", "asRegexp", "ifTrue:", "match:", "trimBoth:", "show:"],
+referencedClasses: ["Dictionary", "Array", "Transcript"]
 }),
 smalltalk.Tutor);
 

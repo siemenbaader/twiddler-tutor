@@ -16,15 +16,19 @@ initialize
 	keys := Array new.
 	4 timesRepeat:[keys add: Array new.].
 	
+	keyToChordMap := Dictionary new.
 	
 	self keyConfiguration linesDo: [:line | 
 		| trimmedLine tokens |
 		trimmedLine := (line trimBoth tokenize: '#') at: 1.
 		trimmedLine == '' ifFalse: [
-			tokens := trimmedLine tokenize: '\s+' asRegexp
-			
+			tokens := trimmedLine tokenize: '\s+' asRegexp.
+			((tokens at: 4) match: '".+"') ifTrue: [
+				keyToChordMap at: ((tokens at: 4)trimBoth: '"') put: (tokens at: 2 ).
+			]
 		]
-	]
+	].
+	Transcript show: keyToChordMap.
 !
 
 keys
