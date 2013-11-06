@@ -10,10 +10,13 @@ category: 'not yet classified',
 fn: function (keySequence){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
-return self}, function($ctx1) {$ctx1.fill(self,"chordFor:",{keySequence:keySequence},smalltalk.Tutor)})},
+var $1;
+$1=_st(self["@keyToChordMap"])._at_(keySequence);
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"chordFor:",{keySequence:keySequence},smalltalk.Tutor)})},
 args: ["keySequence"],
-source: "chordFor: keySequence\x0a\x09\x22Looks up the chord matching the key(s), indicated by a one ormore digit string; or integer key code.\x22",
-messageSends: [],
+source: "chordFor: keySequence\x0a\x09\x22Looks up the chord matching the key(s), indicated by a one ormore digit string; or integer key code.\x22\x0a\x09\x0a\x09^ keyToChordMap at: keySequence.",
+messageSends: ["at:"],
 referencedClasses: []
 }),
 smalltalk.Tutor);
@@ -216,6 +219,22 @@ return self}, function($ctx1) {$ctx1.fill(self,"showChord:",{chord:chord,row:row
 args: ["chord"],
 source: "showChord: chord\x0a\x09\x22I highlight the buttons of the chord. Chord string format is top-to-bottom 'm0rl'\x22\x0a\x09\x0a\x09| row col | \x0a\x09\x0a\x09self clearChord.\x0a\x09\x0a\x09chord withIndexDo: [:letter :index |\x0a\x09\x09\x09\x0a\x09\x09letter == '0' ifFalse:[\x0a\x09\x09\x09col := columns at: letter.\x0a\x09\x09\x09row := index.\x0a\x09\x09\x09\x0a\x09\x09\x09((keys at: row) at: col) asJQuery addClass: 'pressed'.\x0a\x09\x09]\x0a\x09]\x0a\x09",
 messageSends: ["clearChord", "withIndexDo:", "ifFalse:", "==", "at:", "addClass:", "asJQuery"],
+referencedClasses: []
+}),
+smalltalk.Tutor);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "showChordFor:",
+category: 'not yet classified',
+fn: function (keySequence){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+self._showChord_(self._chordFor_(keySequence));
+return self}, function($ctx1) {$ctx1.fill(self,"showChordFor:",{keySequence:keySequence},smalltalk.Tutor)})},
+args: ["keySequence"],
+source: "showChordFor: keySequence\x0a\x09\x22I visually display a chord for the given letter or letter sequence\x22\x0a\x09\x0a\x09self showChord: (self chordFor: keySequence).",
+messageSends: ["showChord:", "chordFor:"],
 referencedClasses: []
 }),
 smalltalk.Tutor);
