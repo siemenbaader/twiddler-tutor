@@ -9,9 +9,9 @@ initialize
 	"comment stating purpose of message"
 	columns := Dictionary new.
 	columns
-		at: 'l' put: 1;  
+		at: 'l' put: 3;  
 		at: 'm' put: 2;
-		at: 'r' put: 3.
+		at: 'r' put: 1.
 	
 	keys := Array new.
 	4 timesRepeat:[keys add: Array new.].

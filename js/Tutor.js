@@ -37,9 +37,9 @@ return smalltalk.withContext(function($ctx1) {
 var $1,$2;
 self["@columns"]=_st($Dictionary())._new();
 $1=self["@columns"];
-_st($1)._at_put_("l",(1));
+_st($1)._at_put_("l",(3));
 _st($1)._at_put_("m",(2));
-$2=_st($1)._at_put_("r",(3));
+$2=_st($1)._at_put_("r",(1));
 self["@keys"]=_st($Array())._new();
 (4)._timesRepeat_((function(){
 return smalltalk.withContext(function($ctx2) {
@@ -47,7 +47,7 @@ return _st(self["@keys"])._add_(_st($Array())._new());
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
 return self}, function($ctx1) {$ctx1.fill(self,"initialize",{},smalltalk.Tutor)})},
 args: [],
-source: "initialize\x0a\x09\x22comment stating purpose of message\x22\x0a\x09columns := Dictionary new.\x0a\x09columns\x0a\x09\x09at: 'l' put: 1;  \x0a\x09\x09at: 'm' put: 2;\x0a\x09\x09at: 'r' put: 3.\x0a\x09\x0a\x09keys := Array new.\x0a\x094 timesRepeat:[keys add: Array new.].",
+source: "initialize\x0a\x09\x22comment stating purpose of message\x22\x0a\x09columns := Dictionary new.\x0a\x09columns\x0a\x09\x09at: 'l' put: 3;  \x0a\x09\x09at: 'm' put: 2;\x0a\x09\x09at: 'r' put: 1.\x0a\x09\x0a\x09keys := Array new.\x0a\x094 timesRepeat:[keys add: Array new.].",
 messageSends: ["new", "at:put:", "timesRepeat:", "add:"],
 referencedClasses: ["Dictionary", "Array"]
 }),
