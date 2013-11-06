@@ -19,9 +19,9 @@ keys
 !
 
 remove
-	"removes itself from the DOM"
+	"removes all classes of .keypad from the DOM."
 
-	root asJQuery detach.
+	'.keypad' asJQuery remove.
 !
 
 renderOn: html
@@ -69,7 +69,7 @@ renderOn: html
 					
 					1 to: 4 do: [:row |  
 						l to: r do: [:col |
-							(keys at: row ifAbsent: 'Flo') at: col put: (html div class: 'key'; style: 'left:', (20 + (col - 1 * 40) asString), 'px; top:',  (100 + (row - 1 * 20) asString) , 'px').
+							(keys at: row ifAbsent: 'Flo') at: col put: (html div class: 'key'; style: 'left:', ((20 + (col - 1 * 40)) asString), 'px; top:',  ((100 + (row - 1 * 40)) asString) , 'px').
 						].
 					].
 				].
@@ -82,12 +82,16 @@ Tutor class instanceVariableNames: 'instance'!
 
 begin
 	"create the keypad and embed it into the page"
+	|button|
 	
-	('<button>Re-Create</button>' asJQuery click: [
-		instance remove. 
-		instance := self new.
-		instance appendToJQuery: 'body' asJQuery. 
-	]) appendTo: 'body' asJQuery.
+	button := '<button>Re-Create</button>' asJQuery 
+		click: [
+			instance remove.
+			instance := self new.
+			instance appendToJQuery: 'body' asJQuery. 	
+		].
+		
+	button appendTo: 'body' asJQuery.
 	
 	instance := self new.
 	instance appendToJQuery: 'body' asJQuery.

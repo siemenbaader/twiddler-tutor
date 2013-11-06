@@ -52,11 +52,11 @@ category: 'not yet classified',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
-_st(_st(self["@root"])._asJQuery())._detach();
+_st(".keypad"._asJQuery())._remove();
 return self}, function($ctx1) {$ctx1.fill(self,"remove",{},smalltalk.Tutor)})},
 args: [],
-source: "remove\x0a\x09\x22removes itself from the DOM\x22\x0a\x0a\x09root asJQuery detach.",
-messageSends: ["detach", "asJQuery"],
+source: "remove\x0a\x09\x22removes all classes of .keypad from the DOM.\x22\x0a\x0a\x09'.keypad' asJQuery remove.",
+messageSends: ["remove", "asJQuery"],
 referencedClasses: []
 }),
 smalltalk.Tutor);
@@ -100,7 +100,7 @@ return _st(self["@l"])._to_do_(self["@r"],(function(col){
 return smalltalk.withContext(function($ctx5) {
 $13=_st(html)._div();
 _st($13)._class_("key");
-$14=_st($13)._style_(_st(_st(_st("left:".__comma((20).__plus(_st(_st(_st(col).__minus((1))).__star((40)))._asString()))).__comma("px; top:")).__comma((100).__plus(_st(_st(_st(row).__minus((1))).__star((20)))._asString()))).__comma("px"));
+$14=_st($13)._style_(_st(_st(_st("left:".__comma(_st((20).__plus(_st(_st(col).__minus((1))).__star((40))))._asString())).__comma("px; top:")).__comma(_st((100).__plus(_st(_st(row).__minus((1))).__star((40))))._asString())).__comma("px"));
 return _st(_st(self["@keys"])._at_ifAbsent_(row,"Flo"))._at_put_(col,$14);
 }, function($ctx5) {$ctx5.fillBlock({col:col},$ctx4,4)})}));
 }, function($ctx4) {$ctx4.fillBlock({row:row},$ctx3,3)})}));
@@ -110,8 +110,8 @@ return $4;
 self["@root"]=$2;
 return self}, function($ctx1) {$ctx1.fill(self,"renderOn:",{html:html},smalltalk.Tutor)})},
 args: ["html"],
-source: "renderOn: html\x0a\x09\x22Draw the keypad\x22\x0a\x0a\x09root := html div\x0a\x09\x09class: 'keypad' ;\x0a\x09\x09with: [\x0a\x09\x09\x09html style: \x0a\x09\x09\x09\x09'.keypad .border {\x0a\x09\x09\x09\x09\x09box-sizing: border-box;\x0a\x09\x09\x09\x09\x09border: 1px solid black;\x0a\x09\x09\x09\x09\x09border-radius: 10px; \x0a\x09\x09\x09\x09\x09width: 140px; height: 260px;\x0a\x09\x09\x09\x09\x09position: relative;\x0a\x09\x09\x09\x09}\x0a\x09\x09\x09\x09\x0a\x09\x09\x09\x09.keypad .mod-button {\x0a\x09\x09\x09\x09\x09box-sizing: border-box;\x0a\x09\x09\x09\x09\x09position: absolute;\x0a\x09\x09\x09\x09\x09border: 1px solid gray;\x0a\x09\x09\x09\x09\x09height: 20px;\x0a\x09\x09\x09\x09\x09width: 20px;\x0a\x09\x09\x09\x09\x09border-radius: 10px;\x0a\x09\x09\x09\x09}\x0a\x09\x09\x09\x09\x0a\x09\x09\x09\x09.keypad .key {\x0a\x09\x09\x09\x09\x09box-sizing: border-box;\x0a\x09\x09\x09\x09\x09position: absolute;\x0a\x09\x09\x09\x09\x09border: 1px solid black;\x0a\x09\x09\x09\x09\x09height: 20px;\x0a\x09\x09\x09\x09\x09width: 20px;\x0a\x09\x09\x09\x09\x09border-radius: 4px;\x0a\x09\x09\x09\x09}\x0a\x09\x09\x09\x09'.\x0a\x09\x09\x09\x09\x0a\x09\x09\x09html div \x0a\x09\x09\x09\x09class: 'border'; \x0a\x09\x09\x09\x09with: [ \x0a\x09\x09\x09\x09\x09html div class: 'mod-button'; style: 'left: 20px; top: 40px;'.\x0a\x09\x09\x09\x09\x09html div class: 'mod-button'; style: 'left: 40px; top: 20px;'.\x0a\x09\x09\x09\x09\x09html div class: 'mod-button'; style: 'left: 80px; top: 20px;'.\x0a\x09\x09\x09\x09\x09html div class: 'mod-button'; style: 'left: 100px; top: 40px;'.\x0a\x09\x09\x09\x09\x09\x0a\x09\x09\x09\x09\x09\x0a\x09\x09\x09\x09\x091 to: 4 do: [:row |  \x0a\x09\x09\x09\x09\x09\x09l to: r do: [:col |\x0a\x09\x09\x09\x09\x09\x09\x09(keys at: row ifAbsent: 'Flo') at: col put: (html div class: 'key'; style: 'left:', (20 + (col - 1 * 40) asString), 'px; top:',  (100 + (row - 1 * 20) asString) , 'px').\x0a\x09\x09\x09\x09\x09\x09].\x0a\x09\x09\x09\x09\x09].\x0a\x09\x09\x09\x09].\x0a\x09\x09].\x0a\x09\x09",
-messageSends: ["class:", "div", "with:", "style:", "to:do:", "at:put:", "at:ifAbsent:", ",", "+", "asString", "*", "-"],
+source: "renderOn: html\x0a\x09\x22Draw the keypad\x22\x0a\x0a\x09root := html div\x0a\x09\x09class: 'keypad' ;\x0a\x09\x09with: [\x0a\x09\x09\x09html style: \x0a\x09\x09\x09\x09'.keypad .border {\x0a\x09\x09\x09\x09\x09box-sizing: border-box;\x0a\x09\x09\x09\x09\x09border: 1px solid black;\x0a\x09\x09\x09\x09\x09border-radius: 10px; \x0a\x09\x09\x09\x09\x09width: 140px; height: 260px;\x0a\x09\x09\x09\x09\x09position: relative;\x0a\x09\x09\x09\x09}\x0a\x09\x09\x09\x09\x0a\x09\x09\x09\x09.keypad .mod-button {\x0a\x09\x09\x09\x09\x09box-sizing: border-box;\x0a\x09\x09\x09\x09\x09position: absolute;\x0a\x09\x09\x09\x09\x09border: 1px solid gray;\x0a\x09\x09\x09\x09\x09height: 20px;\x0a\x09\x09\x09\x09\x09width: 20px;\x0a\x09\x09\x09\x09\x09border-radius: 10px;\x0a\x09\x09\x09\x09}\x0a\x09\x09\x09\x09\x0a\x09\x09\x09\x09.keypad .key {\x0a\x09\x09\x09\x09\x09box-sizing: border-box;\x0a\x09\x09\x09\x09\x09position: absolute;\x0a\x09\x09\x09\x09\x09border: 1px solid black;\x0a\x09\x09\x09\x09\x09height: 20px;\x0a\x09\x09\x09\x09\x09width: 20px;\x0a\x09\x09\x09\x09\x09border-radius: 4px;\x0a\x09\x09\x09\x09}\x0a\x09\x09\x09\x09'.\x0a\x09\x09\x09\x09\x0a\x09\x09\x09html div \x0a\x09\x09\x09\x09class: 'border'; \x0a\x09\x09\x09\x09with: [ \x0a\x09\x09\x09\x09\x09html div class: 'mod-button'; style: 'left: 20px; top: 40px;'.\x0a\x09\x09\x09\x09\x09html div class: 'mod-button'; style: 'left: 40px; top: 20px;'.\x0a\x09\x09\x09\x09\x09html div class: 'mod-button'; style: 'left: 80px; top: 20px;'.\x0a\x09\x09\x09\x09\x09html div class: 'mod-button'; style: 'left: 100px; top: 40px;'.\x0a\x09\x09\x09\x09\x09\x0a\x09\x09\x09\x09\x09\x0a\x09\x09\x09\x09\x091 to: 4 do: [:row |  \x0a\x09\x09\x09\x09\x09\x09l to: r do: [:col |\x0a\x09\x09\x09\x09\x09\x09\x09(keys at: row ifAbsent: 'Flo') at: col put: (html div class: 'key'; style: 'left:', ((20 + (col - 1 * 40)) asString), 'px; top:',  ((100 + (row - 1 * 40)) asString) , 'px').\x0a\x09\x09\x09\x09\x09\x09].\x0a\x09\x09\x09\x09\x09].\x0a\x09\x09\x09\x09].\x0a\x09\x09].\x0a\x09\x09",
+messageSends: ["class:", "div", "with:", "style:", "to:do:", "at:put:", "at:ifAbsent:", ",", "asString", "+", "*", "-"],
 referencedClasses: []
 }),
 smalltalk.Tutor);
@@ -124,20 +124,22 @@ selector: "begin",
 category: 'not yet classified',
 fn: function (){
 var self=this;
+var button;
 return smalltalk.withContext(function($ctx1) { 
-_st(_st("<button>Re-Create</button>"._asJQuery())._click_((function(){
+button=_st("<button>Re-Create</button>"._asJQuery())._click_((function(){
 return smalltalk.withContext(function($ctx2) {
 _st(self["@instance"])._remove();
 self["@instance"]=self._new();
 self["@instance"];
 return _st(self["@instance"])._appendToJQuery_("body"._asJQuery());
-}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})})))._appendTo_("body"._asJQuery());
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
+_st(button)._appendTo_("body"._asJQuery());
 self["@instance"]=self._new();
 _st(self["@instance"])._appendToJQuery_("body"._asJQuery());
-return self}, function($ctx1) {$ctx1.fill(self,"begin",{},smalltalk.Tutor.klass)})},
+return self}, function($ctx1) {$ctx1.fill(self,"begin",{button:button},smalltalk.Tutor.klass)})},
 args: [],
-source: "begin\x0a\x09\x22create the keypad and embed it into the page\x22\x0a\x09\x0a\x09('<button>Re-Create</button>' asJQuery click: [\x0a\x09\x09instance remove. \x0a\x09\x09instance := self new.\x0a\x09\x09instance appendToJQuery: 'body' asJQuery. \x0a\x09]) appendTo: 'body' asJQuery.\x0a\x09\x0a\x09instance := self new.\x0a\x09instance appendToJQuery: 'body' asJQuery. ",
-messageSends: ["appendTo:", "click:", "asJQuery", "remove", "new", "appendToJQuery:"],
+source: "begin\x0a\x09\x22create the keypad and embed it into the page\x22\x0a\x09|button|\x0a\x09\x0a\x09button := '<button>Re-Create</button>' asJQuery \x0a\x09\x09click: [\x0a\x09\x09\x09instance remove.\x0a\x09\x09\x09instance := self new.\x0a\x09\x09\x09instance appendToJQuery: 'body' asJQuery. \x09\x0a\x09\x09].\x0a\x09\x09\x0a\x09button appendTo: 'body' asJQuery.\x0a\x09\x0a\x09instance := self new.\x0a\x09instance appendToJQuery: 'body' asJQuery. ",
+messageSends: ["click:", "asJQuery", "remove", "new", "appendToJQuery:", "appendTo:"],
 referencedClasses: []
 }),
 smalltalk.Tutor.klass);
