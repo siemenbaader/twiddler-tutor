@@ -1,15 +1,18 @@
 Smalltalk current createPackage: 'Tutor'!
 Widget subclass: #Tutor
-	instanceVariableNames: 'count header root keys l m r'
+	instanceVariableNames: 'count header root keys columns'
 	package: 'Tutor'!
 
 !Tutor methodsFor: 'not yet classified'!
 
 initialize
 	"comment stating purpose of message"
-	l := 1.
-	m := 2.
-	r := 3.
+	columns := Dictionary new.
+	columns
+		at: 'l' put: 1;  
+		at: 'm' put: 2;
+		at: 'r' put: 3.
+	
 	keys := Array new.
 	4 timesRepeat:[keys add: Array new.].
 !
@@ -73,7 +76,7 @@ renderOn: html
 					
 					
 					1 to: 4 do: [:row |  
-						l to: r do: [:col |
+						columns values do: [:col |
 							(keys at: row ifAbsent: 'Flo') at: col put: (html div class: 'key'; style: 'left:', ((20 + (col - 1 * 40)) asString), 'px; top:',  ((100 + (row - 1 * 40)) asString) , 'px').
 						].
 					].
@@ -84,7 +87,29 @@ renderOn: html
 showChord: chord
 	"I highlight the buttons of the chord. Chord string format is top-to-bottom 'm0rl'"
 	
-	((keys at: 1) at: 1) asJQuery addClass: 'pressed'.
+	| row col | 
+	
+	self clearChord.
+	
+	chord withIndexDo: [:letter :index |
+			
+		letter == '0' ifFalse:[
+			col := columns at: letter.
+			row := index.
+			
+			((keys at: row) at: col) asJQuery addClass: 'pressed'.
+		]
+	]
+!
+
+clearChord
+	"Shows all buttons as released"
+	
+	keys do: [:row |
+		row do: [:key |
+			key asJQuery removeClass: 'pressed'.
+		].
+	].
 ! !
 
 Tutor class instanceVariableNames: 'instance'!
