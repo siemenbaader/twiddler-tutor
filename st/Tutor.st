@@ -56,6 +56,11 @@ renderOn: html
 					width: 20px;
 					border-radius: 4px;
 				}
+				
+				.keypad .key.pressed {
+					background-color: black;
+					color: white;
+				}
 				'.
 				
 			html div 
@@ -74,6 +79,12 @@ renderOn: html
 					].
 				].
 		].
+!
+
+showChord: chord
+	"I highlight the buttons of the chord. Chord string format is top-to-bottom 'm0rl'"
+	
+	((keys at: 1) at: 1) asJQuery addClass: 'pressed'.
 ! !
 
 Tutor class instanceVariableNames: 'instance'!
