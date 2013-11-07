@@ -10,10 +10,10 @@ category: 'not yet classified',
 fn: function (html){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
-var $1,$3,$5,$6,$4,$2;
+var $1,$3,$5,$6,$7,$8,$9,$10,$11,$12,$4,$2;
 _st(html)._div_((function(){
 return smalltalk.withContext(function($ctx2) {
-_st(html)._style_("\x0a\x09\x09\x09.lesson {\x0a\x09\x09\x09\x09float: left;\x0a\x09\x09\x09\x09padding-left: 30px;\x0a\x09\x09\x09\x09height: 260px;\x0a\x09\x09\x09\x09box-sizing: border-box;\x0a\x09\x09\x09}\x0a\x09\x09\x09\x0a\x09\x09\x09.lesson .exercise-text {\x0a\x09\x09\x09\x09font-family: monospace;\x0a\x09\x09\x09\x09font-size: 20px;\x0a\x09\x09\x09}\x0a\x09\x09\x09.lesson .letters-to-type {\x0a\x09\x09\x09\x09background-color: #AAD;\x0a\x09\x09\x09\x09outline: 2px solid #AAD;\x0a\x09\x09\x09}\x0a\x09\x09");
+_st(html)._style_("\x0a\x09\x09\x09.lesson {\x0a\x09\x09\x09\x09float: left;\x0a\x09\x09\x09\x09padding-left: 30px;\x0a\x09\x09\x09\x09height: 260px;\x0a\x09\x09\x09\x09box-sizing: border-box;\x0a\x09\x09\x09}\x0a\x09\x09\x09\x0a\x09\x09\x09.lesson .exercise-text {\x0a\x09\x09\x09\x09font-family: monospace;\x0a\x09\x09\x09\x09font-size: 20px;\x0a\x09\x09\x09}\x0a\x09\x09\x09.lesson .letters-to-type {\x0a\x09\x09\x09\x09background-color: #AAD;\x0a\x09\x09\x09\x09outline: 2px solid #AAD;\x0a\x09\x09\x09}\x0a\x09\x09\x09\x0a\x09\x09\x09.lesson .error {\x0a\x09\x09\x09\x09color: red;\x0a\x09\x09\x09}\x0a\x09\x09\x09.lesson .caret {\x0a\x09\x09\x09\x09color: blue;\x0a\x09\x09\x09}\x0a\x09\x09");
 $1=_st(html)._div();
 _st($1)._class_("lesson");
 $2=_st($1)._with_((function(){
@@ -29,11 +29,28 @@ return smalltalk.withContext(function($ctx5) {
 _st(html)._span_("We used to cut t");
 $5=_st(html)._span();
 _st($5)._class_("letters-to-type");
-$6=_st($5)._with_("he");
+$6=_st($5)._with_("h");
 $6;
-return _st(html)._span_(" green green grass.");
+return _st(html)._span_("e green green grass.");
 }, function($ctx5) {$ctx5.fillBlock({},$ctx4,4)})}));
-return _st(html)._p_("We ufed to lut the green green grass.");
+return _st(html)._p_((function(){
+return smalltalk.withContext(function($ctx5) {
+_st(html)._span_("We u");
+$7=_st(html)._span();
+_st($7)._class_("error");
+$8=_st($7)._with_("f");
+$8;
+_st(html)._span_("ed to ");
+$9=_st(html)._span();
+_st($9)._class_("error");
+$10=_st($9)._with_("l");
+$10;
+_st(html)._span_("ut  t");
+$11=_st(html)._span();
+_st($11)._class_("caret");
+$12=_st($11)._with_("_");
+return $12;
+}, function($ctx5) {$ctx5.fillBlock({},$ctx4,5)})}));
 }, function($ctx4) {$ctx4.fillBlock({},$ctx3,3)})}));
 return $4;
 }, function($ctx3) {$ctx3.fillBlock({},$ctx2,2)})}));
@@ -41,7 +58,7 @@ return $2;
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
 return self}, function($ctx1) {$ctx1.fill(self,"renderOn:",{html:html},smalltalk.Lesson)})},
 args: ["html"],
-source: "renderOn: html\x0a\x09\x22The lesson area shows a line of text, shows the chord for the next letter or letter sequence to be typed, and tracks the user's speed and accuracy.\x22\x0a\x0a\x09html div: [\x0a\x09\x09html style: '\x0a\x09\x09\x09.lesson {\x0a\x09\x09\x09\x09float: left;\x0a\x09\x09\x09\x09padding-left: 30px;\x0a\x09\x09\x09\x09height: 260px;\x0a\x09\x09\x09\x09box-sizing: border-box;\x0a\x09\x09\x09}\x0a\x09\x09\x09\x0a\x09\x09\x09.lesson .exercise-text {\x0a\x09\x09\x09\x09font-family: monospace;\x0a\x09\x09\x09\x09font-size: 20px;\x0a\x09\x09\x09}\x0a\x09\x09\x09.lesson .letters-to-type {\x0a\x09\x09\x09\x09background-color: #AAD;\x0a\x09\x09\x09\x09outline: 2px solid #AAD;\x0a\x09\x09\x09}\x0a\x09\x09' .\x0a\x09\x09\x0a\x09\x09html div\x0a\x09\x09\x09class: 'lesson' ; \x0a\x09\x09\x09with: [\x0a\x09\x09\x09\x09html h1: 'Lesson 1'.\x0a\x09\x09\x09\x09html br.\x0a\x09\x09\x09\x09html div \x0a\x09\x09\x09\x09\x09class: 'exercise-text';\x0a\x09\x09\x09\x09\x09with: [\x0a\x09\x09\x09\x09\x09\x09html p: [\x0a\x09\x09\x09\x09\x09\x09\x09html span: 'We used to cut t'.\x0a\x09\x09\x09\x09\x09\x09\x09html span class: 'letters-to-type'; with: 'he'.\x0a\x09\x09\x09\x09\x09\x09\x09html span: ' green green grass.'.\x0a\x09\x09\x09\x09\x09\x09].\x0a\x09\x09\x09\x09\x09\x09html p: 'We ufed to lut the green green grass.'.\x0a\x09\x09\x09\x09\x09].\x0a\x09\x09\x09\x09\x0a\x09\x09\x09]\x0a\x09\x09]\x0a\x09",
+source: "renderOn: html\x0a\x09\x22The lesson area shows a line of text, shows the chord for the next letter or letter sequence to be typed, and tracks the user's speed and accuracy.\x22\x0a\x0a\x09html div: [\x0a\x09\x09html style: '\x0a\x09\x09\x09.lesson {\x0a\x09\x09\x09\x09float: left;\x0a\x09\x09\x09\x09padding-left: 30px;\x0a\x09\x09\x09\x09height: 260px;\x0a\x09\x09\x09\x09box-sizing: border-box;\x0a\x09\x09\x09}\x0a\x09\x09\x09\x0a\x09\x09\x09.lesson .exercise-text {\x0a\x09\x09\x09\x09font-family: monospace;\x0a\x09\x09\x09\x09font-size: 20px;\x0a\x09\x09\x09}\x0a\x09\x09\x09.lesson .letters-to-type {\x0a\x09\x09\x09\x09background-color: #AAD;\x0a\x09\x09\x09\x09outline: 2px solid #AAD;\x0a\x09\x09\x09}\x0a\x09\x09\x09\x0a\x09\x09\x09.lesson .error {\x0a\x09\x09\x09\x09color: red;\x0a\x09\x09\x09}\x0a\x09\x09\x09.lesson .caret {\x0a\x09\x09\x09\x09color: blue;\x0a\x09\x09\x09}\x0a\x09\x09' .\x0a\x09\x09\x0a\x09\x09html div\x0a\x09\x09\x09class: 'lesson' ; \x0a\x09\x09\x09with: [\x0a\x09\x09\x09\x09html h1: 'Lesson 1'.\x0a\x09\x09\x09\x09html br.\x0a\x09\x09\x09\x09html div \x0a\x09\x09\x09\x09\x09class: 'exercise-text';\x0a\x09\x09\x09\x09\x09with: [\x0a\x09\x09\x09\x09\x09\x09html p: [\x0a\x09\x09\x09\x09\x09\x09\x09html span: 'We used to cut t'.\x0a\x09\x09\x09\x09\x09\x09\x09html span class: 'letters-to-type'; with: 'h'.\x0a\x09\x09\x09\x09\x09\x09\x09html span: 'e green green grass.'.\x0a\x09\x09\x09\x09\x09\x09].\x0a\x09\x09\x09\x09\x09\x09html p: [\x0a\x09\x09\x09\x09\x09\x09\x09html span: 'We u'.\x0a\x09\x09\x09\x09\x09\x09\x09html span class: 'error'; with: 'f'.\x0a\x09\x09\x09\x09\x09\x09\x09html span: 'ed to '.\x0a\x09\x09\x09\x09\x09\x09\x09html span class: 'error'; with: 'l'.\x0a\x09\x09\x09\x09\x09\x09\x09html span: 'ut  t'.\x0a\x09\x09\x09\x09\x09\x09\x09html span class: 'caret'; with: '_'\x0a\x09\x09\x09\x09\x09\x09]\x0a\x09\x09\x09\x09\x09].\x0a\x09\x09\x09\x09\x0a\x09\x09\x09]\x0a\x09\x09]\x0a\x09",
 messageSends: ["div:", "style:", "class:", "div", "with:", "h1:", "br", "p:", "span:", "span"],
 referencedClasses: []
 }),
@@ -127,7 +144,26 @@ referencedClasses: ["Tutor", "Transcript"]
 }),
 smalltalk.Tutor);
 
+smalltalk.addMethod(
+smalltalk.method({
+selector: "twiddlerKeypad",
+category: 'not yet classified',
+fn: function (){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1;
+$1=self["@twiddlerKeypad"];
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"twiddlerKeypad",{},smalltalk.Tutor)})},
+args: [],
+source: "twiddlerKeypad\x0a\x09^ twiddlerKeypad.",
+messageSends: [],
+referencedClasses: []
+}),
+smalltalk.Tutor);
 
+
+smalltalk.Tutor.klass.iVarNames = ['instance'];
 smalltalk.addMethod(
 smalltalk.method({
 selector: "begin",
@@ -135,12 +171,34 @@ category: 'not yet classified',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
+var $1,$2;
 _st("#tutor"._asJQuery())._empty();
-_st(self._new())._appendToJQuery_("#tutor"._asJQuery());
+$1=self._new();
+_st($1)._appendToJQuery_("#tutor"._asJQuery());
+$2=_st($1)._yourself();
+self["@instance"]=$2;
 return self}, function($ctx1) {$ctx1.fill(self,"begin",{},smalltalk.Tutor.klass)})},
 args: [],
-source: "begin\x0a\x09\x22create the button, keypad and lesson and embed them into the page\x22\x0a\x0a\x09'#tutor' asJQuery empty.\x0a\x09\x0a\x09self new appendToJQuery: '#tutor' asJQuery.",
-messageSends: ["empty", "asJQuery", "appendToJQuery:", "new"],
+source: "begin\x0a\x09\x22create the button, keypad and lesson and embed them into the page\x22\x0a\x0a\x09'#tutor' asJQuery empty.\x0a\x09\x0a\x09instance := self new appendToJQuery: ('#tutor' asJQuery) ; yourself.",
+messageSends: ["empty", "asJQuery", "appendToJQuery:", "new", "yourself"],
+referencedClasses: []
+}),
+smalltalk.Tutor.klass);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "instance",
+category: 'not yet classified',
+fn: function (){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1;
+$1=self["@instance"];
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"instance",{},smalltalk.Tutor.klass)})},
+args: [],
+source: "instance\x0a\x09^instance.",
+messageSends: [],
 referencedClasses: []
 }),
 smalltalk.Tutor.klass);

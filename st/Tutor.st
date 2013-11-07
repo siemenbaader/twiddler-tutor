@@ -25,6 +25,13 @@ renderOn: html
 				background-color: #AAD;
 				outline: 2px solid #AAD;
 			}
+			
+			.lesson .error {
+				color: red;
+			}
+			.lesson .caret {
+				color: blue;
+			}
 		' .
 		
 		html div
@@ -37,10 +44,17 @@ renderOn: html
 					with: [
 						html p: [
 							html span: 'We used to cut t'.
-							html span class: 'letters-to-type'; with: 'he'.
-							html span: ' green green grass.'.
+							html span class: 'letters-to-type'; with: 'h'.
+							html span: 'e green green grass.'.
 						].
-						html p: 'We ufed to lut the green green grass.'.
+						html p: [
+							html span: 'We u'.
+							html span class: 'error'; with: 'f'.
+							html span: 'ed to '.
+							html span class: 'error'; with: 'l'.
+							html span: 'ut  t'.
+							html span class: 'caret'; with: '_'
+						]
 					].
 				
 			]
@@ -92,7 +106,13 @@ renderOn: html
 					html with: lesson.
 				].
 			html div style: 'clear: both'; class: 'clearfix'.
+!
+
+twiddlerKeypad
+	^ twiddlerKeypad.
 ! !
+
+Tutor class instanceVariableNames: 'instance'!
 
 !Tutor class methodsFor: 'not yet classified'!
 
@@ -101,7 +121,11 @@ begin
 
 	'#tutor' asJQuery empty.
 	
-	self new appendToJQuery: '#tutor' asJQuery.
+	instance := self new appendToJQuery: ('#tutor' asJQuery) ; yourself.
+!
+
+instance
+	^instance.
 ! !
 
 Widget subclass: #TwiddlerKeypad
