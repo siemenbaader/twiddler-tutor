@@ -1,12 +1,117 @@
 Smalltalk current createPackage: 'Tutor'!
+Widget subclass: #Lesson
+	instanceVariableNames: ''
+	package: 'Tutor'!
+
+!Lesson methodsFor: 'not yet classified'!
+
+renderOn: html
+	"The lesson area shows a line of text, shows the chord for the next letter or letter sequence to be typed, and tracks the user's speed and accuracy."
+
+	html div: [
+		html style: '
+			.lesson {
+				float: left;
+				padding-left: 30px;
+				height: 260px;
+				box-sizing: border-box;
+			}
+			
+			.lesson .exercise-text {
+				font-family: monospace;
+				font-size: 20px;
+			}
+			.lesson .letters-to-type {
+				background-color: #AAD;
+				outline: 2px solid #AAD;
+			}
+		' .
+		
+		html div
+			class: 'lesson' ; 
+			with: [
+				html h1: 'Lesson 1'.
+				html br.
+				html div 
+					class: 'exercise-text';
+					with: [
+						html p: [
+							html span: 'We used to cut t'.
+							html span class: 'letters-to-type'; with: 'he'.
+							html span: ' green green grass.'.
+						].
+						html p: 'We ufed to lut the green green grass.'.
+					].
+				
+			]
+		]
+! !
+
 Widget subclass: #Tutor
-	instanceVariableNames: 'count header root keys columns keyToChordMap'
+	instanceVariableNames: 'twiddlerKeypad lesson'
 	package: 'Tutor'!
 
 !Tutor methodsFor: 'not yet classified'!
 
+initialize
+	"Set up the whole application object with a keypad and a lesson screen."
+	twiddlerKeypad := TwiddlerKeypad new.
+	lesson := Lesson new.
+!
+
+renderOn: html
+	"render the whole application"
+
+	html style: 
+		' .menu-bar {
+		}'.
+	
+	html div
+		class: 'menu-bar';
+		with: [ 
+			html button 
+				with: 'Recreate App';
+				onClick: [Tutor begin].
+			
+			html button
+				with: 'More button';
+				onClick: [Transcript show: 'more clicked'].
+				
+			html select
+				with: [
+					html option with: 'lesson 1'; value: '1'.
+					html option with: 'lesson 2'; value: '2'.
+				].
+			].
+			
+			html hr.
+			
+			html div
+				with: [
+					html with: twiddlerKeypad.
+					html with: lesson.
+				].
+			html div style: 'clear: both'; class: 'clearfix'.
+! !
+
+!Tutor class methodsFor: 'not yet classified'!
+
+begin
+	"create the button, keypad and lesson and embed them into the page"
+
+	'#tutor' asJQuery empty.
+	
+	self new appendToJQuery: '#tutor' asJQuery.
+! !
+
+Widget subclass: #TwiddlerKeypad
+	instanceVariableNames: 'count header root keys columns keyToChordMap'
+	package: 'Tutor'!
+
+!TwiddlerKeypad methodsFor: 'not yet classified'!
+
 chordFor: keySequence
-	"Looks up the chord matching the key(s), indicated by a one ormore digit string; or integer key code."
+	"Looks up the chord matching the key(s), indicated by a one or more digit string; or integer key code."
 	
 	^ keyToChordMap at: keySequence.
 !
@@ -293,6 +398,7 @@ renderOn: html
 
 	root := html div
 		class: 'keypad' ;
+		style: 'float: left';
 		with: [
 			html style: 
 				'.keypad .border {
@@ -369,28 +475,30 @@ showChordFor: keySequence
 	self showChord: (self chordFor: keySequence).
 ! !
 
-Tutor class instanceVariableNames: 'instance'!
+TwiddlerKeypad class instanceVariableNames: 'instance'!
 
-!Tutor class methodsFor: 'not yet classified'!
+!TwiddlerKeypad class methodsFor: 'not yet classified'!
 
 begin
-	"create the keypad and embed it into the page"
-	|button|
-	
-	button := '<button>Re-Create</button>' asJQuery 
-		click: [
-			instance remove.
-			instance := self new.
-			instance appendToJQuery: 'body' asJQuery. 	
-		].
-		
-	button appendTo: 'body' asJQuery.
+	"create the button, keypad and lesson and embed them into the page"
+
+	'#tutor' asJQuery empty.
 	
 	instance := self new.
-	instance appendToJQuery: 'body' asJQuery.
+	
+	self appendToJQuery: '#tutor' asJQuery.
 !
 
 instance
 	^ instance
+!
+
+renderOn: html
+	"render the whole application"
+
+	html div 
+		with: html button; 
+			with: 'Recreate App';
+			click: Transcript show: 'clicked'.
 ! !
 
