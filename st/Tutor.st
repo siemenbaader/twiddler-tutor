@@ -1,6 +1,6 @@
 Smalltalk current createPackage: 'Tutor'!
 Widget subclass: #Lesson
-	instanceVariableNames: ''
+	instanceVariableNames: 'lessonString typedString lessonStringContainer typedStringContainer tagBrush'
 	package: 'Tutor'!
 
 !Lesson methodsFor: 'not yet classified'!
@@ -8,6 +8,8 @@ Widget subclass: #Lesson
 renderOn: html
 	"The lesson area shows a line of text, shows the chord for the next letter or letter sequence to be typed, and tracks the user's speed and accuracy."
 
+	tagBrush := html.
+	
 	html div: [
 		html style: '
 			.lesson {
@@ -42,23 +44,63 @@ renderOn: html
 				html div 
 					class: 'exercise-text';
 					with: [
-						html p: [
-							html span: 'We used to cut t'.
-							html span class: 'letters-to-type'; with: 'h'.
-							html span: 'e green green grass.'.
-						].
-						html p: [
+						lessonStringContainer := html p class: 'lesson-string'.
+
+						typedStringContainer := html p class: 'typed-string'.
+"						html p : [
 							html span: 'We u'.
 							html span class: 'error'; with: 'f'.
 							html span: 'ed to '.
 							html span class: 'error'; with: 'l'.
 							html span: 'ut  t'.
 							html span class: 'caret'; with: '_'
-						]
+						]"
 					].
 				
 			]
-		]
+		].
+!
+
+initialize
+	lessonString :=	'We used to cut the green green grass.' .
+	typedString := 'We ufed to cp' .
+!
+
+redrawLessonStrings
+	"Comment"
+	
+	| caretIndex letterToType |
+	caretIndex := typedString size + 1.
+	letterToType := lessonString at: caretIndex.
+	
+	"show letter to be typed on the keypad"
+	Tutor instance twiddlerKeypad showChordFor: letterToType.
+	
+	"clear lesson string & typed string "
+	lessonStringContainer asJQuery empty.
+	typedStringContainer asJQuery empty.
+	
+	
+	"show lesson string"
+	lessonStringContainer 
+		with: (lessonString copyFrom: 1 to: caretIndex -1) ;
+		with: (tagBrush span class: 'letters-to-type'; with: letterToType) ;
+		with: (lessonString copyFrom: caretIndex + 1 to: lessonString size).
+
+	"show typed string"
+	
+	typedString withIndexDo: [:letter :index |
+		(lessonString at: index) == letter 
+			ifTrue: [
+				typedStringContainer with: letter.
+			]
+			ifFalse: [
+				typedStringContainer with:  [
+					tagBrush span class: 'error'; with: letter.
+					]
+			]
+	].
+	typedStringContainer with: (tagBrush span class: 'caret'; with: '_').
 ! !
 
 Widget subclass: #Tutor
@@ -110,6 +152,10 @@ renderOn: html
 
 twiddlerKeypad
 	^ twiddlerKeypad.
+!
+
+lesson
+	^ lesson.
 ! !
 
 Tutor class instanceVariableNames: 'instance'!
@@ -122,6 +168,7 @@ begin
 	'#tutor' asJQuery empty.
 	
 	instance := self new appendToJQuery: ('#tutor' asJQuery) ; yourself.
+	instance lesson redrawLessonStrings.
 !
 
 instance
@@ -142,7 +189,7 @@ chordFor: keySequence
 
 clearChord
 	"Shows all buttons as released"
-	
+	Transcript show: 'cleared chord'; cr.
 	keys do: [:row |
 		row do: [:key |
 			key asJQuery removeClass: 'pressed'.
@@ -173,7 +220,6 @@ initialize
 			]
 		]
 	].
-	Transcript show: keyToChordMap.
 !
 
 keyConfiguration
