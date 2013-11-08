@@ -42,7 +42,6 @@ redrawLessonStrings
 		with: (lessonString copyFrom: caretIndex + 1 to: lessonString size).
 
 	"show typed string"
-	
 	typedString withIndexDo: [:letter :index |
 		(lessonString at: index ifAbsent: Nil) == letter 
 			ifTrue: [
@@ -219,7 +218,7 @@ instance
 ! !
 
 Widget subclass: #TwiddlerKeypad
-	instanceVariableNames: 'count header root keys columns keyToChordMap'
+	instanceVariableNames: 'count header root keys columns keyToChordMap numButton altButton ctrlButton shiftButton'
 	package: 'Tutor'!
 
 !TwiddlerKeypad methodsFor: 'not yet classified'!
@@ -239,6 +238,8 @@ clearChord
 			key asJQuery removeClass: 'pressed'.
 		].
 	].
+	
+	shiftButton asJQuery removeClass: 'pressed'.
 !
 
 initialize
@@ -540,6 +541,11 @@ renderOn: html
 					border-radius: 10px;
 				}
 				
+				.keypad .mod-button.pressed {
+					background-color: black;
+					color: white;
+				}
+				
 				.keypad .key {
 					box-sizing: border-box;
 					position: absolute;
@@ -558,10 +564,10 @@ renderOn: html
 			html div 
 				class: 'border'; 
 				with: [ 
-					html div class: 'mod-button'; style: 'left: 20px; top: 40px;'.
-					html div class: 'mod-button'; style: 'left: 40px; top: 20px;'.
-					html div class: 'mod-button'; style: 'left: 80px; top: 20px;'.
-					html div class: 'mod-button'; style: 'left: 100px; top: 40px;'.
+					numButton := html div class: 'mod-button'; style: 'left: 20px; top: 40px;'.
+					altButton := html div class: 'mod-button'; style: 'left: 40px; top: 20px;'.
+					ctrlButton :=	html div class: 'mod-button'; style: 'left: 80px; top: 20px;'.
+					shiftButton := html div class: 'mod-button'; style: 'left: 100px; top: 40px;'.
 					
 					
 					1 to: 4 do: [:row |  
@@ -595,6 +601,11 @@ showChordFor: keySequence
 	"I visually display a chord for the given letter or letter sequence"
 	
 	self showChord: (self chordFor: keySequence).
+	
+	(keySequence match: '[A-Z]+' asRegexp)  "naïve regex for capital letters; should be looked up properly."
+		ifTrue: [
+			shiftButton asJQuery addClass: 'pressed'.
+		].
 ! !
 
 TwiddlerKeypad class instanceVariableNames: 'instance'!

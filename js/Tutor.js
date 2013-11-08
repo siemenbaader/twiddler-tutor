@@ -99,7 +99,7 @@ $9=_st($8)._with_("_");
 _st(self["@typedStringContainer"])._with_($9);
 return self}, function($ctx1) {$ctx1.fill(self,"redrawLessonStrings",{caretIndex:caretIndex,letterToType:letterToType},smalltalk.Lesson)})},
 args: [],
-source: "redrawLessonStrings\x0a\x09\x22Comment\x22\x0a\x09\x0a\x09| caretIndex letterToType |\x0a\x09caretIndex := (typedString size + 1).\x0a\x09letterToType := lessonString at: caretIndex ifAbsent: String cr.    \x22type enter when done\x22\x0a\x09\x0a\x09\x22show letter to be typed on the keypad\x22\x0a\x09Tutor instance twiddlerKeypad showChordFor: letterToType.\x0a\x09\x0a\x09\x22clear lesson string & typed string \x22\x0a\x09lessonStringContainer asJQuery empty.\x0a\x09typedStringContainer asJQuery empty.\x0a\x09\x0a\x09\x0a\x09\x22show lesson string\x22\x0a\x09lessonStringContainer \x0a\x09\x09with: (lessonString copyFrom: 1 to: caretIndex -1) ;\x0a\x09\x09with: (tagBrush span class: 'letters-to-type'; with: letterToType) ;\x0a\x09\x09with: (lessonString copyFrom: caretIndex + 1 to: lessonString size).\x0a\x0a\x09\x22show typed string\x22\x0a\x09\x0a\x09typedString withIndexDo: [:letter :index |\x0a\x09\x09(lessonString at: index ifAbsent: Nil) == letter \x0a\x09\x09\x09ifTrue: [\x0a\x09\x09\x09\x09typedStringContainer with: letter.\x0a\x09\x09\x09]\x0a\x09\x09\x09ifFalse: [\x0a\x09\x09\x09\x09typedStringContainer with:  [\x0a\x09\x09\x09\x09\x09tagBrush span class: 'error'; with: letter.\x0a\x09\x09\x09\x09\x09]\x0a\x09\x09\x09]\x0a\x09].\x0a\x09typedStringContainer with: (tagBrush span class: 'caret'; with: '_').\x0a\x09\x0a\x09\x0a\x09\x0a\x09",
+source: "redrawLessonStrings\x0a\x09\x22Comment\x22\x0a\x09\x0a\x09| caretIndex letterToType |\x0a\x09caretIndex := (typedString size + 1).\x0a\x09letterToType := lessonString at: caretIndex ifAbsent: String cr.    \x22type enter when done\x22\x0a\x09\x0a\x09\x22show letter to be typed on the keypad\x22\x0a\x09Tutor instance twiddlerKeypad showChordFor: letterToType.\x0a\x09\x0a\x09\x22clear lesson string & typed string \x22\x0a\x09lessonStringContainer asJQuery empty.\x0a\x09typedStringContainer asJQuery empty.\x0a\x09\x0a\x09\x0a\x09\x22show lesson string\x22\x0a\x09lessonStringContainer \x0a\x09\x09with: (lessonString copyFrom: 1 to: caretIndex -1) ;\x0a\x09\x09with: (tagBrush span class: 'letters-to-type'; with: letterToType) ;\x0a\x09\x09with: (lessonString copyFrom: caretIndex + 1 to: lessonString size).\x0a\x0a\x09\x22show typed string\x22\x0a\x09typedString withIndexDo: [:letter :index |\x0a\x09\x09(lessonString at: index ifAbsent: Nil) == letter \x0a\x09\x09\x09ifTrue: [\x0a\x09\x09\x09\x09typedStringContainer with: letter.\x0a\x09\x09\x09]\x0a\x09\x09\x09ifFalse: [\x0a\x09\x09\x09\x09typedStringContainer with:  [\x0a\x09\x09\x09\x09\x09tagBrush span class: 'error'; with: letter.\x0a\x09\x09\x09\x09\x09]\x0a\x09\x09\x09]\x0a\x09].\x0a\x09typedStringContainer with: (tagBrush span class: 'caret'; with: '_').\x0a\x09\x0a\x09\x0a\x09\x0a\x09",
 messageSends: ["+", "size", "at:ifAbsent:", "cr", "showChordFor:", "twiddlerKeypad", "instance", "empty", "asJQuery", "with:", "copyFrom:to:", "-", "class:", "span", "withIndexDo:", "ifTrue:ifFalse:", "=="],
 referencedClasses: ["String", "Tutor", "Nil"]
 }),
@@ -409,7 +409,7 @@ referencedClasses: []
 smalltalk.Tutor.klass);
 
 
-smalltalk.addClass('TwiddlerKeypad', smalltalk.Widget, ['count', 'header', 'root', 'keys', 'columns', 'keyToChordMap'], 'Tutor');
+smalltalk.addClass('TwiddlerKeypad', smalltalk.Widget, ['count', 'header', 'root', 'keys', 'columns', 'keyToChordMap', 'numButton', 'altButton', 'ctrlButton', 'shiftButton'], 'Tutor');
 smalltalk.addMethod(
 smalltalk.method({
 selector: "chordFor:",
@@ -444,9 +444,10 @@ return smalltalk.withContext(function($ctx3) {
 return _st(_st(key)._asJQuery())._removeClass_("pressed");
 }, function($ctx3) {$ctx3.fillBlock({key:key},$ctx2,2)})}));
 }, function($ctx2) {$ctx2.fillBlock({row:row},$ctx1,1)})}));
+_st(_st(self["@shiftButton"])._asJQuery())._removeClass_("pressed");
 return self}, function($ctx1) {$ctx1.fill(self,"clearChord",{},smalltalk.TwiddlerKeypad)})},
 args: [],
-source: "clearChord\x0a\x09\x22Shows all buttons as released\x22\x0a\x09\x0a\x09keys do: [:row |\x0a\x09\x09row do: [:key |\x0a\x09\x09\x09key asJQuery removeClass: 'pressed'.\x0a\x09\x09].\x0a\x09].",
+source: "clearChord\x0a\x09\x22Shows all buttons as released\x22\x0a\x09\x0a\x09keys do: [:row |\x0a\x09\x09row do: [:key |\x0a\x09\x09\x09key asJQuery removeClass: 'pressed'.\x0a\x09\x09].\x0a\x09].\x0a\x09\x0a\x09shiftButton asJQuery removeClass: 'pressed'.",
 messageSends: ["do:", "removeClass:", "asJQuery"],
 referencedClasses: []
 }),
@@ -580,7 +581,7 @@ _st($1)._class_("keypad");
 _st($1)._style_("float: left");
 $2=_st($1)._with_((function(){
 return smalltalk.withContext(function($ctx2) {
-_st(html)._style_(".keypad .border {\x0a\x09\x09\x09\x09\x09box-sizing: border-box;\x0a\x09\x09\x09\x09\x09border: 1px solid black;\x0a\x09\x09\x09\x09\x09border-radius: 10px; \x0a\x09\x09\x09\x09\x09width: 140px; height: 260px;\x0a\x09\x09\x09\x09\x09position: relative;\x0a\x09\x09\x09\x09}\x0a\x09\x09\x09\x09\x0a\x09\x09\x09\x09.keypad .mod-button {\x0a\x09\x09\x09\x09\x09box-sizing: border-box;\x0a\x09\x09\x09\x09\x09position: absolute;\x0a\x09\x09\x09\x09\x09border: 1px solid gray;\x0a\x09\x09\x09\x09\x09height: 20px;\x0a\x09\x09\x09\x09\x09width: 20px;\x0a\x09\x09\x09\x09\x09border-radius: 10px;\x0a\x09\x09\x09\x09}\x0a\x09\x09\x09\x09\x0a\x09\x09\x09\x09.keypad .key {\x0a\x09\x09\x09\x09\x09box-sizing: border-box;\x0a\x09\x09\x09\x09\x09position: absolute;\x0a\x09\x09\x09\x09\x09border: 1px solid black;\x0a\x09\x09\x09\x09\x09height: 20px;\x0a\x09\x09\x09\x09\x09width: 20px;\x0a\x09\x09\x09\x09\x09border-radius: 4px;\x0a\x09\x09\x09\x09}\x0a\x09\x09\x09\x09\x0a\x09\x09\x09\x09.keypad .key.pressed {\x0a\x09\x09\x09\x09\x09background-color: black;\x0a\x09\x09\x09\x09\x09color: white;\x0a\x09\x09\x09\x09}\x0a\x09\x09\x09\x09");
+_st(html)._style_(".keypad .border {\x0a\x09\x09\x09\x09\x09box-sizing: border-box;\x0a\x09\x09\x09\x09\x09border: 1px solid black;\x0a\x09\x09\x09\x09\x09border-radius: 10px; \x0a\x09\x09\x09\x09\x09width: 140px; height: 260px;\x0a\x09\x09\x09\x09\x09position: relative;\x0a\x09\x09\x09\x09}\x0a\x09\x09\x09\x09\x0a\x09\x09\x09\x09.keypad .mod-button {\x0a\x09\x09\x09\x09\x09box-sizing: border-box;\x0a\x09\x09\x09\x09\x09position: absolute;\x0a\x09\x09\x09\x09\x09border: 1px solid gray;\x0a\x09\x09\x09\x09\x09height: 20px;\x0a\x09\x09\x09\x09\x09width: 20px;\x0a\x09\x09\x09\x09\x09border-radius: 10px;\x0a\x09\x09\x09\x09}\x0a\x09\x09\x09\x09\x0a\x09\x09\x09\x09.keypad .mod-button.pressed {\x0a\x09\x09\x09\x09\x09background-color: black;\x0a\x09\x09\x09\x09\x09color: white;\x0a\x09\x09\x09\x09}\x0a\x09\x09\x09\x09\x0a\x09\x09\x09\x09.keypad .key {\x0a\x09\x09\x09\x09\x09box-sizing: border-box;\x0a\x09\x09\x09\x09\x09position: absolute;\x0a\x09\x09\x09\x09\x09border: 1px solid black;\x0a\x09\x09\x09\x09\x09height: 20px;\x0a\x09\x09\x09\x09\x09width: 20px;\x0a\x09\x09\x09\x09\x09border-radius: 4px;\x0a\x09\x09\x09\x09}\x0a\x09\x09\x09\x09\x0a\x09\x09\x09\x09.keypad .key.pressed {\x0a\x09\x09\x09\x09\x09background-color: black;\x0a\x09\x09\x09\x09\x09color: white;\x0a\x09\x09\x09\x09}\x0a\x09\x09\x09\x09");
 $3=_st(html)._div();
 _st($3)._class_("border");
 $4=_st($3)._with_((function(){
@@ -588,19 +589,23 @@ return smalltalk.withContext(function($ctx3) {
 $5=_st(html)._div();
 _st($5)._class_("mod-button");
 $6=_st($5)._style_("left: 20px; top: 40px;");
-$6;
+self["@numButton"]=$6;
+self["@numButton"];
 $7=_st(html)._div();
 _st($7)._class_("mod-button");
 $8=_st($7)._style_("left: 40px; top: 20px;");
-$8;
+self["@altButton"]=$8;
+self["@altButton"];
 $9=_st(html)._div();
 _st($9)._class_("mod-button");
 $10=_st($9)._style_("left: 80px; top: 20px;");
-$10;
+self["@ctrlButton"]=$10;
+self["@ctrlButton"];
 $11=_st(html)._div();
 _st($11)._class_("mod-button");
 $12=_st($11)._style_("left: 100px; top: 40px;");
-$12;
+self["@shiftButton"]=$12;
+self["@shiftButton"];
 return (1)._to_do_((4),(function(row){
 return smalltalk.withContext(function($ctx4) {
 return _st(_st(self["@columns"])._values())._do_((function(col){
@@ -617,7 +622,7 @@ return $4;
 self["@root"]=$2;
 return self}, function($ctx1) {$ctx1.fill(self,"renderOn:",{html:html},smalltalk.TwiddlerKeypad)})},
 args: ["html"],
-source: "renderOn: html\x0a\x09\x22Draw the keypad\x22\x0a\x0a\x09root := html div\x0a\x09\x09class: 'keypad' ;\x0a\x09\x09style: 'float: left';\x0a\x09\x09with: [\x0a\x09\x09\x09html style: \x0a\x09\x09\x09\x09'.keypad .border {\x0a\x09\x09\x09\x09\x09box-sizing: border-box;\x0a\x09\x09\x09\x09\x09border: 1px solid black;\x0a\x09\x09\x09\x09\x09border-radius: 10px; \x0a\x09\x09\x09\x09\x09width: 140px; height: 260px;\x0a\x09\x09\x09\x09\x09position: relative;\x0a\x09\x09\x09\x09}\x0a\x09\x09\x09\x09\x0a\x09\x09\x09\x09.keypad .mod-button {\x0a\x09\x09\x09\x09\x09box-sizing: border-box;\x0a\x09\x09\x09\x09\x09position: absolute;\x0a\x09\x09\x09\x09\x09border: 1px solid gray;\x0a\x09\x09\x09\x09\x09height: 20px;\x0a\x09\x09\x09\x09\x09width: 20px;\x0a\x09\x09\x09\x09\x09border-radius: 10px;\x0a\x09\x09\x09\x09}\x0a\x09\x09\x09\x09\x0a\x09\x09\x09\x09.keypad .key {\x0a\x09\x09\x09\x09\x09box-sizing: border-box;\x0a\x09\x09\x09\x09\x09position: absolute;\x0a\x09\x09\x09\x09\x09border: 1px solid black;\x0a\x09\x09\x09\x09\x09height: 20px;\x0a\x09\x09\x09\x09\x09width: 20px;\x0a\x09\x09\x09\x09\x09border-radius: 4px;\x0a\x09\x09\x09\x09}\x0a\x09\x09\x09\x09\x0a\x09\x09\x09\x09.keypad .key.pressed {\x0a\x09\x09\x09\x09\x09background-color: black;\x0a\x09\x09\x09\x09\x09color: white;\x0a\x09\x09\x09\x09}\x0a\x09\x09\x09\x09'.\x0a\x09\x09\x09\x09\x0a\x09\x09\x09html div \x0a\x09\x09\x09\x09class: 'border'; \x0a\x09\x09\x09\x09with: [ \x0a\x09\x09\x09\x09\x09html div class: 'mod-button'; style: 'left: 20px; top: 40px;'.\x0a\x09\x09\x09\x09\x09html div class: 'mod-button'; style: 'left: 40px; top: 20px;'.\x0a\x09\x09\x09\x09\x09html div class: 'mod-button'; style: 'left: 80px; top: 20px;'.\x0a\x09\x09\x09\x09\x09html div class: 'mod-button'; style: 'left: 100px; top: 40px;'.\x0a\x09\x09\x09\x09\x09\x0a\x09\x09\x09\x09\x09\x0a\x09\x09\x09\x09\x091 to: 4 do: [:row |  \x0a\x09\x09\x09\x09\x09\x09columns values do: [:col |\x0a\x09\x09\x09\x09\x09\x09\x09(keys at: row ifAbsent: 'Flo') at: col put: (html div class: 'key'; style: 'left:', ((20 + (col - 1 * 40)) asString), 'px; top:',  ((100 + (row - 1 * 40)) asString) , 'px').\x0a\x09\x09\x09\x09\x09\x09].\x0a\x09\x09\x09\x09\x09].\x0a\x09\x09\x09\x09].\x0a\x09\x09].\x0a\x09\x09",
+source: "renderOn: html\x0a\x09\x22Draw the keypad\x22\x0a\x0a\x09root := html div\x0a\x09\x09class: 'keypad' ;\x0a\x09\x09style: 'float: left';\x0a\x09\x09with: [\x0a\x09\x09\x09html style: \x0a\x09\x09\x09\x09'.keypad .border {\x0a\x09\x09\x09\x09\x09box-sizing: border-box;\x0a\x09\x09\x09\x09\x09border: 1px solid black;\x0a\x09\x09\x09\x09\x09border-radius: 10px; \x0a\x09\x09\x09\x09\x09width: 140px; height: 260px;\x0a\x09\x09\x09\x09\x09position: relative;\x0a\x09\x09\x09\x09}\x0a\x09\x09\x09\x09\x0a\x09\x09\x09\x09.keypad .mod-button {\x0a\x09\x09\x09\x09\x09box-sizing: border-box;\x0a\x09\x09\x09\x09\x09position: absolute;\x0a\x09\x09\x09\x09\x09border: 1px solid gray;\x0a\x09\x09\x09\x09\x09height: 20px;\x0a\x09\x09\x09\x09\x09width: 20px;\x0a\x09\x09\x09\x09\x09border-radius: 10px;\x0a\x09\x09\x09\x09}\x0a\x09\x09\x09\x09\x0a\x09\x09\x09\x09.keypad .mod-button.pressed {\x0a\x09\x09\x09\x09\x09background-color: black;\x0a\x09\x09\x09\x09\x09color: white;\x0a\x09\x09\x09\x09}\x0a\x09\x09\x09\x09\x0a\x09\x09\x09\x09.keypad .key {\x0a\x09\x09\x09\x09\x09box-sizing: border-box;\x0a\x09\x09\x09\x09\x09position: absolute;\x0a\x09\x09\x09\x09\x09border: 1px solid black;\x0a\x09\x09\x09\x09\x09height: 20px;\x0a\x09\x09\x09\x09\x09width: 20px;\x0a\x09\x09\x09\x09\x09border-radius: 4px;\x0a\x09\x09\x09\x09}\x0a\x09\x09\x09\x09\x0a\x09\x09\x09\x09.keypad .key.pressed {\x0a\x09\x09\x09\x09\x09background-color: black;\x0a\x09\x09\x09\x09\x09color: white;\x0a\x09\x09\x09\x09}\x0a\x09\x09\x09\x09'.\x0a\x09\x09\x09\x09\x0a\x09\x09\x09html div \x0a\x09\x09\x09\x09class: 'border'; \x0a\x09\x09\x09\x09with: [ \x0a\x09\x09\x09\x09\x09numButton := html div class: 'mod-button'; style: 'left: 20px; top: 40px;'.\x0a\x09\x09\x09\x09\x09altButton := html div class: 'mod-button'; style: 'left: 40px; top: 20px;'.\x0a\x09\x09\x09\x09\x09ctrlButton :=\x09html div class: 'mod-button'; style: 'left: 80px; top: 20px;'.\x0a\x09\x09\x09\x09\x09shiftButton := html div class: 'mod-button'; style: 'left: 100px; top: 40px;'.\x0a\x09\x09\x09\x09\x09\x0a\x09\x09\x09\x09\x09\x0a\x09\x09\x09\x09\x091 to: 4 do: [:row |  \x0a\x09\x09\x09\x09\x09\x09columns values do: [:col |\x0a\x09\x09\x09\x09\x09\x09\x09(keys at: row ifAbsent: 'Flo') at: col put: (html div class: 'key'; style: 'left:', ((20 + (col - 1 * 40)) asString), 'px; top:',  ((100 + (row - 1 * 40)) asString) , 'px').\x0a\x09\x09\x09\x09\x09\x09].\x0a\x09\x09\x09\x09\x09].\x0a\x09\x09\x09\x09].\x0a\x09\x09].\x0a\x09\x09",
 messageSends: ["class:", "div", "style:", "with:", "to:do:", "do:", "values", "at:put:", "at:ifAbsent:", ",", "asString", "+", "*", "-"],
 referencedClasses: []
 }),
@@ -659,11 +664,16 @@ category: 'not yet classified',
 fn: function (keySequence){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
+var $1;
 self._showChord_(self._chordFor_(keySequence));
+$1=_st(keySequence)._match_("[A-Z]+"._asRegexp());
+if(smalltalk.assert($1)){
+_st(_st(self["@shiftButton"])._asJQuery())._addClass_("pressed");
+};
 return self}, function($ctx1) {$ctx1.fill(self,"showChordFor:",{keySequence:keySequence},smalltalk.TwiddlerKeypad)})},
 args: ["keySequence"],
-source: "showChordFor: keySequence\x0a\x09\x22I visually display a chord for the given letter or letter sequence\x22\x0a\x09\x0a\x09self showChord: (self chordFor: keySequence).",
-messageSends: ["showChord:", "chordFor:"],
+source: "showChordFor: keySequence\x0a\x09\x22I visually display a chord for the given letter or letter sequence\x22\x0a\x09\x0a\x09self showChord: (self chordFor: keySequence).\x0a\x09\x0a\x09(keySequence match: '[A-Z]+' asRegexp)  \x22naïve regex for capital letters; should be looked up properly.\x22\x0a\x09\x09ifTrue: [\x0a\x09\x09\x09shiftButton asJQuery addClass: 'pressed'.\x0a\x09\x09].",
+messageSends: ["showChord:", "chordFor:", "ifTrue:", "match:", "asRegexp", "addClass:", "asJQuery"],
 referencedClasses: []
 }),
 smalltalk.TwiddlerKeypad);
