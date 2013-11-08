@@ -5,60 +5,15 @@ Widget subclass: #Lesson
 
 !Lesson methodsFor: 'not yet classified'!
 
-renderOn: html
-	"The lesson area shows a line of text, shows the chord for the next letter or letter sequence to be typed, and tracks the user's speed and accuracy."
+addChar: char
+	typedString := typedString , char.
+	self redrawLessonStrings.
+!
 
-	tagBrush := html.
-	
-	html div: [
-		html style: '
-			.lesson {
-				float: left;
-				padding-left: 30px;
-				height: 260px;
-				box-sizing: border-box;
-			}
-			
-			.lesson .exercise-text {
-				font-family: monospace;
-				font-size: 20px;
-			}
-			.lesson .letters-to-type {
-				background-color: #AAD;
-				outline: 2px solid #AAD;
-			}
-			
-			.lesson .error {
-				color: red;
-			}
-			.lesson .caret {
-				color: blue;
-			}
-		' .
-		
-		html div
-			class: 'lesson' ; 
-			with: [
-				html h1: 'Lesson 1'.
-				html br.
-				html div 
-					class: 'exercise-text';
-					with: [
-						lessonStringContainer := html p class: 'lesson-string'.
-
-						typedStringContainer := html p class: 'typed-string'.
-"						html p : [
-							html span: 'We u'.
-							html span class: 'error'; with: 'f'.
-							html span: 'ed to '.
-							html span class: 'error'; with: 'l'.
-							html span: 'ut  t'.
-							html span class: 'caret'; with: '_'
-						]"
-					].
-				
-			]
-		].
+backspace
+	typedString := typedString copyFrom: 1 to: typedString size - 1.
+	Transcript show: typedString; cr.
+	self redrawLessonStrings.
 !
 
 initialize
@@ -70,11 +25,11 @@ redrawLessonStrings
 	"Comment"
 	
 	| caretIndex letterToType |
-	caretIndex := typedString size + 1.
+	caretIndex := (typedString size + 1) min: lessonString size. 
 	letterToType := lessonString at: caretIndex.
 	
 	"show letter to be typed on the keypad"
-	Tutor instance twiddlerKeypad showChordFor: letterToType.
+	"Tutor instance twiddlerKeypad showChordFor: letterToType."
 	
 	"clear lesson string & typed string "
 	lessonStringContainer asJQuery empty.
@@ -90,7 +45,7 @@ redrawLessonStrings
 	"show typed string"
 	
 	typedString withIndexDo: [:letter :index |
-		(lessonString at: index) == letter 
+		(lessonString at: index ifAbsent: Nil) == letter 
 			ifTrue: [
 				typedStringContainer with: letter.
 			]
@@ -101,13 +56,86 @@ redrawLessonStrings
 			]
 	].
 	typedStringContainer with: (tagBrush span class: 'caret'; with: '_').
+!
+
+renderOn: html
+	"The lesson area shows a line of text, shows the chord for the next letter or letter sequence to be typed, and tracks the user's speed and accuracy."
+
+	tagBrush := html.
+	
+	html div 
+		with: [
+			html style: '
+				.lesson {
+					float: left;
+					padding-left: 30px;
+					height: 260px;
+					box-sizing: border-box;
+				}
+								
+				.lesson .exercise-text {
+					font-family: monospace;
+					font-size: 20px;
+				}
+				.lesson .letters-to-type {
+					background-color: #AAD;
+					outline: 2px solid #AAD;
+				}
+				
+				.lesson .error {
+					color: red;
+				}
+				.lesson .caret {
+					color: blue;
+				}
+			' .
+			
+			html div
+				class: 'lesson' ; 
+				with: [
+					html h1: 'Lesson 1'.
+					html br.
+					html div 
+						class: 'exercise-text';
+						with: [
+							lessonStringContainer := html pre class: 'lesson-string'.
+	
+							typedStringContainer := html pre class: 'typed-string'.
+						].
+				]
+			].
 ! !
 
 Widget subclass: #Tutor
-	instanceVariableNames: 'twiddlerKeypad lesson'
+	instanceVariableNames: 'twiddlerKeypad lesson inputArea ev'
 	package: 'Tutor'!
 
 !Tutor methodsFor: 'not yet classified'!
+
+ev
+	^ev.
+!
+
+ev: e
+	ev := e.
+!
+
+handleKeyEvent: event
+	"Extract a single letter or backspace from the input field. Defers execution to after the current call to allow the <input> to update its value."
+
+		
+	event keyCode == 8 
+		ifTrue: [
+			lesson backspace.
+		].
+	event keyCode == 9
+		ifFalse: [
+			lesson addChar: inputArea asJQuery val.
+		].
+		
+	inputArea asJQuery val: ''.
+	event stopPropagation; preventDefault.
+!
 
 initialize
 	"Set up the whole application object with a keypad and a lesson screen."
@@ -115,47 +143,58 @@ initialize
 	lesson := Lesson new.
 !
 
+lesson
+	^ lesson.
+!
+
 renderOn: html
 	"render the whole application"
 
-	html style: 
-		' .menu-bar {
-		}'.
-	
 	html div
-		class: 'menu-bar';
-		with: [ 
-			html button 
-				with: 'Recreate App';
-				onClick: [Tutor begin].
-			
-			html button
-				with: 'More button';
-				onClick: [Transcript show: 'more clicked'].
-				
-			html select
-				with: [
-					html option with: 'lesson 1'; value: '1'.
-					html option with: 'lesson 2'; value: '2'.
-				].
-			].
-			
-			html hr.
+		tabindex: 0;
+		onFocus: [Transcript show: 'app focus'. inputArea asJQuery focus. ];
+		style: 'border: 2px solid red;';
+		with: [
+			html style: 
+				' .menu-bar {
+				}'.
 			
 			html div
-				with: [
-					html with: twiddlerKeypad.
-					html with: lesson.
-				].
-			html div style: 'clear: both'; class: 'clearfix'.
+				class: 'menu-bar';
+				with: [ 
+					html button 
+						with: 'Recreate App';
+						onClick: [Tutor begin].
+					
+					html button
+						with: 'More button';
+						onClick: [Transcript show: 'more clicked'].
+						
+					html select
+						with: [
+							html option with: 'lesson 1'; value: '1'.
+							html option with: 'lesson 2'; value: '2'.
+						].
+					].
+					
+					html hr.
+					
+					html div
+						with: [
+							html with: twiddlerKeypad.
+							html with: lesson.
+						].
+					html div style: 'clear: both'; class: 'clearfix'.
+					
+					inputArea := html input 
+						type:'text'; 
+						class: 'input-area';
+						onKeyDown: [:event | [ self handleKeyEvent: event ] valueWithTimeout: 0. ].
+		]
 !
 
 twiddlerKeypad
 	^ twiddlerKeypad.
-!
-
-lesson
-	^ lesson.
 ! !
 
 Tutor class instanceVariableNames: 'instance'!
@@ -189,7 +228,7 @@ chordFor: keySequence
 
 clearChord
 	"Shows all buttons as released"
-	Transcript show: 'cleared chord'; cr.
+	
 	keys do: [:row |
 		row do: [:key |
 			key asJQuery removeClass: 'pressed'.
@@ -248,6 +287,7 @@ keyConfiguration
 # can be expected to account for roughly one-third of the adjacent
 # letter pairs in normal English text!!
 
+0     m000 = " "
 0     0m00 = "e"
 0     00m0 = "t"
 0     000m = "h"

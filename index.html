@@ -11,6 +11,9 @@
       }});
 
       require(['amber/devel', 'tutor/Tutor'], function (smalltalk) {
+        window.onbeforeunload = function() {
+              return 'Do you really want to close?';
+            };
         smalltalk.defaultAmdNamespace = "tutor";
         smalltalk.initialize();
 
