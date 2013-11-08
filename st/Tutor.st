@@ -12,12 +12,11 @@ addChar: char
 
 backspace
 	typedString := typedString copyFrom: 1 to: typedString size - 1.
-	Transcript show: typedString; cr.
 	self redrawLessonStrings.
 !
 
 initialize
-	lessonString :=	'We used to cut the green green grass.' .
+	lessonString :=	'We used to cut the green green grass /  | a |  a := [ :p | a asString ~ ].' .
 	typedString := 'We ufed to cp' .
 !
 
@@ -29,7 +28,7 @@ redrawLessonStrings
 	letterToType := lessonString at: caretIndex.
 	
 	"show letter to be typed on the keypad"
-	"Tutor instance twiddlerKeypad showChordFor: letterToType."
+	Tutor instance twiddlerKeypad showChordFor: letterToType.
 	
 	"clear lesson string & typed string "
 	lessonStringContainer asJQuery empty.
@@ -222,8 +221,9 @@ Widget subclass: #TwiddlerKeypad
 
 chordFor: keySequence
 	"Looks up the chord matching the key(s), indicated by a one or more digit string; or integer key code."
+	Transcript show: keySequence.
 	
-	^ keyToChordMap at: keySequence.
+	^ keyToChordMap at: keySequence asLowercase.
 !
 
 clearChord
@@ -259,6 +259,9 @@ initialize
 			]
 		]
 	].
+	
+	"parser does not yet support parsing non-quoted non-whitespace chars, so I added space manually."
+	keyToChordMap at: ' ' put: 'm000'.
 !
 
 keyConfiguration
@@ -287,7 +290,6 @@ keyConfiguration
 # can be expected to account for roughly one-third of the adjacent
 # letter pairs in normal English text!!
 
-0     m000 = " "
 0     0m00 = "e"
 0     00m0 = "t"
 0     000m = "h"
@@ -491,6 +493,10 @@ num   00mm = CAPS_LOCK
 num   00rr = NUM_LOCK
 num   00ll = SCROLL_LOCK
 '
+!
+
+keyToChordMap
+	^ keyToChordMap.
 !
 
 keys
