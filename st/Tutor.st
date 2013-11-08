@@ -16,7 +16,7 @@ backspace
 !
 
 initialize
-	lessonString :=	'We used to cut the green green grass /  | a |  a := [ :p | a asString ~ ].' .
+	lessonString :=	'We used to cut the green green grass'.
 	typedString := 'We ufed to cp' .
 !
 
@@ -24,8 +24,8 @@ redrawLessonStrings
 	"Comment"
 	
 	| caretIndex letterToType |
-	caretIndex := (typedString size + 1) min: lessonString size. 
-	letterToType := lessonString at: caretIndex.
+	caretIndex := (typedString size + 1).
+	letterToType := lessonString at: caretIndex ifAbsent: String cr.    "type enter when done"
 	
 	"show letter to be typed on the keypad"
 	Tutor instance twiddlerKeypad showChordFor: letterToType.
@@ -142,6 +142,10 @@ initialize
 	lesson := Lesson new.
 !
 
+inputArea
+	^inputArea.
+!
+
 lesson
 	^ lesson.
 !
@@ -207,6 +211,7 @@ begin
 	
 	instance := self new appendToJQuery: ('#tutor' asJQuery) ; yourself.
 	instance lesson redrawLessonStrings.
+	instance inputArea asJQuery focus.
 !
 
 instance
@@ -262,6 +267,7 @@ initialize
 	
 	"parser does not yet support parsing non-quoted non-whitespace chars, so I added space manually."
 	keyToChordMap at: ' ' put: 'm000'.
+	keyToChordMap at: (String cr) put: 'mmmm'.
 !
 
 keyConfiguration

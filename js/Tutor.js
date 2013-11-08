@@ -44,11 +44,11 @@ category: 'not yet classified',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
-self["@lessonString"]="We used to cut the green green grass /  | a |  a := [ :p | a asString ~ ].";
+self["@lessonString"]="We used to cut the green green grass";
 self["@typedString"]="We ufed to cp";
 return self}, function($ctx1) {$ctx1.fill(self,"initialize",{},smalltalk.Lesson)})},
 args: [],
-source: "initialize\x0a\x09lessonString :=\x09'We used to cut the green green grass /  | a |  a := [ :p | a asString ~ ].' .\x0a\x09typedString := 'We ufed to cp' .\x0a\x09",
+source: "initialize\x0a\x09lessonString :=\x09'We used to cut the green green grass'.\x0a\x09typedString := 'We ufed to cp' .\x0a\x09",
 messageSends: [],
 referencedClasses: []
 }),
@@ -61,12 +61,13 @@ category: 'not yet classified',
 fn: function (){
 var self=this;
 var caretIndex,letterToType;
+function $String(){return smalltalk.String||(typeof String=="undefined"?nil:String)}
 function $Tutor(){return smalltalk.Tutor||(typeof Tutor=="undefined"?nil:Tutor)}
 function $Nil(){return smalltalk.Nil||(typeof Nil=="undefined"?nil:Nil)}
 return smalltalk.withContext(function($ctx1) { 
 var $1,$2,$3,$4,$5,$6,$7,$8,$9;
-caretIndex=_st(_st(_st(self["@typedString"])._size()).__plus((1)))._min_(_st(self["@lessonString"])._size());
-letterToType=_st(self["@lessonString"])._at_(caretIndex);
+caretIndex=_st(_st(self["@typedString"])._size()).__plus((1));
+letterToType=_st(self["@lessonString"])._at_ifAbsent_(caretIndex,_st($String())._cr());
 _st(_st(_st($Tutor())._instance())._twiddlerKeypad())._showChordFor_(letterToType);
 _st(_st(self["@lessonStringContainer"])._asJQuery())._empty();
 _st(_st(self["@typedStringContainer"])._asJQuery())._empty();
@@ -98,9 +99,9 @@ $9=_st($8)._with_("_");
 _st(self["@typedStringContainer"])._with_($9);
 return self}, function($ctx1) {$ctx1.fill(self,"redrawLessonStrings",{caretIndex:caretIndex,letterToType:letterToType},smalltalk.Lesson)})},
 args: [],
-source: "redrawLessonStrings\x0a\x09\x22Comment\x22\x0a\x09\x0a\x09| caretIndex letterToType |\x0a\x09caretIndex := (typedString size + 1) min: lessonString size. \x0a\x09letterToType := lessonString at: caretIndex.\x0a\x09\x0a\x09\x22show letter to be typed on the keypad\x22\x0a\x09Tutor instance twiddlerKeypad showChordFor: letterToType.\x0a\x09\x0a\x09\x22clear lesson string & typed string \x22\x0a\x09lessonStringContainer asJQuery empty.\x0a\x09typedStringContainer asJQuery empty.\x0a\x09\x0a\x09\x0a\x09\x22show lesson string\x22\x0a\x09lessonStringContainer \x0a\x09\x09with: (lessonString copyFrom: 1 to: caretIndex -1) ;\x0a\x09\x09with: (tagBrush span class: 'letters-to-type'; with: letterToType) ;\x0a\x09\x09with: (lessonString copyFrom: caretIndex + 1 to: lessonString size).\x0a\x0a\x09\x22show typed string\x22\x0a\x09\x0a\x09typedString withIndexDo: [:letter :index |\x0a\x09\x09(lessonString at: index ifAbsent: Nil) == letter \x0a\x09\x09\x09ifTrue: [\x0a\x09\x09\x09\x09typedStringContainer with: letter.\x0a\x09\x09\x09]\x0a\x09\x09\x09ifFalse: [\x0a\x09\x09\x09\x09typedStringContainer with:  [\x0a\x09\x09\x09\x09\x09tagBrush span class: 'error'; with: letter.\x0a\x09\x09\x09\x09\x09]\x0a\x09\x09\x09]\x0a\x09].\x0a\x09typedStringContainer with: (tagBrush span class: 'caret'; with: '_').\x0a\x09\x0a\x09\x0a\x09\x0a\x09",
-messageSends: ["min:", "+", "size", "at:", "showChordFor:", "twiddlerKeypad", "instance", "empty", "asJQuery", "with:", "copyFrom:to:", "-", "class:", "span", "withIndexDo:", "ifTrue:ifFalse:", "==", "at:ifAbsent:"],
-referencedClasses: ["Tutor", "Nil"]
+source: "redrawLessonStrings\x0a\x09\x22Comment\x22\x0a\x09\x0a\x09| caretIndex letterToType |\x0a\x09caretIndex := (typedString size + 1).\x0a\x09letterToType := lessonString at: caretIndex ifAbsent: String cr.    \x22type enter when done\x22\x0a\x09\x0a\x09\x22show letter to be typed on the keypad\x22\x0a\x09Tutor instance twiddlerKeypad showChordFor: letterToType.\x0a\x09\x0a\x09\x22clear lesson string & typed string \x22\x0a\x09lessonStringContainer asJQuery empty.\x0a\x09typedStringContainer asJQuery empty.\x0a\x09\x0a\x09\x0a\x09\x22show lesson string\x22\x0a\x09lessonStringContainer \x0a\x09\x09with: (lessonString copyFrom: 1 to: caretIndex -1) ;\x0a\x09\x09with: (tagBrush span class: 'letters-to-type'; with: letterToType) ;\x0a\x09\x09with: (lessonString copyFrom: caretIndex + 1 to: lessonString size).\x0a\x0a\x09\x22show typed string\x22\x0a\x09\x0a\x09typedString withIndexDo: [:letter :index |\x0a\x09\x09(lessonString at: index ifAbsent: Nil) == letter \x0a\x09\x09\x09ifTrue: [\x0a\x09\x09\x09\x09typedStringContainer with: letter.\x0a\x09\x09\x09]\x0a\x09\x09\x09ifFalse: [\x0a\x09\x09\x09\x09typedStringContainer with:  [\x0a\x09\x09\x09\x09\x09tagBrush span class: 'error'; with: letter.\x0a\x09\x09\x09\x09\x09]\x0a\x09\x09\x09]\x0a\x09].\x0a\x09typedStringContainer with: (tagBrush span class: 'caret'; with: '_').\x0a\x09\x0a\x09\x0a\x09\x0a\x09",
+messageSends: ["+", "size", "at:ifAbsent:", "cr", "showChordFor:", "twiddlerKeypad", "instance", "empty", "asJQuery", "with:", "copyFrom:to:", "-", "class:", "span", "withIndexDo:", "ifTrue:ifFalse:", "=="],
+referencedClasses: ["String", "Tutor", "Nil"]
 }),
 smalltalk.Lesson);
 
@@ -224,6 +225,24 @@ args: [],
 source: "initialize\x0a\x09\x22Set up the whole application object with a keypad and a lesson screen.\x22\x0a\x09twiddlerKeypad := TwiddlerKeypad new.\x0a\x09lesson := Lesson new.\x0a\x09",
 messageSends: ["new"],
 referencedClasses: ["TwiddlerKeypad", "Lesson"]
+}),
+smalltalk.Tutor);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "inputArea",
+category: 'not yet classified',
+fn: function (){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1;
+$1=self["@inputArea"];
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"inputArea",{},smalltalk.Tutor)})},
+args: [],
+source: "inputArea\x0a\x09^inputArea.\x0a\x09",
+messageSends: [],
+referencedClasses: []
 }),
 smalltalk.Tutor);
 
@@ -362,10 +381,11 @@ _st($1)._appendToJQuery_("#tutor"._asJQuery());
 $2=_st($1)._yourself();
 self["@instance"]=$2;
 _st(_st(self["@instance"])._lesson())._redrawLessonStrings();
+_st(_st(_st(self["@instance"])._inputArea())._asJQuery())._focus();
 return self}, function($ctx1) {$ctx1.fill(self,"begin",{},smalltalk.Tutor.klass)})},
 args: [],
-source: "begin\x0a\x09\x22create the button, keypad and lesson and embed them into the page\x22\x0a\x0a\x09'#tutor' asJQuery empty.\x0a\x09\x0a\x09instance := self new appendToJQuery: ('#tutor' asJQuery) ; yourself.\x0a\x09instance lesson redrawLessonStrings.",
-messageSends: ["empty", "asJQuery", "appendToJQuery:", "new", "yourself", "redrawLessonStrings", "lesson"],
+source: "begin\x0a\x09\x22create the button, keypad and lesson and embed them into the page\x22\x0a\x0a\x09'#tutor' asJQuery empty.\x0a\x09\x0a\x09instance := self new appendToJQuery: ('#tutor' asJQuery) ; yourself.\x0a\x09instance lesson redrawLessonStrings.\x0a\x09instance inputArea asJQuery focus.",
+messageSends: ["empty", "asJQuery", "appendToJQuery:", "new", "yourself", "redrawLessonStrings", "lesson", "focus", "inputArea"],
 referencedClasses: []
 }),
 smalltalk.Tutor.klass);
@@ -440,6 +460,7 @@ fn: function (){
 var self=this;
 function $Dictionary(){return smalltalk.Dictionary||(typeof Dictionary=="undefined"?nil:Dictionary)}
 function $Array(){return smalltalk.Array||(typeof Array=="undefined"?nil:Array)}
+function $String(){return smalltalk.String||(typeof String=="undefined"?nil:String)}
 return smalltalk.withContext(function($ctx1) { 
 var $1,$2,$3,$4;
 self["@columns"]=_st($Dictionary())._new();
@@ -469,11 +490,12 @@ return _st(self["@keyToChordMap"])._at_put_(_st(_st(tokens)._at_((4)))._trimBoth
 };
 }, function($ctx2) {$ctx2.fillBlock({line:line,trimmedLine:trimmedLine,tokens:tokens},$ctx1,2)})}));
 _st(self["@keyToChordMap"])._at_put_(" ","m000");
+_st(self["@keyToChordMap"])._at_put_(_st($String())._cr(),"mmmm");
 return self}, function($ctx1) {$ctx1.fill(self,"initialize",{},smalltalk.TwiddlerKeypad)})},
 args: [],
-source: "initialize\x0a\x09\x22comment stating purpose of message\x22\x0a\x09columns := Dictionary new.\x0a\x09columns\x0a\x09\x09at: 'l' put: 3;\x0a\x09\x09at: 'm' put: 2;\x0a\x09\x09at: 'r' put: 1.\x0a\x09\x0a\x09keys := Array new.\x0a\x094 timesRepeat:[keys add: Array new.].\x0a\x09\x0a\x09keyToChordMap := Dictionary new.\x0a\x09\x0a\x09self keyConfiguration linesDo: [:line | \x0a\x09\x09| trimmedLine tokens |\x0a\x09\x09trimmedLine := (line trimBoth tokenize: '#') at: 1.\x0a\x09\x09trimmedLine == '' ifFalse: [\x0a\x09\x09\x09tokens := trimmedLine tokenize: '\x5cs+' asRegexp.\x0a\x09\x09\x09((tokens at: 4) match: '\x22.+\x22') ifTrue: [\x0a\x09\x09\x09\x09keyToChordMap at: ((tokens at: 4)trimBoth: '\x22') put: (tokens at: 2 ).\x0a\x09\x09\x09]\x0a\x09\x09]\x0a\x09].\x0a\x09\x0a\x09\x22parser does not yet support parsing non-quoted non-whitespace chars, so I added space manually.\x22\x0a\x09keyToChordMap at: ' ' put: 'm000'.",
-messageSends: ["new", "at:put:", "timesRepeat:", "add:", "linesDo:", "keyConfiguration", "at:", "tokenize:", "trimBoth", "ifFalse:", "==", "asRegexp", "ifTrue:", "match:", "trimBoth:"],
-referencedClasses: ["Dictionary", "Array"]
+source: "initialize\x0a\x09\x22comment stating purpose of message\x22\x0a\x09columns := Dictionary new.\x0a\x09columns\x0a\x09\x09at: 'l' put: 3;\x0a\x09\x09at: 'm' put: 2;\x0a\x09\x09at: 'r' put: 1.\x0a\x09\x0a\x09keys := Array new.\x0a\x094 timesRepeat:[keys add: Array new.].\x0a\x09\x0a\x09keyToChordMap := Dictionary new.\x0a\x09\x0a\x09self keyConfiguration linesDo: [:line | \x0a\x09\x09| trimmedLine tokens |\x0a\x09\x09trimmedLine := (line trimBoth tokenize: '#') at: 1.\x0a\x09\x09trimmedLine == '' ifFalse: [\x0a\x09\x09\x09tokens := trimmedLine tokenize: '\x5cs+' asRegexp.\x0a\x09\x09\x09((tokens at: 4) match: '\x22.+\x22') ifTrue: [\x0a\x09\x09\x09\x09keyToChordMap at: ((tokens at: 4)trimBoth: '\x22') put: (tokens at: 2 ).\x0a\x09\x09\x09]\x0a\x09\x09]\x0a\x09].\x0a\x09\x0a\x09\x22parser does not yet support parsing non-quoted non-whitespace chars, so I added space manually.\x22\x0a\x09keyToChordMap at: ' ' put: 'm000'.\x0a\x09keyToChordMap at: (String cr) put: 'mmmm'.",
+messageSends: ["new", "at:put:", "timesRepeat:", "add:", "linesDo:", "keyConfiguration", "at:", "tokenize:", "trimBoth", "ifFalse:", "==", "asRegexp", "ifTrue:", "match:", "trimBoth:", "cr"],
+referencedClasses: ["Dictionary", "Array", "String"]
 }),
 smalltalk.TwiddlerKeypad);
 
