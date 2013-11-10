@@ -164,6 +164,29 @@ ev: e
 	ev := e.
 !
 
+handleCharKey: event
+
+	event stopPropagation; preventDefault.
+		
+	lesson addChar: inputArea asJQuery val.
+	inputArea asJQuery val: ''.
+!
+
+handleControlKey: event
+
+	event stopPropagation; preventDefault.
+	
+	Transcript show: 'key event'; show: event keyCode; cr.
+	event keyCode == 8 
+		ifTrue: [
+			lesson backspace.
+		].
+	event keyCode == 13
+		ifTrue: [
+			lesson nextLesson.
+		].
+!
+
 initialize
 	"Set up the whole application object with a keypad and a lesson screen."
 	twiddlerKeypad := TwiddlerKeypad new.
@@ -188,11 +211,20 @@ renderOn: html
 	html div
 		tabindex: 0;
 		onFocus: [Transcript show: 'app focus'. inputArea asJQuery focus. ];
-		style: 'border: 2px solid red;';
 		with: [
 			html style: 
 				' .menu-bar {
-				}'.
+				}
+				
+				.input-area {
+					position: relative;
+					left: -200px;
+					height: 20px;
+					margin: 0;
+					padding: 0;
+					top: -20px;
+				}
+				'.
 			
 			html div
 				class: 'menu-bar';
@@ -200,19 +232,15 @@ renderOn: html
 					html button 
 						with: 'Recreate App';
 						onClick: [Tutor begin].
-					
-					html button
-						with: 'More button';
-						onClick: [Transcript show: 'more clicked'].
-						
+											
 					lessonPicker := html select
 						with: [
-
 							Tutor instance lesson lessons withIndexDo: [:item :index | 
 								html option with: 'lesson ' , index asString ;  value: index asString.
 							].
 						];
-						onChange: [ Tutor instance lesson lessonIndex: lessonPicker asJQuery val asNumber.].
+						onChange: [ Tutor instance lesson lessonIndex: lessonPicker asJQuery val asNumber.] ;
+						onFocus: [  inputArea asJQuery focus. ].
 					].
 					
 					html hr.
@@ -234,29 +262,6 @@ renderOn: html
 
 twiddlerKeypad
 	^ twiddlerKeypad.
-!
-
-handleCharKey: event
-
-	event stopPropagation; preventDefault.
-		
-	lesson addChar: inputArea asJQuery val.
-	inputArea asJQuery val: ''.
-!
-
-handleControlKey: event
-
-	event stopPropagation; preventDefault.
-	
-	Transcript show: 'key event'; show: event keyCode; cr.
-	event keyCode == 8 
-		ifTrue: [
-			lesson backspace.
-		].
-	event keyCode == 13
-		ifTrue: [
-			lesson nextLesson.
-		].
 ! !
 
 Tutor class instanceVariableNames: 'instance'!
