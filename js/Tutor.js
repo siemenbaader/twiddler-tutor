@@ -47,16 +47,25 @@ function $Array(){return smalltalk.Array||(typeof Array=="undefined"?nil:Array)}
 return smalltalk.withContext(function($ctx1) { 
 var $1,$2;
 $1=_st($Array())._new();
+_st($1)._add_("ssh root@zypher");
+_st($1)._add_("rsync -avuz file.txt siba@ssh.itu.dk:/home/siba/web");
+_st($1)._add_("cd ~/home/siemen");
+_st($1)._add_("sh ./foo");
+_st($1)._add_("a := [:i | ^ self.]");
+_st($1)._add_("ssh root@zypher");
+_st($1)._add_("rsync -avusz");
+_st($1)._add_("cd ~/home/siemen");
+_st($1)._add_("sh ./foo");
 _st($1)._add_("We used to cut the green green grass");
 _st($1)._add_("The force of the USA is mighty");
 _st($1)._add_("Slimane the Slimey Pig sledged the slider");
 $2=_st($1)._yourself();
 self["@lessons"]=$2;
-self["@lessonIndex"]=(2);
+self["@lessonIndex"]=(1);
 self["@typedString"]="";
 return self}, function($ctx1) {$ctx1.fill(self,"initialize",{},smalltalk.Lesson)})},
 args: [],
-source: "initialize\x0a\x09lessons := Array new \x0a\x09\x09add: 'We used to cut the green green grass' ;\x0a\x09\x09add: 'The force of the USA is mighty' ;\x0a\x09\x09add: 'Slimane the Slimey Pig sledged the slider' ;\x0a\x09\x09yourself.\x0a\x0a\x09lessonIndex := 2.\x0a\x09typedString := '' .\x0a\x09",
+source: "initialize\x0a\x09lessons := Array new \x0a\x09\x09add: 'ssh root@zypher' ;\x0a\x09\x09add: 'rsync -avuz file.txt siba@ssh.itu.dk:/home/siba/web' ;\x0a\x09\x09add: 'cd ~/home/siemen' ;\x0a\x09\x09add: 'sh ./foo' ;\x0a\x09\x09add: 'a := [:i | ^ self.]' ;\x0a\x09\x09add: 'ssh root@zypher' ;\x0a\x09\x09add: 'rsync -avusz' ;\x0a\x09\x09add: 'cd ~/home/siemen' ;\x0a\x09\x09add: 'sh ./foo' ;\x0a\x09\x09add: 'We used to cut the green green grass' ;\x0a\x09\x09add: 'The force of the USA is mighty' ;\x0a\x09\x09add: 'Slimane the Slimey Pig sledged the slider' ;\x0a\x09\x09yourself.\x0a\x0a\x09lessonIndex := 1.\x0a\x09typedString := '' .\x0a\x09",
 messageSends: ["add:", "new", "yourself"],
 referencedClasses: ["Array"]
 }),
@@ -279,33 +288,54 @@ smalltalk.Tutor);
 
 smalltalk.addMethod(
 smalltalk.method({
-selector: "handleKeyEvent:",
+selector: "handleCharKey:",
 category: 'not yet classified',
 fn: function (event){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
-var $1,$2,$3,$4,$5;
-$1=_st(_st(event)._keyCode()).__eq_eq((8));
-if(smalltalk.assert($1)){
+var $1,$2;
+$1=event;
+_st($1)._stopPropagation();
+$2=_st($1)._preventDefault();
+_st(self["@lesson"])._addChar_(_st(_st(self["@inputArea"])._asJQuery())._val());
+_st(_st(self["@inputArea"])._asJQuery())._val_("");
+return self}, function($ctx1) {$ctx1.fill(self,"handleCharKey:",{event:event},smalltalk.Tutor)})},
+args: ["event"],
+source: "handleCharKey: event\x0a\x0a\x09event stopPropagation; preventDefault.\x0a\x09\x09\x0a\x09lesson addChar: inputArea asJQuery val.\x0a\x09inputArea asJQuery val: ''.\x0a\x0a\x09",
+messageSends: ["stopPropagation", "preventDefault", "addChar:", "val", "asJQuery", "val:"],
+referencedClasses: []
+}),
+smalltalk.Tutor);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "handleControlKey:",
+category: 'not yet classified',
+fn: function (event){
+var self=this;
+function $Transcript(){return smalltalk.Transcript||(typeof Transcript=="undefined"?nil:Transcript)}
+return smalltalk.withContext(function($ctx1) { 
+var $1,$2,$3,$4,$5,$6;
+$1=event;
+_st($1)._stopPropagation();
+$2=_st($1)._preventDefault();
+$3=$Transcript();
+_st($3)._show_("key event");
+_st($3)._show_(_st(event)._keyCode());
+$4=_st($3)._cr();
+$5=_st(_st(event)._keyCode()).__eq_eq((8));
+if(smalltalk.assert($5)){
 _st(self["@lesson"])._backspace();
 };
-$2=_st(_st(event)._keyCode()).__eq_eq((13));
-if(smalltalk.assert($2)){
+$6=_st(_st(event)._keyCode()).__eq_eq((13));
+if(smalltalk.assert($6)){
 _st(self["@lesson"])._nextLesson();
 };
-$3=_st(_st(event)._keyCode()).__eq_eq((9));
-if(! smalltalk.assert($3)){
-_st(self["@lesson"])._addChar_(_st(_st(self["@inputArea"])._asJQuery())._val());
-};
-_st(_st(self["@inputArea"])._asJQuery())._val_("");
-$4=event;
-_st($4)._stopPropagation();
-$5=_st($4)._preventDefault();
-return self}, function($ctx1) {$ctx1.fill(self,"handleKeyEvent:",{event:event},smalltalk.Tutor)})},
+return self}, function($ctx1) {$ctx1.fill(self,"handleControlKey:",{event:event},smalltalk.Tutor)})},
 args: ["event"],
-source: "handleKeyEvent: event\x0a\x09\x22Extract a single letter or backspace from the input field. Defers execution to after the current call to allow the <input> to update its value.\x22\x0a\x0a\x09\x09\x0a\x09event keyCode == 8 \x0a\x09\x09ifTrue: [\x0a\x09\x09\x09lesson backspace.\x0a\x09\x09].\x0a\x09event keyCode == 13\x0a\x09\x09ifTrue: [\x0a\x09\x09\x09lesson nextLesson.\x0a\x09\x09].\x0a\x09event keyCode == 9\x0a\x09\x09ifFalse: [\x0a\x09\x09\x09lesson addChar: inputArea asJQuery val.\x0a\x09\x09].\x0a\x09\x09\x0a\x09inputArea asJQuery val: ''.\x0a\x09event stopPropagation; preventDefault.\x0a\x09",
-messageSends: ["ifTrue:", "==", "keyCode", "backspace", "nextLesson", "ifFalse:", "addChar:", "val", "asJQuery", "val:", "stopPropagation", "preventDefault"],
-referencedClasses: []
+source: "handleControlKey: event\x0a\x0a\x09event stopPropagation; preventDefault.\x0a\x09\x0a\x09Transcript show: 'key event'; show: event keyCode; cr.\x0a\x09event keyCode == 8 \x0a\x09\x09ifTrue: [\x0a\x09\x09\x09lesson backspace.\x0a\x09\x09].\x0a\x09event keyCode == 13\x0a\x09\x09ifTrue: [\x0a\x09\x09\x09lesson nextLesson.\x0a\x09\x09].\x0a\x0a\x09",
+messageSends: ["stopPropagation", "preventDefault", "show:", "keyCode", "cr", "ifTrue:", "==", "backspace", "nextLesson"],
+referencedClasses: ["Transcript"]
 }),
 smalltalk.Tutor);
 
@@ -391,7 +421,7 @@ var self=this;
 function $Transcript(){return smalltalk.Transcript||(typeof Transcript=="undefined"?nil:Transcript)}
 function $Tutor(){return smalltalk.Tutor||(typeof Tutor=="undefined"?nil:Tutor)}
 return smalltalk.withContext(function($ctx1) { 
-var $1,$3,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$4,$17,$18,$19,$20,$2;
+var $1,$3,$5,$6,$7,$8,$9,$10,$11,$12,$4,$13,$14,$15,$16,$2;
 $1=_st(html)._div();
 _st($1)._tabindex_((0));
 _st($1)._onFocus_((function(){
@@ -424,24 +454,19 @@ $8;
 $9=_st(html)._select();
 _st($9)._with_((function(){
 return smalltalk.withContext(function($ctx4) {
+return _st(_st(_st(_st($Tutor())._instance())._lesson())._lessons())._withIndexDo_((function(item,index){
+return smalltalk.withContext(function($ctx5) {
 $10=_st(html)._option();
-_st($10)._with_("lesson 1");
-$11=_st($10)._value_("1");
-$11;
-$12=_st(html)._option();
-_st($12)._with_("lesson 2");
-$13=_st($12)._value_("2");
-$13;
-$14=_st(html)._option();
-_st($14)._with_("lesson 3");
-$15=_st($14)._value_("3");
-return $15;
+_st($10)._with_("lesson ".__comma(_st(index)._asString()));
+$11=_st($10)._value_(_st(index)._asString());
+return $11;
+}, function($ctx5) {$ctx5.fillBlock({item:item,index:index},$ctx4,7)})}));
 }, function($ctx4) {$ctx4.fillBlock({},$ctx3,6)})}));
-$16=_st($9)._onChange_((function(){
+$12=_st($9)._onChange_((function(){
 return smalltalk.withContext(function($ctx4) {
 return _st(_st(_st($Tutor())._instance())._lesson())._lessonIndex_(_st(_st(_st(self["@lessonPicker"])._asJQuery())._val())._asNumber());
-}, function($ctx4) {$ctx4.fillBlock({},$ctx3,7)})}));
-self["@lessonPicker"]=$16;
+}, function($ctx4) {$ctx4.fillBlock({},$ctx3,8)})}));
+self["@lessonPicker"]=$12;
 return self["@lessonPicker"];
 }, function($ctx3) {$ctx3.fillBlock({},$ctx2,3)})}));
 $4;
@@ -450,28 +475,35 @@ _st(_st(html)._div())._with_((function(){
 return smalltalk.withContext(function($ctx3) {
 _st(html)._with_(self["@twiddlerKeypad"]);
 return _st(html)._with_(self["@lesson"]);
-}, function($ctx3) {$ctx3.fillBlock({},$ctx2,8)})}));
-$17=_st(html)._div();
-_st($17)._style_("clear: both");
-$18=_st($17)._class_("clearfix");
-$18;
-$19=_st(html)._input();
-_st($19)._type_("text");
-_st($19)._class_("input-area");
-$20=_st($19)._onKeyDown_((function(event){
+}, function($ctx3) {$ctx3.fillBlock({},$ctx2,9)})}));
+$13=_st(html)._div();
+_st($13)._style_("clear: both");
+$14=_st($13)._class_("clearfix");
+$14;
+$15=_st(html)._input();
+_st($15)._type_("text");
+_st($15)._class_("input-area");
+_st($15)._onKeyDown_((function(event){
 return smalltalk.withContext(function($ctx3) {
 return _st((function(){
 return smalltalk.withContext(function($ctx4) {
-return self._handleKeyEvent_(event);
-}, function($ctx4) {$ctx4.fillBlock({},$ctx3,10)})}))._valueWithTimeout_((0));
-}, function($ctx3) {$ctx3.fillBlock({event:event},$ctx2,9)})}));
-self["@inputArea"]=$20;
+return self._handleControlKey_(event);
+}, function($ctx4) {$ctx4.fillBlock({},$ctx3,11)})}))._valueWithTimeout_((0));
+}, function($ctx3) {$ctx3.fillBlock({event:event},$ctx2,10)})}));
+$16=_st($15)._onKeyPress_((function(event){
+return smalltalk.withContext(function($ctx3) {
+return _st((function(){
+return smalltalk.withContext(function($ctx4) {
+return self._handleCharKey_(event);
+}, function($ctx4) {$ctx4.fillBlock({},$ctx3,13)})}))._valueWithTimeout_((0));
+}, function($ctx3) {$ctx3.fillBlock({event:event},$ctx2,12)})}));
+self["@inputArea"]=$16;
 return self["@inputArea"];
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,2)})}));
 return self}, function($ctx1) {$ctx1.fill(self,"renderOn:",{html:html},smalltalk.Tutor)})},
 args: ["html"],
-source: "renderOn: html\x0a\x09\x22render the whole application\x22\x0a\x0a\x09html div\x0a\x09\x09tabindex: 0;\x0a\x09\x09onFocus: [Transcript show: 'app focus'. inputArea asJQuery focus. ];\x0a\x09\x09style: 'border: 2px solid red;';\x0a\x09\x09with: [\x0a\x09\x09\x09html style: \x0a\x09\x09\x09\x09' .menu-bar {\x0a\x09\x09\x09\x09}'.\x0a\x09\x09\x09\x0a\x09\x09\x09html div\x0a\x09\x09\x09\x09class: 'menu-bar';\x0a\x09\x09\x09\x09with: [ \x0a\x09\x09\x09\x09\x09html button \x0a\x09\x09\x09\x09\x09\x09with: 'Recreate App';\x0a\x09\x09\x09\x09\x09\x09onClick: [Tutor begin].\x0a\x09\x09\x09\x09\x09\x0a\x09\x09\x09\x09\x09html button\x0a\x09\x09\x09\x09\x09\x09with: 'More button';\x0a\x09\x09\x09\x09\x09\x09onClick: [Transcript show: 'more clicked'].\x0a\x09\x09\x09\x09\x09\x09\x0a\x09\x09\x09\x09\x09lessonPicker := html select\x0a\x09\x09\x09\x09\x09\x09with: [\x0a\x09\x09\x09\x09\x09\x09\x09html option with: 'lesson 1'; value: '1'.\x0a\x09\x09\x09\x09\x09\x09\x09html option with: 'lesson 2'; value: '2'.\x0a\x09\x09\x09\x09\x09\x09\x09html option with: 'lesson 3'; value: '3'.\x0a\x09\x09\x09\x09\x09\x09];\x0a\x09\x09\x09\x09\x09\x09onChange: [ Tutor instance lesson lessonIndex: lessonPicker asJQuery val asNumber.].\x0a\x09\x09\x09\x09\x09].\x0a\x09\x09\x09\x09\x09\x0a\x09\x09\x09\x09\x09html hr.\x0a\x09\x09\x09\x09\x09\x0a\x09\x09\x09\x09\x09html div\x0a\x09\x09\x09\x09\x09\x09with: [\x0a\x09\x09\x09\x09\x09\x09\x09html with: twiddlerKeypad.\x0a\x09\x09\x09\x09\x09\x09\x09html with: lesson.\x0a\x09\x09\x09\x09\x09\x09].\x0a\x09\x09\x09\x09\x09html div style: 'clear: both'; class: 'clearfix'.\x0a\x09\x09\x09\x09\x09\x0a\x09\x09\x09\x09\x09inputArea := html input \x0a\x09\x09\x09\x09\x09\x09type:'text'; \x0a\x09\x09\x09\x09\x09\x09class: 'input-area';\x0a\x09\x09\x09\x09\x09\x09onKeyDown: [:event | [ self handleKeyEvent: event ] valueWithTimeout: 0. ].\x0a\x09\x09]",
-messageSends: ["tabindex:", "div", "onFocus:", "show:", "focus", "asJQuery", "style:", "with:", "class:", "button", "onClick:", "begin", "select", "option", "value:", "onChange:", "lessonIndex:", "lesson", "instance", "asNumber", "val", "hr", "type:", "input", "onKeyDown:", "valueWithTimeout:", "handleKeyEvent:"],
+source: "renderOn: html\x0a\x09\x22render the whole application\x22\x0a\x0a\x09html div\x0a\x09\x09tabindex: 0;\x0a\x09\x09onFocus: [Transcript show: 'app focus'. inputArea asJQuery focus. ];\x0a\x09\x09style: 'border: 2px solid red;';\x0a\x09\x09with: [\x0a\x09\x09\x09html style: \x0a\x09\x09\x09\x09' .menu-bar {\x0a\x09\x09\x09\x09}'.\x0a\x09\x09\x09\x0a\x09\x09\x09html div\x0a\x09\x09\x09\x09class: 'menu-bar';\x0a\x09\x09\x09\x09with: [ \x0a\x09\x09\x09\x09\x09html button \x0a\x09\x09\x09\x09\x09\x09with: 'Recreate App';\x0a\x09\x09\x09\x09\x09\x09onClick: [Tutor begin].\x0a\x09\x09\x09\x09\x09\x0a\x09\x09\x09\x09\x09html button\x0a\x09\x09\x09\x09\x09\x09with: 'More button';\x0a\x09\x09\x09\x09\x09\x09onClick: [Transcript show: 'more clicked'].\x0a\x09\x09\x09\x09\x09\x09\x0a\x09\x09\x09\x09\x09lessonPicker := html select\x0a\x09\x09\x09\x09\x09\x09with: [\x0a\x0a\x09\x09\x09\x09\x09\x09\x09Tutor instance lesson lessons withIndexDo: [:item :index | \x0a\x09\x09\x09\x09\x09\x09\x09\x09html option with: 'lesson ' , index asString ;  value: index asString.\x0a\x09\x09\x09\x09\x09\x09\x09].\x0a\x09\x09\x09\x09\x09\x09];\x0a\x09\x09\x09\x09\x09\x09onChange: [ Tutor instance lesson lessonIndex: lessonPicker asJQuery val asNumber.].\x0a\x09\x09\x09\x09\x09].\x0a\x09\x09\x09\x09\x09\x0a\x09\x09\x09\x09\x09html hr.\x0a\x09\x09\x09\x09\x09\x0a\x09\x09\x09\x09\x09html div\x0a\x09\x09\x09\x09\x09\x09with: [\x0a\x09\x09\x09\x09\x09\x09\x09html with: twiddlerKeypad.\x0a\x09\x09\x09\x09\x09\x09\x09html with: lesson.\x0a\x09\x09\x09\x09\x09\x09].\x0a\x09\x09\x09\x09\x09html div style: 'clear: both'; class: 'clearfix'.\x0a\x09\x09\x09\x09\x09\x0a\x09\x09\x09\x09\x09inputArea := html input \x0a\x09\x09\x09\x09\x09\x09type:'text'; \x0a\x09\x09\x09\x09\x09\x09class: 'input-area';\x0a\x09\x09\x09\x09\x09\x09onKeyDown: [:event | [ self handleControlKey: event ] valueWithTimeout: 0  ] ;\x0a\x09\x09\x09\x09\x09\x09onKeyPress: [:event | [ self handleCharKey: event ] valueWithTimeout: 0  ].\x0a\x09\x09]",
+messageSends: ["tabindex:", "div", "onFocus:", "show:", "focus", "asJQuery", "style:", "with:", "class:", "button", "onClick:", "begin", "select", "withIndexDo:", "lessons", "lesson", "instance", "option", ",", "asString", "value:", "onChange:", "lessonIndex:", "asNumber", "val", "hr", "type:", "input", "onKeyDown:", "valueWithTimeout:", "handleControlKey:", "onKeyPress:", "handleCharKey:"],
 referencedClasses: ["Transcript", "Tutor"]
 }),
 smalltalk.Tutor);
@@ -505,17 +537,17 @@ var self=this;
 return smalltalk.withContext(function($ctx1) { 
 var $1,$2;
 _st("#tutor"._asJQuery())._empty();
-$1=self._new();
+self["@instance"]=self._new();
+$1=self["@instance"];
 _st($1)._appendToJQuery_("#tutor"._asJQuery());
 $2=_st($1)._yourself();
-self["@instance"]=$2;
 _st(_st(self["@instance"])._lesson())._redrawLessonStrings();
 _st(_st(_st(self["@instance"])._lessonPicker())._asJQuery())._val_(_st(_st(self["@instance"])._lesson())._lessonIndex());
 _st(_st(_st(self["@instance"])._inputArea())._asJQuery())._focus();
 return self}, function($ctx1) {$ctx1.fill(self,"begin",{},smalltalk.Tutor.klass)})},
 args: [],
-source: "begin\x0a\x09\x22create the button, keypad and lesson and embed them into the page\x22\x0a\x0a\x09'#tutor' asJQuery empty.\x0a\x09\x0a\x09instance := self new appendToJQuery: ('#tutor' asJQuery) ; yourself.\x0a\x09instance lesson redrawLessonStrings.\x0a\x09instance lessonPicker asJQuery val: (instance lesson lessonIndex).\x0a\x09instance inputArea asJQuery focus.",
-messageSends: ["empty", "asJQuery", "appendToJQuery:", "new", "yourself", "redrawLessonStrings", "lesson", "val:", "lessonPicker", "lessonIndex", "focus", "inputArea"],
+source: "begin\x0a\x09\x22create the button, keypad and lesson and embed them into the page\x22\x0a\x0a\x09'#tutor' asJQuery empty.\x0a\x09\x0a\x09instance := self new.\x0a\x09instance appendToJQuery: ('#tutor' asJQuery) ; yourself.\x0a\x09instance lesson redrawLessonStrings.\x0a\x09instance lessonPicker asJQuery val: (instance lesson lessonIndex).\x0a\x09instance inputArea asJQuery focus.",
+messageSends: ["empty", "asJQuery", "new", "appendToJQuery:", "yourself", "redrawLessonStrings", "lesson", "val:", "lessonPicker", "lessonIndex", "focus", "inputArea"],
 referencedClasses: []
 }),
 smalltalk.Tutor.klass);

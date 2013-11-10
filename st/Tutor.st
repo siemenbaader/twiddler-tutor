@@ -17,13 +17,37 @@ backspace
 
 initialize
 	lessons := Array new 
+		add: 'ssh root@zypher' ;
+		add: 'rsync -avuz file.txt siba@ssh.itu.dk:/home/siba/web' ;
+		add: 'cd ~/home/siemen' ;
+		add: 'sh ./foo' ;
+		add: 'a := [:i | ^ self.]' ;
+		add: 'ssh root@zypher' ;
+		add: 'rsync -avusz' ;
+		add: 'cd ~/home/siemen' ;
+		add: 'sh ./foo' ;
 		add: 'We used to cut the green green grass' ;
 		add: 'The force of the USA is mighty' ;
 		add: 'Slimane the Slimey Pig sledged the slider' ;
 		yourself.
 
-	lessonIndex := 2.
+	lessonIndex := 1.
 	typedString := '' .
+!
+
+lessonIndex
+	^ lessonIndex.
+!
+
+lessonIndex: i
+	lessonIndex := i.
+	Tutor instance lessonPicker asJQuery val: i asString.
+	typedString := '' .
+	self redrawLessonStrings.
+!
+
+lessons
+	^ lessons.
 !
 
 nextLesson
@@ -124,21 +148,6 @@ renderOn: html
 						].
 				]
 			].
-!
-
-lessons
-	^ lessons.
-!
-
-lessonIndex
-	^ lessonIndex.
-!
-
-lessonIndex: i
-	lessonIndex := i.
-	Tutor instance lessonPicker asJQuery val: i asString.
-	typedString := '' .
-	self redrawLessonStrings.
 ! !
 
 Widget subclass: #Tutor
@@ -155,27 +164,6 @@ ev: e
 	ev := e.
 !
 
-handleKeyEvent: event
-	"Extract a single letter or backspace from the input field. Defers execution to after the current call to allow the <input> to update its value."
-
-		
-	event keyCode == 8 
-		ifTrue: [
-			lesson backspace.
-		].
-	event keyCode == 13
-		ifTrue: [
-			lesson nextLesson.
-		].
-	event keyCode == 9
-		ifFalse: [
-			lesson addChar: inputArea asJQuery val.
-		].
-		
-	inputArea asJQuery val: ''.
-	event stopPropagation; preventDefault.
-!
-
 initialize
 	"Set up the whole application object with a keypad and a lesson screen."
 	twiddlerKeypad := TwiddlerKeypad new.
@@ -188,6 +176,10 @@ inputArea
 
 lesson
 	^ lesson.
+!
+
+lessonPicker
+	^lessonPicker.
 !
 
 renderOn: html
@@ -215,9 +207,10 @@ renderOn: html
 						
 					lessonPicker := html select
 						with: [
-							html option with: 'lesson 1'; value: '1'.
-							html option with: 'lesson 2'; value: '2'.
-							html option with: 'lesson 3'; value: '3'.
+
+							Tutor instance lesson lessons withIndexDo: [:item :index | 
+								html option with: 'lesson ' , index asString ;  value: index asString.
+							].
 						];
 						onChange: [ Tutor instance lesson lessonIndex: lessonPicker asJQuery val asNumber.].
 					].
@@ -234,7 +227,8 @@ renderOn: html
 					inputArea := html input 
 						type:'text'; 
 						class: 'input-area';
-						onKeyDown: [:event | [ self handleKeyEvent: event ] valueWithTimeout: 0. ].
+						onKeyDown: [:event | [ self handleControlKey: event ] valueWithTimeout: 0  ] ;
+						onKeyPress: [:event | [ self handleCharKey: event ] valueWithTimeout: 0  ].
 		]
 !
 
@@ -242,8 +236,27 @@ twiddlerKeypad
 	^ twiddlerKeypad.
 !
 
-lessonPicker
-	^lessonPicker.
+handleCharKey: event
+
+	event stopPropagation; preventDefault.
+		
+	lesson addChar: inputArea asJQuery val.
+	inputArea asJQuery val: ''.
+!
+
+handleControlKey: event
+
+	event stopPropagation; preventDefault.
+	
+	Transcript show: 'key event'; show: event keyCode; cr.
+	event keyCode == 8 
+		ifTrue: [
+			lesson backspace.
+		].
+	event keyCode == 13
+		ifTrue: [
+			lesson nextLesson.
+		].
 ! !
 
 Tutor class instanceVariableNames: 'instance'!
@@ -255,7 +268,8 @@ begin
 
 	'#tutor' asJQuery empty.
 	
-	instance := self new appendToJQuery: ('#tutor' asJQuery) ; yourself.
+	instance := self new.
+	instance appendToJQuery: ('#tutor' asJQuery) ; yourself.
 	instance lesson redrawLessonStrings.
 	instance lessonPicker asJQuery val: (instance lesson lessonIndex).
 	instance inputArea asJQuery focus.
