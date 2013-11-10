@@ -2,7 +2,7 @@ define("tutor/Tutor", ["amber_vm/smalltalk", "amber_vm/nil", "amber_vm/_st", "am
 smalltalk.addPackage('Tutor');
 smalltalk.packages["Tutor"].transport = {"type":"amd","amdNamespace":"tutor"};
 
-smalltalk.addClass('Lesson', smalltalk.Widget, ['lessonString', 'typedString', 'lessonStringContainer', 'typedStringContainer', 'tagBrush'], 'Tutor');
+smalltalk.addClass('Lesson', smalltalk.Widget, ['lessons', 'lessonIndex', 'typedString', 'lessonStringContainer', 'typedStringContainer', 'tagBrush'], 'Tutor');
 smalltalk.addMethod(
 smalltalk.method({
 selector: "addChar:",
@@ -43,13 +43,108 @@ selector: "initialize",
 category: 'not yet classified',
 fn: function (){
 var self=this;
+function $Array(){return smalltalk.Array||(typeof Array=="undefined"?nil:Array)}
 return smalltalk.withContext(function($ctx1) { 
-self["@lessonString"]="We used to cut the green green grass";
-self["@typedString"]="We ufed to cp";
+var $1,$2;
+$1=_st($Array())._new();
+_st($1)._add_("We used to cut the green green grass");
+_st($1)._add_("The force of the USA is mighty");
+_st($1)._add_("Slimane the Slimey Pig sledged the slider");
+$2=_st($1)._yourself();
+self["@lessons"]=$2;
+self["@lessonIndex"]=(2);
+self["@typedString"]="";
 return self}, function($ctx1) {$ctx1.fill(self,"initialize",{},smalltalk.Lesson)})},
 args: [],
-source: "initialize\x0a\x09lessonString :=\x09'We used to cut the green green grass'.\x0a\x09typedString := 'We ufed to cp' .\x0a\x09",
+source: "initialize\x0a\x09lessons := Array new \x0a\x09\x09add: 'We used to cut the green green grass' ;\x0a\x09\x09add: 'The force of the USA is mighty' ;\x0a\x09\x09add: 'Slimane the Slimey Pig sledged the slider' ;\x0a\x09\x09yourself.\x0a\x0a\x09lessonIndex := 2.\x0a\x09typedString := '' .\x0a\x09",
+messageSends: ["add:", "new", "yourself"],
+referencedClasses: ["Array"]
+}),
+smalltalk.Lesson);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "lessonIndex",
+category: 'not yet classified',
+fn: function (){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1;
+$1=self["@lessonIndex"];
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"lessonIndex",{},smalltalk.Lesson)})},
+args: [],
+source: "lessonIndex\x0a\x09^ lessonIndex.",
 messageSends: [],
+referencedClasses: []
+}),
+smalltalk.Lesson);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "lessonIndex:",
+category: 'not yet classified',
+fn: function (i){
+var self=this;
+function $Tutor(){return smalltalk.Tutor||(typeof Tutor=="undefined"?nil:Tutor)}
+return smalltalk.withContext(function($ctx1) { 
+self["@lessonIndex"]=i;
+_st(_st(_st(_st($Tutor())._instance())._lessonPicker())._asJQuery())._val_(_st(i)._asString());
+self["@typedString"]="";
+self._redrawLessonStrings();
+return self}, function($ctx1) {$ctx1.fill(self,"lessonIndex:",{i:i},smalltalk.Lesson)})},
+args: ["i"],
+source: "lessonIndex: i\x0a\x09lessonIndex := i.\x0a\x09Tutor instance lessonPicker asJQuery val: i asString.\x0a\x09typedString := '' .\x0a\x09self redrawLessonStrings.\x0a\x09",
+messageSends: ["val:", "asJQuery", "lessonPicker", "instance", "asString", "redrawLessonStrings"],
+referencedClasses: ["Tutor"]
+}),
+smalltalk.Lesson);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "lessons",
+category: 'not yet classified',
+fn: function (){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1;
+$1=self["@lessons"];
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"lessons",{},smalltalk.Lesson)})},
+args: [],
+source: "lessons\x0a\x09^ lessons.",
+messageSends: [],
+referencedClasses: []
+}),
+smalltalk.Lesson);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "nextLesson",
+category: 'not yet classified',
+fn: function (){
+var self=this;
+var lessonString,i;
+return smalltalk.withContext(function($ctx1) { 
+var $1,$2;
+lessonString=_st(self["@lessons"])._at_(self["@lessonIndex"]);
+$1=_st(_st(self["@typedString"])._size()).__gt_eq(_st(lessonString)._size());
+if(smalltalk.assert($1)){
+i=_st(self["@lessonIndex"]).__plus((1));
+i;
+self["@typedString"]="";
+self["@typedString"];
+$2=_st(i).__gt(_st(self["@lessons"])._size());
+if(smalltalk.assert($2)){
+i=(1);
+i;
+};
+self._lessonIndex_(i);
+};
+return self}, function($ctx1) {$ctx1.fill(self,"nextLesson",{lessonString:lessonString,i:i},smalltalk.Lesson)})},
+args: [],
+source: "nextLesson\x0a\x09| lessonString i | \x0a\x09lessonString := lessons at: lessonIndex.\x0a\x09\x0a\x09typedString size >= lessonString size ifTrue: [\x0a\x09\x09i := lessonIndex + 1.\x0a\x09\x09typedString := '' .\x0a\x0a\x09\x09(i > lessons size) ifTrue:[\x0a\x09\x09\x09i := 1.\x0a\x09\x09].\x0a\x09\x09self lessonIndex: i\x0a\x09]",
+messageSends: ["at:", "ifTrue:", ">=", "size", "+", ">", "lessonIndex:"],
 referencedClasses: []
 }),
 smalltalk.Lesson);
@@ -60,27 +155,28 @@ selector: "redrawLessonStrings",
 category: 'not yet classified',
 fn: function (){
 var self=this;
-var caretIndex,letterToType;
+var caretIndex,letterToType,lessonStr;
 function $String(){return smalltalk.String||(typeof String=="undefined"?nil:String)}
 function $Tutor(){return smalltalk.Tutor||(typeof Tutor=="undefined"?nil:Tutor)}
 function $Nil(){return smalltalk.Nil||(typeof Nil=="undefined"?nil:Nil)}
 return smalltalk.withContext(function($ctx1) { 
 var $1,$2,$3,$4,$5,$6,$7,$8,$9;
 caretIndex=_st(_st(self["@typedString"])._size()).__plus((1));
-letterToType=_st(self["@lessonString"])._at_ifAbsent_(caretIndex,_st($String())._cr());
+lessonStr=_st(self["@lessons"])._at_(self["@lessonIndex"]);
+letterToType=_st(lessonStr)._at_ifAbsent_(caretIndex,_st($String())._cr());
 _st(_st(_st($Tutor())._instance())._twiddlerKeypad())._showChordFor_(letterToType);
 _st(_st(self["@lessonStringContainer"])._asJQuery())._empty();
 _st(_st(self["@typedStringContainer"])._asJQuery())._empty();
 $1=self["@lessonStringContainer"];
-_st($1)._with_(_st(self["@lessonString"])._copyFrom_to_((1),_st(caretIndex).__minus((1))));
+_st($1)._with_(_st(lessonStr)._copyFrom_to_((1),_st(caretIndex).__minus((1))));
 $2=_st(self["@tagBrush"])._span();
 _st($2)._class_("letters-to-type");
 $3=_st($2)._with_(letterToType);
 _st($1)._with_($3);
-$4=_st($1)._with_(_st(self["@lessonString"])._copyFrom_to_(_st(caretIndex).__plus((1)),_st(self["@lessonString"])._size()));
+$4=_st($1)._with_(_st(lessonStr)._copyFrom_to_(_st(caretIndex).__plus((1)),_st(lessonStr)._size()));
 _st(self["@typedString"])._withIndexDo_((function(letter,index){
 return smalltalk.withContext(function($ctx2) {
-$5=_st(_st(self["@lessonString"])._at_ifAbsent_(index,$Nil())).__eq_eq(letter);
+$5=_st(_st(lessonStr)._at_ifAbsent_(index,$Nil())).__eq_eq(letter);
 if(smalltalk.assert($5)){
 return _st(self["@typedStringContainer"])._with_(letter);
 } else {
@@ -97,10 +193,10 @@ $8=_st(self["@tagBrush"])._span();
 _st($8)._class_("caret");
 $9=_st($8)._with_("_");
 _st(self["@typedStringContainer"])._with_($9);
-return self}, function($ctx1) {$ctx1.fill(self,"redrawLessonStrings",{caretIndex:caretIndex,letterToType:letterToType},smalltalk.Lesson)})},
+return self}, function($ctx1) {$ctx1.fill(self,"redrawLessonStrings",{caretIndex:caretIndex,letterToType:letterToType,lessonStr:lessonStr},smalltalk.Lesson)})},
 args: [],
-source: "redrawLessonStrings\x0a\x09\x22Comment\x22\x0a\x09\x0a\x09| caretIndex letterToType |\x0a\x09caretIndex := (typedString size + 1).\x0a\x09letterToType := lessonString at: caretIndex ifAbsent: String cr.    \x22type enter when done\x22\x0a\x09\x0a\x09\x22show letter to be typed on the keypad\x22\x0a\x09Tutor instance twiddlerKeypad showChordFor: letterToType.\x0a\x09\x0a\x09\x22clear lesson string & typed string \x22\x0a\x09lessonStringContainer asJQuery empty.\x0a\x09typedStringContainer asJQuery empty.\x0a\x09\x0a\x09\x0a\x09\x22show lesson string\x22\x0a\x09lessonStringContainer \x0a\x09\x09with: (lessonString copyFrom: 1 to: caretIndex -1) ;\x0a\x09\x09with: (tagBrush span class: 'letters-to-type'; with: letterToType) ;\x0a\x09\x09with: (lessonString copyFrom: caretIndex + 1 to: lessonString size).\x0a\x0a\x09\x22show typed string\x22\x0a\x09typedString withIndexDo: [:letter :index |\x0a\x09\x09(lessonString at: index ifAbsent: Nil) == letter \x0a\x09\x09\x09ifTrue: [\x0a\x09\x09\x09\x09typedStringContainer with: letter.\x0a\x09\x09\x09]\x0a\x09\x09\x09ifFalse: [\x0a\x09\x09\x09\x09typedStringContainer with:  [\x0a\x09\x09\x09\x09\x09tagBrush span class: 'error'; with: letter.\x0a\x09\x09\x09\x09\x09]\x0a\x09\x09\x09]\x0a\x09].\x0a\x09typedStringContainer with: (tagBrush span class: 'caret'; with: '_').\x0a\x09\x0a\x09\x0a\x09\x0a\x09",
-messageSends: ["+", "size", "at:ifAbsent:", "cr", "showChordFor:", "twiddlerKeypad", "instance", "empty", "asJQuery", "with:", "copyFrom:to:", "-", "class:", "span", "withIndexDo:", "ifTrue:ifFalse:", "=="],
+source: "redrawLessonStrings\x0a\x09\x22Comment\x22\x0a\x09\x0a\x09| caretIndex letterToType lessonStr|\x0a\x09caretIndex := (typedString size + 1).\x0a\x09lessonStr :=  lessons at: lessonIndex.\x0a\x09letterToType := lessonStr at: caretIndex ifAbsent: String cr.    \x22type enter when done\x22\x0a\x09\x0a\x09\x22show letter to be typed on the keypad\x22\x0a\x09Tutor instance twiddlerKeypad showChordFor: letterToType.\x0a\x09\x0a\x09\x22clear lesson string & typed string \x22\x0a\x09lessonStringContainer asJQuery empty.\x0a\x09typedStringContainer asJQuery empty.\x0a\x09\x0a\x09\x0a\x09\x22show lesson string\x22\x0a\x09lessonStringContainer \x0a\x09\x09with: (lessonStr copyFrom: 1 to: caretIndex -1) ;\x0a\x09\x09with: (tagBrush span class: 'letters-to-type'; with: letterToType) ;\x0a\x09\x09with: (lessonStr copyFrom: caretIndex + 1 to: lessonStr size).\x0a\x0a\x09\x22show typed string\x22\x0a\x09typedString withIndexDo: [:letter :index |\x0a\x09\x09(lessonStr at: index ifAbsent: Nil) == letter \x0a\x09\x09\x09ifTrue: [\x0a\x09\x09\x09\x09typedStringContainer with: letter.\x0a\x09\x09\x09]\x0a\x09\x09\x09ifFalse: [\x0a\x09\x09\x09\x09typedStringContainer with:  [\x0a\x09\x09\x09\x09\x09tagBrush span class: 'error'; with: letter.\x0a\x09\x09\x09\x09\x09]\x0a\x09\x09\x09]\x0a\x09].\x0a\x09typedStringContainer with: (tagBrush span class: 'caret'; with: '_').\x0a\x09\x0a\x09\x0a\x09\x0a\x09",
+messageSends: ["+", "size", "at:", "at:ifAbsent:", "cr", "showChordFor:", "twiddlerKeypad", "instance", "empty", "asJQuery", "with:", "copyFrom:to:", "-", "class:", "span", "withIndexDo:", "ifTrue:ifFalse:", "=="],
 referencedClasses: ["String", "Tutor", "Nil"]
 }),
 smalltalk.Lesson);
@@ -121,7 +217,7 @@ $1=_st(html)._div();
 _st($1)._class_("lesson");
 $2=_st($1)._with_((function(){
 return smalltalk.withContext(function($ctx3) {
-_st(html)._h1_("Lesson 1");
+_st(html)._h1_("Lesson");
 _st(html)._br();
 $3=_st(html)._div();
 _st($3)._class_("exercise-text");
@@ -138,7 +234,7 @@ return $2;
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
 return self}, function($ctx1) {$ctx1.fill(self,"renderOn:",{html:html},smalltalk.Lesson)})},
 args: ["html"],
-source: "renderOn: html\x0a\x09\x22The lesson area shows a line of text, shows the chord for the next letter or letter sequence to be typed, and tracks the user's speed and accuracy.\x22\x0a\x0a\x09tagBrush := html.\x0a\x09\x0a\x09html div \x0a\x09\x09with: [\x0a\x09\x09\x09html style: '\x0a\x09\x09\x09\x09.lesson {\x0a\x09\x09\x09\x09\x09float: left;\x0a\x09\x09\x09\x09\x09padding-left: 30px;\x0a\x09\x09\x09\x09\x09height: 260px;\x0a\x09\x09\x09\x09\x09box-sizing: border-box;\x0a\x09\x09\x09\x09}\x0a\x09\x09\x09\x09\x09\x09\x09\x09\x0a\x09\x09\x09\x09.lesson .exercise-text {\x0a\x09\x09\x09\x09\x09font-family: monospace;\x0a\x09\x09\x09\x09\x09font-size: 20px;\x0a\x09\x09\x09\x09}\x0a\x09\x09\x09\x09.lesson .letters-to-type {\x0a\x09\x09\x09\x09\x09background-color: #AAD;\x0a\x09\x09\x09\x09\x09outline: 2px solid #AAD;\x0a\x09\x09\x09\x09}\x0a\x09\x09\x09\x09\x0a\x09\x09\x09\x09.lesson .error {\x0a\x09\x09\x09\x09\x09color: red;\x0a\x09\x09\x09\x09}\x0a\x09\x09\x09\x09.lesson .caret {\x0a\x09\x09\x09\x09\x09color: blue;\x0a\x09\x09\x09\x09}\x0a\x09\x09\x09' .\x0a\x09\x09\x09\x0a\x09\x09\x09html div\x0a\x09\x09\x09\x09class: 'lesson' ; \x0a\x09\x09\x09\x09with: [\x0a\x09\x09\x09\x09\x09html h1: 'Lesson 1'.\x0a\x09\x09\x09\x09\x09html br.\x0a\x09\x09\x09\x09\x09html div \x0a\x09\x09\x09\x09\x09\x09class: 'exercise-text';\x0a\x09\x09\x09\x09\x09\x09with: [\x0a\x09\x09\x09\x09\x09\x09\x09lessonStringContainer := html pre class: 'lesson-string'.\x0a\x09\x0a\x09\x09\x09\x09\x09\x09\x09typedStringContainer := html pre class: 'typed-string'.\x0a\x09\x09\x09\x09\x09\x09].\x0a\x09\x09\x09\x09]\x0a\x09\x09\x09].\x0a\x0a\x09",
+source: "renderOn: html\x0a\x09\x22The lesson area shows a line of text, shows the chord for the next letter or letter sequence to be typed, and tracks the user's speed and accuracy.\x22\x0a\x0a\x09tagBrush := html.\x0a\x09\x0a\x09html div \x0a\x09\x09with: [\x0a\x09\x09\x09html style: '\x0a\x09\x09\x09\x09.lesson {\x0a\x09\x09\x09\x09\x09float: left;\x0a\x09\x09\x09\x09\x09padding-left: 30px;\x0a\x09\x09\x09\x09\x09height: 260px;\x0a\x09\x09\x09\x09\x09box-sizing: border-box;\x0a\x09\x09\x09\x09}\x0a\x09\x09\x09\x09\x09\x09\x09\x09\x0a\x09\x09\x09\x09.lesson .exercise-text {\x0a\x09\x09\x09\x09\x09font-family: monospace;\x0a\x09\x09\x09\x09\x09font-size: 20px;\x0a\x09\x09\x09\x09}\x0a\x09\x09\x09\x09.lesson .letters-to-type {\x0a\x09\x09\x09\x09\x09background-color: #AAD;\x0a\x09\x09\x09\x09\x09outline: 2px solid #AAD;\x0a\x09\x09\x09\x09}\x0a\x09\x09\x09\x09\x0a\x09\x09\x09\x09.lesson .error {\x0a\x09\x09\x09\x09\x09color: red;\x0a\x09\x09\x09\x09}\x0a\x09\x09\x09\x09.lesson .caret {\x0a\x09\x09\x09\x09\x09color: blue;\x0a\x09\x09\x09\x09}\x0a\x09\x09\x09' .\x0a\x09\x09\x09\x0a\x09\x09\x09html div\x0a\x09\x09\x09\x09class: 'lesson' ; \x0a\x09\x09\x09\x09with: [\x0a\x09\x09\x09\x09\x09html h1: 'Lesson'.\x0a\x09\x09\x09\x09\x09html br.\x0a\x09\x09\x09\x09\x09html div \x0a\x09\x09\x09\x09\x09\x09class: 'exercise-text';\x0a\x09\x09\x09\x09\x09\x09with: [\x0a\x09\x09\x09\x09\x09\x09\x09lessonStringContainer := html pre class: 'lesson-string'.\x0a\x09\x0a\x09\x09\x09\x09\x09\x09\x09typedStringContainer := html pre class: 'typed-string'.\x0a\x09\x09\x09\x09\x09\x09].\x0a\x09\x09\x09\x09]\x0a\x09\x09\x09].\x0a\x0a\x09",
 messageSends: ["with:", "div", "style:", "class:", "h1:", "br", "pre"],
 referencedClasses: []
 }),
@@ -146,7 +242,7 @@ smalltalk.Lesson);
 
 
 
-smalltalk.addClass('Tutor', smalltalk.Widget, ['twiddlerKeypad', 'lesson', 'inputArea', 'ev'], 'Tutor');
+smalltalk.addClass('Tutor', smalltalk.Widget, ['twiddlerKeypad', 'lesson', 'inputArea', 'ev', 'lessonPicker'], 'Tutor');
 smalltalk.addMethod(
 smalltalk.method({
 selector: "ev",
@@ -188,23 +284,27 @@ category: 'not yet classified',
 fn: function (event){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
-var $1,$2,$3,$4;
+var $1,$2,$3,$4,$5;
 $1=_st(_st(event)._keyCode()).__eq_eq((8));
 if(smalltalk.assert($1)){
 _st(self["@lesson"])._backspace();
 };
-$2=_st(_st(event)._keyCode()).__eq_eq((9));
-if(! smalltalk.assert($2)){
+$2=_st(_st(event)._keyCode()).__eq_eq((13));
+if(smalltalk.assert($2)){
+_st(self["@lesson"])._nextLesson();
+};
+$3=_st(_st(event)._keyCode()).__eq_eq((9));
+if(! smalltalk.assert($3)){
 _st(self["@lesson"])._addChar_(_st(_st(self["@inputArea"])._asJQuery())._val());
 };
 _st(_st(self["@inputArea"])._asJQuery())._val_("");
-$3=event;
-_st($3)._stopPropagation();
-$4=_st($3)._preventDefault();
+$4=event;
+_st($4)._stopPropagation();
+$5=_st($4)._preventDefault();
 return self}, function($ctx1) {$ctx1.fill(self,"handleKeyEvent:",{event:event},smalltalk.Tutor)})},
 args: ["event"],
-source: "handleKeyEvent: event\x0a\x09\x22Extract a single letter or backspace from the input field. Defers execution to after the current call to allow the <input> to update its value.\x22\x0a\x0a\x09\x09\x0a\x09event keyCode == 8 \x0a\x09\x09ifTrue: [\x0a\x09\x09\x09lesson backspace.\x0a\x09\x09].\x0a\x09event keyCode == 9\x0a\x09\x09ifFalse: [\x0a\x09\x09\x09lesson addChar: inputArea asJQuery val.\x0a\x09\x09].\x0a\x09\x09\x0a\x09inputArea asJQuery val: ''.\x0a\x09event stopPropagation; preventDefault.\x0a\x09",
-messageSends: ["ifTrue:", "==", "keyCode", "backspace", "ifFalse:", "addChar:", "val", "asJQuery", "val:", "stopPropagation", "preventDefault"],
+source: "handleKeyEvent: event\x0a\x09\x22Extract a single letter or backspace from the input field. Defers execution to after the current call to allow the <input> to update its value.\x22\x0a\x0a\x09\x09\x0a\x09event keyCode == 8 \x0a\x09\x09ifTrue: [\x0a\x09\x09\x09lesson backspace.\x0a\x09\x09].\x0a\x09event keyCode == 13\x0a\x09\x09ifTrue: [\x0a\x09\x09\x09lesson nextLesson.\x0a\x09\x09].\x0a\x09event keyCode == 9\x0a\x09\x09ifFalse: [\x0a\x09\x09\x09lesson addChar: inputArea asJQuery val.\x0a\x09\x09].\x0a\x09\x09\x0a\x09inputArea asJQuery val: ''.\x0a\x09event stopPropagation; preventDefault.\x0a\x09",
+messageSends: ["ifTrue:", "==", "keyCode", "backspace", "nextLesson", "ifFalse:", "addChar:", "val", "asJQuery", "val:", "stopPropagation", "preventDefault"],
 referencedClasses: []
 }),
 smalltalk.Tutor);
@@ -266,6 +366,24 @@ smalltalk.Tutor);
 
 smalltalk.addMethod(
 smalltalk.method({
+selector: "lessonPicker",
+category: 'not yet classified',
+fn: function (){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+var $1;
+$1=self["@lessonPicker"];
+return $1;
+}, function($ctx1) {$ctx1.fill(self,"lessonPicker",{},smalltalk.Tutor)})},
+args: [],
+source: "lessonPicker\x0a\x09^lessonPicker.\x0a\x09",
+messageSends: [],
+referencedClasses: []
+}),
+smalltalk.Tutor);
+
+smalltalk.addMethod(
+smalltalk.method({
 selector: "renderOn:",
 category: 'not yet classified',
 fn: function (html){
@@ -273,7 +391,7 @@ var self=this;
 function $Transcript(){return smalltalk.Transcript||(typeof Transcript=="undefined"?nil:Transcript)}
 function $Tutor(){return smalltalk.Tutor||(typeof Tutor=="undefined"?nil:Tutor)}
 return smalltalk.withContext(function($ctx1) { 
-var $1,$3,$5,$6,$7,$8,$9,$10,$11,$12,$4,$13,$14,$15,$16,$2;
+var $1,$3,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$4,$17,$18,$19,$20,$2;
 $1=_st(html)._div();
 _st($1)._tabindex_((0));
 _st($1)._onFocus_((function(){
@@ -303,17 +421,28 @@ return smalltalk.withContext(function($ctx4) {
 return _st($Transcript())._show_("more clicked");
 }, function($ctx4) {$ctx4.fillBlock({},$ctx3,5)})}));
 $8;
-return _st(_st(html)._select())._with_((function(){
+$9=_st(html)._select();
+_st($9)._with_((function(){
 return smalltalk.withContext(function($ctx4) {
-$9=_st(html)._option();
-_st($9)._with_("lesson 1");
-$10=_st($9)._value_("1");
-$10;
-$11=_st(html)._option();
-_st($11)._with_("lesson 2");
-$12=_st($11)._value_("2");
-return $12;
+$10=_st(html)._option();
+_st($10)._with_("lesson 1");
+$11=_st($10)._value_("1");
+$11;
+$12=_st(html)._option();
+_st($12)._with_("lesson 2");
+$13=_st($12)._value_("2");
+$13;
+$14=_st(html)._option();
+_st($14)._with_("lesson 3");
+$15=_st($14)._value_("3");
+return $15;
 }, function($ctx4) {$ctx4.fillBlock({},$ctx3,6)})}));
+$16=_st($9)._onChange_((function(){
+return smalltalk.withContext(function($ctx4) {
+return _st(_st(_st($Tutor())._instance())._lesson())._lessonIndex_(_st(_st(_st(self["@lessonPicker"])._asJQuery())._val())._asNumber());
+}, function($ctx4) {$ctx4.fillBlock({},$ctx3,7)})}));
+self["@lessonPicker"]=$16;
+return self["@lessonPicker"];
 }, function($ctx3) {$ctx3.fillBlock({},$ctx2,3)})}));
 $4;
 _st(html)._hr();
@@ -321,28 +450,28 @@ _st(_st(html)._div())._with_((function(){
 return smalltalk.withContext(function($ctx3) {
 _st(html)._with_(self["@twiddlerKeypad"]);
 return _st(html)._with_(self["@lesson"]);
-}, function($ctx3) {$ctx3.fillBlock({},$ctx2,7)})}));
-$13=_st(html)._div();
-_st($13)._style_("clear: both");
-$14=_st($13)._class_("clearfix");
-$14;
-$15=_st(html)._input();
-_st($15)._type_("text");
-_st($15)._class_("input-area");
-$16=_st($15)._onKeyDown_((function(event){
+}, function($ctx3) {$ctx3.fillBlock({},$ctx2,8)})}));
+$17=_st(html)._div();
+_st($17)._style_("clear: both");
+$18=_st($17)._class_("clearfix");
+$18;
+$19=_st(html)._input();
+_st($19)._type_("text");
+_st($19)._class_("input-area");
+$20=_st($19)._onKeyDown_((function(event){
 return smalltalk.withContext(function($ctx3) {
 return _st((function(){
 return smalltalk.withContext(function($ctx4) {
 return self._handleKeyEvent_(event);
-}, function($ctx4) {$ctx4.fillBlock({},$ctx3,9)})}))._valueWithTimeout_((0));
-}, function($ctx3) {$ctx3.fillBlock({event:event},$ctx2,8)})}));
-self["@inputArea"]=$16;
+}, function($ctx4) {$ctx4.fillBlock({},$ctx3,10)})}))._valueWithTimeout_((0));
+}, function($ctx3) {$ctx3.fillBlock({event:event},$ctx2,9)})}));
+self["@inputArea"]=$20;
 return self["@inputArea"];
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,2)})}));
 return self}, function($ctx1) {$ctx1.fill(self,"renderOn:",{html:html},smalltalk.Tutor)})},
 args: ["html"],
-source: "renderOn: html\x0a\x09\x22render the whole application\x22\x0a\x0a\x09html div\x0a\x09\x09tabindex: 0;\x0a\x09\x09onFocus: [Transcript show: 'app focus'. inputArea asJQuery focus. ];\x0a\x09\x09style: 'border: 2px solid red;';\x0a\x09\x09with: [\x0a\x09\x09\x09html style: \x0a\x09\x09\x09\x09' .menu-bar {\x0a\x09\x09\x09\x09}'.\x0a\x09\x09\x09\x0a\x09\x09\x09html div\x0a\x09\x09\x09\x09class: 'menu-bar';\x0a\x09\x09\x09\x09with: [ \x0a\x09\x09\x09\x09\x09html button \x0a\x09\x09\x09\x09\x09\x09with: 'Recreate App';\x0a\x09\x09\x09\x09\x09\x09onClick: [Tutor begin].\x0a\x09\x09\x09\x09\x09\x0a\x09\x09\x09\x09\x09html button\x0a\x09\x09\x09\x09\x09\x09with: 'More button';\x0a\x09\x09\x09\x09\x09\x09onClick: [Transcript show: 'more clicked'].\x0a\x09\x09\x09\x09\x09\x09\x0a\x09\x09\x09\x09\x09html select\x0a\x09\x09\x09\x09\x09\x09with: [\x0a\x09\x09\x09\x09\x09\x09\x09html option with: 'lesson 1'; value: '1'.\x0a\x09\x09\x09\x09\x09\x09\x09html option with: 'lesson 2'; value: '2'.\x0a\x09\x09\x09\x09\x09\x09].\x0a\x09\x09\x09\x09\x09].\x0a\x09\x09\x09\x09\x09\x0a\x09\x09\x09\x09\x09html hr.\x0a\x09\x09\x09\x09\x09\x0a\x09\x09\x09\x09\x09html div\x0a\x09\x09\x09\x09\x09\x09with: [\x0a\x09\x09\x09\x09\x09\x09\x09html with: twiddlerKeypad.\x0a\x09\x09\x09\x09\x09\x09\x09html with: lesson.\x0a\x09\x09\x09\x09\x09\x09].\x0a\x09\x09\x09\x09\x09html div style: 'clear: both'; class: 'clearfix'.\x0a\x09\x09\x09\x09\x09\x0a\x09\x09\x09\x09\x09inputArea := html input \x0a\x09\x09\x09\x09\x09\x09type:'text'; \x0a\x09\x09\x09\x09\x09\x09class: 'input-area';\x0a\x09\x09\x09\x09\x09\x09onKeyDown: [:event | [ self handleKeyEvent: event ] valueWithTimeout: 0. ].\x0a\x09\x09]",
-messageSends: ["tabindex:", "div", "onFocus:", "show:", "focus", "asJQuery", "style:", "with:", "class:", "button", "onClick:", "begin", "select", "option", "value:", "hr", "type:", "input", "onKeyDown:", "valueWithTimeout:", "handleKeyEvent:"],
+source: "renderOn: html\x0a\x09\x22render the whole application\x22\x0a\x0a\x09html div\x0a\x09\x09tabindex: 0;\x0a\x09\x09onFocus: [Transcript show: 'app focus'. inputArea asJQuery focus. ];\x0a\x09\x09style: 'border: 2px solid red;';\x0a\x09\x09with: [\x0a\x09\x09\x09html style: \x0a\x09\x09\x09\x09' .menu-bar {\x0a\x09\x09\x09\x09}'.\x0a\x09\x09\x09\x0a\x09\x09\x09html div\x0a\x09\x09\x09\x09class: 'menu-bar';\x0a\x09\x09\x09\x09with: [ \x0a\x09\x09\x09\x09\x09html button \x0a\x09\x09\x09\x09\x09\x09with: 'Recreate App';\x0a\x09\x09\x09\x09\x09\x09onClick: [Tutor begin].\x0a\x09\x09\x09\x09\x09\x0a\x09\x09\x09\x09\x09html button\x0a\x09\x09\x09\x09\x09\x09with: 'More button';\x0a\x09\x09\x09\x09\x09\x09onClick: [Transcript show: 'more clicked'].\x0a\x09\x09\x09\x09\x09\x09\x0a\x09\x09\x09\x09\x09lessonPicker := html select\x0a\x09\x09\x09\x09\x09\x09with: [\x0a\x09\x09\x09\x09\x09\x09\x09html option with: 'lesson 1'; value: '1'.\x0a\x09\x09\x09\x09\x09\x09\x09html option with: 'lesson 2'; value: '2'.\x0a\x09\x09\x09\x09\x09\x09\x09html option with: 'lesson 3'; value: '3'.\x0a\x09\x09\x09\x09\x09\x09];\x0a\x09\x09\x09\x09\x09\x09onChange: [ Tutor instance lesson lessonIndex: lessonPicker asJQuery val asNumber.].\x0a\x09\x09\x09\x09\x09].\x0a\x09\x09\x09\x09\x09\x0a\x09\x09\x09\x09\x09html hr.\x0a\x09\x09\x09\x09\x09\x0a\x09\x09\x09\x09\x09html div\x0a\x09\x09\x09\x09\x09\x09with: [\x0a\x09\x09\x09\x09\x09\x09\x09html with: twiddlerKeypad.\x0a\x09\x09\x09\x09\x09\x09\x09html with: lesson.\x0a\x09\x09\x09\x09\x09\x09].\x0a\x09\x09\x09\x09\x09html div style: 'clear: both'; class: 'clearfix'.\x0a\x09\x09\x09\x09\x09\x0a\x09\x09\x09\x09\x09inputArea := html input \x0a\x09\x09\x09\x09\x09\x09type:'text'; \x0a\x09\x09\x09\x09\x09\x09class: 'input-area';\x0a\x09\x09\x09\x09\x09\x09onKeyDown: [:event | [ self handleKeyEvent: event ] valueWithTimeout: 0. ].\x0a\x09\x09]",
+messageSends: ["tabindex:", "div", "onFocus:", "show:", "focus", "asJQuery", "style:", "with:", "class:", "button", "onClick:", "begin", "select", "option", "value:", "onChange:", "lessonIndex:", "lesson", "instance", "asNumber", "val", "hr", "type:", "input", "onKeyDown:", "valueWithTimeout:", "handleKeyEvent:"],
 referencedClasses: ["Transcript", "Tutor"]
 }),
 smalltalk.Tutor);
@@ -381,11 +510,12 @@ _st($1)._appendToJQuery_("#tutor"._asJQuery());
 $2=_st($1)._yourself();
 self["@instance"]=$2;
 _st(_st(self["@instance"])._lesson())._redrawLessonStrings();
+_st(_st(_st(self["@instance"])._lessonPicker())._asJQuery())._val_(_st(_st(self["@instance"])._lesson())._lessonIndex());
 _st(_st(_st(self["@instance"])._inputArea())._asJQuery())._focus();
 return self}, function($ctx1) {$ctx1.fill(self,"begin",{},smalltalk.Tutor.klass)})},
 args: [],
-source: "begin\x0a\x09\x22create the button, keypad and lesson and embed them into the page\x22\x0a\x0a\x09'#tutor' asJQuery empty.\x0a\x09\x0a\x09instance := self new appendToJQuery: ('#tutor' asJQuery) ; yourself.\x0a\x09instance lesson redrawLessonStrings.\x0a\x09instance inputArea asJQuery focus.",
-messageSends: ["empty", "asJQuery", "appendToJQuery:", "new", "yourself", "redrawLessonStrings", "lesson", "focus", "inputArea"],
+source: "begin\x0a\x09\x22create the button, keypad and lesson and embed them into the page\x22\x0a\x0a\x09'#tutor' asJQuery empty.\x0a\x09\x0a\x09instance := self new appendToJQuery: ('#tutor' asJQuery) ; yourself.\x0a\x09instance lesson redrawLessonStrings.\x0a\x09instance lessonPicker asJQuery val: (instance lesson lessonIndex).\x0a\x09instance inputArea asJQuery focus.",
+messageSends: ["empty", "asJQuery", "appendToJQuery:", "new", "yourself", "redrawLessonStrings", "lesson", "val:", "lessonPicker", "lessonIndex", "focus", "inputArea"],
 referencedClasses: []
 }),
 smalltalk.Tutor.klass);

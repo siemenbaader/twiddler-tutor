@@ -1,6 +1,6 @@
 Smalltalk current createPackage: 'Tutor'!
 Widget subclass: #Lesson
-	instanceVariableNames: 'lessonString typedString lessonStringContainer typedStringContainer tagBrush'
+	instanceVariableNames: 'lessons lessonIndex typedString lessonStringContainer typedStringContainer tagBrush'
 	package: 'Tutor'!
 
 !Lesson methodsFor: 'not yet classified'!
@@ -16,16 +16,38 @@ backspace
 !
 
 initialize
-	lessonString :=	'We used to cut the green green grass'.
-	typedString := 'We ufed to cp' .
+	lessons := Array new 
+		add: 'We used to cut the green green grass' ;
+		add: 'The force of the USA is mighty' ;
+		add: 'Slimane the Slimey Pig sledged the slider' ;
+		yourself.
+
+	lessonIndex := 2.
+	typedString := '' .
+!
+
+nextLesson
+	| lessonString i | 
+	lessonString := lessons at: lessonIndex.
+	
+	typedString size >= lessonString size ifTrue: [
+		i := lessonIndex + 1.
+		typedString := '' .
+
+		(i > lessons size) ifTrue:[
+			i := 1.
+		].
+		self lessonIndex: i
+	]
 !
 
 redrawLessonStrings
 	"Comment"
 	
-	| caretIndex letterToType |
+	| caretIndex letterToType lessonStr|
 	caretIndex := (typedString size + 1).
-	letterToType := lessonString at: caretIndex ifAbsent: String cr.    "type enter when done"
+	lessonStr :=  lessons at: lessonIndex.
+	letterToType := lessonStr at: caretIndex ifAbsent: String cr.    "type enter when done"
 	
 	"show letter to be typed on the keypad"
 	Tutor instance twiddlerKeypad showChordFor: letterToType.
@@ -37,13 +59,13 @@ redrawLessonStrings
 	
 	"show lesson string"
 	lessonStringContainer 
-		with: (lessonString copyFrom: 1 to: caretIndex -1) ;
+		with: (lessonStr copyFrom: 1 to: caretIndex -1) ;
 		with: (tagBrush span class: 'letters-to-type'; with: letterToType) ;
-		with: (lessonString copyFrom: caretIndex + 1 to: lessonString size).
+		with: (lessonStr copyFrom: caretIndex + 1 to: lessonStr size).
 
 	"show typed string"
 	typedString withIndexDo: [:letter :index |
-		(lessonString at: index ifAbsent: Nil) == letter 
+		(lessonStr at: index ifAbsent: Nil) == letter 
 			ifTrue: [
 				typedStringContainer with: letter.
 			]
@@ -91,7 +113,7 @@ renderOn: html
 			html div
 				class: 'lesson' ; 
 				with: [
-					html h1: 'Lesson 1'.
+					html h1: 'Lesson'.
 					html br.
 					html div 
 						class: 'exercise-text';
@@ -102,10 +124,25 @@ renderOn: html
 						].
 				]
 			].
+!
+
+lessons
+	^ lessons.
+!
+
+lessonIndex
+	^ lessonIndex.
+!
+
+lessonIndex: i
+	lessonIndex := i.
+	Tutor instance lessonPicker asJQuery val: i asString.
+	typedString := '' .
+	self redrawLessonStrings.
 ! !
 
 Widget subclass: #Tutor
-	instanceVariableNames: 'twiddlerKeypad lesson inputArea ev'
+	instanceVariableNames: 'twiddlerKeypad lesson inputArea ev lessonPicker'
 	package: 'Tutor'!
 
 !Tutor methodsFor: 'not yet classified'!
@@ -125,6 +162,10 @@ handleKeyEvent: event
 	event keyCode == 8 
 		ifTrue: [
 			lesson backspace.
+		].
+	event keyCode == 13
+		ifTrue: [
+			lesson nextLesson.
 		].
 	event keyCode == 9
 		ifFalse: [
@@ -172,11 +213,13 @@ renderOn: html
 						with: 'More button';
 						onClick: [Transcript show: 'more clicked'].
 						
-					html select
+					lessonPicker := html select
 						with: [
 							html option with: 'lesson 1'; value: '1'.
 							html option with: 'lesson 2'; value: '2'.
-						].
+							html option with: 'lesson 3'; value: '3'.
+						];
+						onChange: [ Tutor instance lesson lessonIndex: lessonPicker asJQuery val asNumber.].
 					].
 					
 					html hr.
@@ -197,6 +240,10 @@ renderOn: html
 
 twiddlerKeypad
 	^ twiddlerKeypad.
+!
+
+lessonPicker
+	^lessonPicker.
 ! !
 
 Tutor class instanceVariableNames: 'instance'!
@@ -210,6 +257,7 @@ begin
 	
 	instance := self new appendToJQuery: ('#tutor' asJQuery) ; yourself.
 	instance lesson redrawLessonStrings.
+	instance lessonPicker asJQuery val: (instance lesson lessonIndex).
 	instance inputArea asJQuery focus.
 !
 
