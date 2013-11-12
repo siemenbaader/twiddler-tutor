@@ -472,7 +472,7 @@ keyConfiguration
 # operations.
 
 0     rmr0 = "&"
-0     rml0 = "|"
+0     rmr0 = "|"
 0     rm0m = "~"
 0     rm0r = "^"
 
