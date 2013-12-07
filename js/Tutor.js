@@ -47,50 +47,52 @@ function $Array(){return smalltalk.Array||(typeof Array=="undefined"?nil:Array)}
 return smalltalk.withContext(function($ctx1) { 
 var $1,$2;
 $1=_st($Array())._new();
-_st($1)._add_("Shell Commands:");
+_st($1)._add_("!@#$");
 $ctx1.sendIdx["add:"]=1;
-_st($1)._add_("rsync -avuz file.txt siba@ssh.itu.dk:/home/siba/web");
+_st($1)._add_("Shell Commands:");
 $ctx1.sendIdx["add:"]=2;
-_st($1)._add_("cd ~/home/siemen");
+_st($1)._add_("rsync -avuz file.txt siba@ssh.itu.dk:/home/siba/web");
 $ctx1.sendIdx["add:"]=3;
-_st($1)._add_("sh ./foo");
+_st($1)._add_("cd ~/home/siemen");
 $ctx1.sendIdx["add:"]=4;
-_st($1)._add_("ssh root@zypher");
+_st($1)._add_("sh ./foo");
 $ctx1.sendIdx["add:"]=5;
-_st($1)._add_("rsync -avusz");
+_st($1)._add_("ssh root@zypher");
 $ctx1.sendIdx["add:"]=6;
-_st($1)._add_("Smalltalk:");
+_st($1)._add_("rsync -avusz");
 $ctx1.sendIdx["add:"]=7;
-_st($1)._add_("a == 1 ifTrue: [ Transcript show: a]");
+_st($1)._add_("Smalltalk:");
 $ctx1.sendIdx["add:"]=8;
-_st($1)._add_("^ self . \x22 ^ measns return ");
+_st($1)._add_("a == 1 ifTrue: [ Transcript show: a]");
 $ctx1.sendIdx["add:"]=9;
-_st($1)._add_("a := [:i | ^ self.]");
+_st($1)._add_("^ self . \x22 ^ measns return ");
 $ctx1.sendIdx["add:"]=10;
-_st($1)._add_("lessonIndex := 1.");
+_st($1)._add_("a := [:i | ^ self.]");
 $ctx1.sendIdx["add:"]=11;
-_st($1)._add_("lessons := Array new ");
+_st($1)._add_("lessonIndex := 1.");
 $ctx1.sendIdx["add:"]=12;
-_st($1)._add_("Programming Chars");
+_st($1)._add_("lessons := Array new ");
 $ctx1.sendIdx["add:"]=13;
-_st($1)._add_("<>/\x5c|,>//??\x5c/[]{}[];:<\x22;:;</<");
+_st($1)._add_("Programming Chars");
 $ctx1.sendIdx["add:"]=14;
-_st($1)._add_("~@:.#@$:.~^&()@#$~()-_=++=()*_*&^%^");
+_st($1)._add_("<>/\x5c|,>//??\x5c/[]{}[];:<\x22;:;</<");
 $ctx1.sendIdx["add:"]=15;
-_st($1)._add_("Numbers");
+_st($1)._add_("~@:.#@$:.~^&()@#$~()-_=++=()*_*&^%^");
 $ctx1.sendIdx["add:"]=16;
-_st($1)._add_("1234 23 14 42 12 34 321 4 3 22 12 32 4134");
+_st($1)._add_("Numbers");
 $ctx1.sendIdx["add:"]=17;
-_st($1)._add_("12 23 41 14 24 213 12 43 21 231 4 12 324 212 21 231 4 ");
+_st($1)._add_("1234 23 14 42 12 34 321 4 3 22 12 32 4134");
 $ctx1.sendIdx["add:"]=18;
-_st($1)._add_("5678 56 78 85 68 785 67 687 567 58 78 768 58 68 56 8");
+_st($1)._add_("12 23 41 14 24 213 12 43 21 231 4 12 324 212 21 231 4 ");
 $ctx1.sendIdx["add:"]=19;
-_st($1)._add_("90-= 0-=9 90-= 90 - 09 =- 89 80 -9 =0 89 90 0- -= =- 90 89");
+_st($1)._add_("5678 56 78 85 68 785 67 687 567 58 78 768 58 68 56 8");
 $ctx1.sendIdx["add:"]=20;
-_st($1)._add_("09 67 89 06 578  256 198 78 567 456 908 7368");
+_st($1)._add_("90-= 0-=9 90-= 90 - 09 =- 89 80 -9 =0 89 90 0- -= =- 90 89");
 $ctx1.sendIdx["add:"]=21;
-_st($1)._add_(".,;: ;:., ;:;,,. (()) ,,.;:");
+_st($1)._add_("09 67 89 06 578  256 198 78 567 456 908 7368");
 $ctx1.sendIdx["add:"]=22;
+_st($1)._add_(".,;: ;:., ;:;,,. (()) ,,.;:");
+$ctx1.sendIdx["add:"]=23;
 _st($1)._add_(".,-.,)-(),\x22''..-(),(({},}{-(.;:$]}_");
 $2=_st($1)._yourself();
 self["@lessons"]=$2;
@@ -98,7 +100,7 @@ self["@lessonIndex"]=(1);
 self["@typedString"]="";
 return self}, function($ctx1) {$ctx1.fill(self,"initialize",{},smalltalk.Lesson)})},
 args: [],
-source: "initialize\x0a\x09lessons := Array new \x0a\x09\x09add: 'Shell Commands:' ;\x0a\x09\x09add: 'rsync -avuz file.txt siba@ssh.itu.dk:/home/siba/web' ;\x0a\x09\x09add: 'cd ~/home/siemen' ;\x0a\x09\x09add: 'sh ./foo' ;\x0a\x09\x09add: 'ssh root@zypher' ;\x0a\x09\x09add: 'rsync -avusz' ;\x0a\x09\x09add: 'Smalltalk:' ;\x0a\x09\x09add: 'a == 1 ifTrue: [ Transcript show: a]' ;\x0a\x09\x09add: '^ self . \x22 ^ measns return ' ;\x0a\x09\x09add: 'a := [:i | ^ self.]' ;\x0a\x09\x09\x0a\x09\x09add: 'lessonIndex := 1.' ;\x0a\x09\x09add: 'lessons := Array new ' ;\x0a\x09\x09add: 'Programming Chars' ;\x0a\x09\x09add: '<>/\x5c|,>//??\x5c/[]{}[];:<\x22;:;</<' ;\x0a\x09\x09add: '~@:.#@$:.~^&()@#$~()-_=++=()*_*&^%^' ;\x0a\x09\x09add: 'Numbers' ;\x0a\x09\x09add: '1234 23 14 42 12 34 321 4 3 22 12 32 4134';  \x0a\x09\x09add: '12 23 41 14 24 213 12 43 21 231 4 12 324 212 21 231 4 ' ;\x0a\x09\x09add: '5678 56 78 85 68 785 67 687 567 58 78 768 58 68 56 8' ;\x0a\x09\x09add: '90-= 0-=9 90-= 90 - 09 =- 89 80 -9 =0 89 90 0- -= =- 90 89' ;\x0a\x09\x09add: '09 67 89 06 578  256 198 78 567 456 908 7368';\x0a\x09\x09add: '.,;: ;:., ;:;,,. (()) ,,.;:' ;\x0a\x09\x09add: '.,-.,)-(),\x22''''..-(),(({},}{-(.;:$]}_' ;\x0a\x09\x09yourself.\x0a\x0a\x09lessonIndex := 1.\x0a\x09typedString := '' .\x0a\x09",
+source: "initialize\x0a\x09lessons := Array new \x0a\x09\x09add: '!@#$' ;\x0a\x09\x09add: 'Shell Commands:' ;\x0a\x09\x09add: 'rsync -avuz file.txt siba@ssh.itu.dk:/home/siba/web' ;\x0a\x09\x09add: 'cd ~/home/siemen' ;\x0a\x09\x09add: 'sh ./foo' ;\x0a\x09\x09add: 'ssh root@zypher' ;\x0a\x09\x09add: 'rsync -avusz' ;\x0a\x09\x09add: 'Smalltalk:' ;\x0a\x09\x09add: 'a == 1 ifTrue: [ Transcript show: a]' ;\x0a\x09\x09add: '^ self . \x22 ^ measns return ' ;\x0a\x09\x09add: 'a := [:i | ^ self.]' ;\x0a\x09\x09\x0a\x09\x09add: 'lessonIndex := 1.' ;\x0a\x09\x09add: 'lessons := Array new ' ;\x0a\x09\x09add: 'Programming Chars' ;\x0a\x09\x09add: '<>/\x5c|,>//??\x5c/[]{}[];:<\x22;:;</<' ;\x0a\x09\x09add: '~@:.#@$:.~^&()@#$~()-_=++=()*_*&^%^' ;\x0a\x09\x09add: 'Numbers' ;\x0a\x09\x09add: '1234 23 14 42 12 34 321 4 3 22 12 32 4134';  \x0a\x09\x09add: '12 23 41 14 24 213 12 43 21 231 4 12 324 212 21 231 4 ' ;\x0a\x09\x09add: '5678 56 78 85 68 785 67 687 567 58 78 768 58 68 56 8' ;\x0a\x09\x09add: '90-= 0-=9 90-= 90 - 09 =- 89 80 -9 =0 89 90 0- -= =- 90 89' ;\x0a\x09\x09add: '09 67 89 06 578  256 198 78 567 456 908 7368';\x0a\x09\x09add: '.,;: ;:., ;:;,,. (()) ,,.;:' ;\x0a\x09\x09add: '.,-.,)-(),\x22''''..-(),(({},}{-(.;:$]}_' ;\x0a\x09\x09yourself.\x0a\x0a\x09lessonIndex := 1.\x0a\x09typedString := '' .\x0a\x09",
 messageSends: ["add:", "new", "yourself"],
 referencedClasses: ["Array"]
 }),
@@ -730,10 +732,12 @@ _st($12)._at_put_("\x22","l00l");
 $ctx1.sendIdx["at:put:"]=7;
 _st($12)._at_put_("'","l00r");
 $ctx1.sendIdx["at:put:"]=8;
-$13=_st($12)._at_put_("\x5c","lml0");
+_st($12)._at_put_("\x5c","lml0");
+$ctx1.sendIdx["at:put:"]=9;
+$13=_st($12)._at_put_("#","ll0m");
 return self}, function($ctx1) {$ctx1.fill(self,"initialize",{},smalltalk.TwiddlerKeypad)})},
 args: [],
-source: "initialize\x0a\x09\x22comment stating purpose of message\x22\x0a\x09columns := Dictionary new.\x0a\x09columns\x0a\x09\x09at: 'l' put: 3;\x0a\x09\x09at: 'm' put: 2;\x0a\x09\x09at: 'r' put: 1.\x0a\x09\x0a\x09keys := Array new.\x0a\x094 timesRepeat:[keys add: Array new.].\x0a\x09\x0a\x09keyToChordMap := Dictionary new.\x0a\x09\x0a\x09self keyConfiguration linesDo: [:line | \x0a\x09\x09| trimmedLine tokens |\x0a\x09\x09trimmedLine := (line trimBoth tokenize: '#') at: 1.\x0a\x09\x09trimmedLine == '' ifFalse: [\x0a\x09\x09\x09tokens := trimmedLine tokenize: '\x5cs+' asRegexp.\x0a\x09\x09\x09((tokens at: 4) match: '\x22.+\x22') ifTrue: [\x0a\x09\x09\x09\x09keyToChordMap at: ((tokens at: 4)trimBoth: '\x22') put: (tokens at: 2 ).\x0a\x09\x09\x09]\x0a\x09\x09]\x0a\x09].\x0a\x09\x0a\x09\x22parser does not yet support parsing non-quoted non-whitespace chars, so I added space manually.\x22\x0a\x09keyToChordMap \x0a\x09\x09at: ' ' put: 'm000' ;\x0a\x09\x09at: (String cr) put: 'mmmm' ;\x0a\x09\x09at: '\x22' put: 'l00l' ;\x0a\x09\x09at: '''' put: 'l00r'; \x0a\x09\x09at: '\x5c' put: 'lml0'.\x0a\x09\x09\x0a\x09\x09\x0a\x09\x09",
+source: "initialize\x0a\x09\x22comment stating purpose of message\x22\x0a\x09columns := Dictionary new.\x0a\x09columns\x0a\x09\x09at: 'l' put: 3;\x0a\x09\x09at: 'm' put: 2;\x0a\x09\x09at: 'r' put: 1.\x0a\x09\x0a\x09keys := Array new.\x0a\x094 timesRepeat:[keys add: Array new.].\x0a\x09\x0a\x09keyToChordMap := Dictionary new.\x0a\x09\x0a\x09self keyConfiguration linesDo: [:line | \x0a\x09\x09| trimmedLine tokens |\x0a\x09\x09trimmedLine := (line trimBoth tokenize: '#') at: 1.\x0a\x09\x09trimmedLine == '' ifFalse: [\x0a\x09\x09\x09tokens := trimmedLine tokenize: '\x5cs+' asRegexp.\x0a\x09\x09\x09((tokens at: 4) match: '\x22.+\x22') ifTrue: [\x0a\x09\x09\x09\x09keyToChordMap at: ((tokens at: 4)trimBoth: '\x22') put: (tokens at: 2 ).\x0a\x09\x09\x09]\x0a\x09\x09]\x0a\x09].\x0a\x09\x0a\x09\x22parser does not yet support parsing non-quoted non-whitespace chars, so I added space manually.\x22\x0a\x09keyToChordMap \x0a\x09\x09at: ' ' put: 'm000' ;\x0a\x09\x09at: (String cr) put: 'mmmm' ;\x0a\x09\x09at: '\x22' put: 'l00l' ;\x0a\x09\x09at: '''' put: 'l00r'; \x0a\x09\x09at: '\x5c' put: 'lml0';\x0a\x09\x09at: '#' put: 'll0m'.\x0a\x0a\x09\x09\x0a\x09\x09",
 messageSends: ["new", "at:put:", "timesRepeat:", "add:", "linesDo:", "keyConfiguration", "at:", "tokenize:", "trimBoth", "ifFalse:", "==", "asRegexp", "ifTrue:", "match:", "trimBoth:", "cr"],
 referencedClasses: ["Dictionary", "Array", "String"]
 }),

@@ -17,6 +17,7 @@ backspace
 
 initialize
 	lessons := Array new 
+		add: '!!@#$' ;
 		add: 'Shell Commands:' ;
 		add: 'rsync -avuz file.txt siba@ssh.itu.dk:/home/siba/web' ;
 		add: 'cd ~/home/siemen' ;
@@ -349,7 +350,8 @@ initialize
 		at: (String cr) put: 'mmmm' ;
 		at: '"' put: 'l00l' ;
 		at: '''' put: 'l00r'; 
-		at: '\' put: 'lml0'.
+		at: '\' put: 'lml0';
+		at: '#' put: 'll0m'.
 !
 
 keyConfiguration
