@@ -47,25 +47,58 @@ function $Array(){return smalltalk.Array||(typeof Array=="undefined"?nil:Array)}
 return smalltalk.withContext(function($ctx1) { 
 var $1,$2;
 $1=_st($Array())._new();
-_st($1)._add_("ssh root@zypher");
+_st($1)._add_("Shell Commands:");
+$ctx1.sendIdx["add:"]=1;
 _st($1)._add_("rsync -avuz file.txt siba@ssh.itu.dk:/home/siba/web");
+$ctx1.sendIdx["add:"]=2;
 _st($1)._add_("cd ~/home/siemen");
+$ctx1.sendIdx["add:"]=3;
 _st($1)._add_("sh ./foo");
-_st($1)._add_("a := [:i | ^ self.]");
+$ctx1.sendIdx["add:"]=4;
 _st($1)._add_("ssh root@zypher");
+$ctx1.sendIdx["add:"]=5;
 _st($1)._add_("rsync -avusz");
-_st($1)._add_("cd ~/home/siemen");
-_st($1)._add_("sh ./foo");
-_st($1)._add_("We used to cut the green green grass");
-_st($1)._add_("The force of the USA is mighty");
-_st($1)._add_("Slimane the Slimey Pig sledged the slider");
+$ctx1.sendIdx["add:"]=6;
+_st($1)._add_("Smalltalk:");
+$ctx1.sendIdx["add:"]=7;
+_st($1)._add_("a == 1 ifTrue: [ Transcript show: a]");
+$ctx1.sendIdx["add:"]=8;
+_st($1)._add_("^ self . \x22 ^ measns return ");
+$ctx1.sendIdx["add:"]=9;
+_st($1)._add_("a := [:i | ^ self.]");
+$ctx1.sendIdx["add:"]=10;
+_st($1)._add_("lessonIndex := 1.");
+$ctx1.sendIdx["add:"]=11;
+_st($1)._add_("lessons := Array new ");
+$ctx1.sendIdx["add:"]=12;
+_st($1)._add_("Programming Chars");
+$ctx1.sendIdx["add:"]=13;
+_st($1)._add_("<>/\x5c|,>//??\x5c/[]{}[];:<\x22;:;</<");
+$ctx1.sendIdx["add:"]=14;
+_st($1)._add_("~@:.#@$:.~^&()@#$~()-_=++=()*_*&^%^");
+$ctx1.sendIdx["add:"]=15;
+_st($1)._add_("Numbers");
+$ctx1.sendIdx["add:"]=16;
+_st($1)._add_("1234 23 14 42 12 34 321 4 3 22 12 32 4134");
+$ctx1.sendIdx["add:"]=17;
+_st($1)._add_("12 23 41 14 24 213 12 43 21 231 4 12 324 212 21 231 4 ");
+$ctx1.sendIdx["add:"]=18;
+_st($1)._add_("5678 56 78 85 68 785 67 687 567 58 78 768 58 68 56 8");
+$ctx1.sendIdx["add:"]=19;
+_st($1)._add_("90-= 0-=9 90-= 90 - 09 =- 89 80 -9 =0 89 90 0- -= =- 90 89");
+$ctx1.sendIdx["add:"]=20;
+_st($1)._add_("09 67 89 06 578  256 198 78 567 456 908 7368");
+$ctx1.sendIdx["add:"]=21;
+_st($1)._add_(".,;: ;:., ;:;,,. (()) ,,.;:");
+$ctx1.sendIdx["add:"]=22;
+_st($1)._add_(".,-.,)-(),\x22''..-(),(({},}{-(.;:$]}_");
 $2=_st($1)._yourself();
 self["@lessons"]=$2;
 self["@lessonIndex"]=(1);
 self["@typedString"]="";
 return self}, function($ctx1) {$ctx1.fill(self,"initialize",{},smalltalk.Lesson)})},
 args: [],
-source: "initialize\x0a\x09lessons := Array new \x0a\x09\x09add: 'ssh root@zypher' ;\x0a\x09\x09add: 'rsync -avuz file.txt siba@ssh.itu.dk:/home/siba/web' ;\x0a\x09\x09add: 'cd ~/home/siemen' ;\x0a\x09\x09add: 'sh ./foo' ;\x0a\x09\x09add: 'a := [:i | ^ self.]' ;\x0a\x09\x09add: 'ssh root@zypher' ;\x0a\x09\x09add: 'rsync -avusz' ;\x0a\x09\x09add: 'cd ~/home/siemen' ;\x0a\x09\x09add: 'sh ./foo' ;\x0a\x09\x09add: 'We used to cut the green green grass' ;\x0a\x09\x09add: 'The force of the USA is mighty' ;\x0a\x09\x09add: 'Slimane the Slimey Pig sledged the slider' ;\x0a\x09\x09yourself.\x0a\x0a\x09lessonIndex := 1.\x0a\x09typedString := '' .\x0a\x09",
+source: "initialize\x0a\x09lessons := Array new \x0a\x09\x09add: 'Shell Commands:' ;\x0a\x09\x09add: 'rsync -avuz file.txt siba@ssh.itu.dk:/home/siba/web' ;\x0a\x09\x09add: 'cd ~/home/siemen' ;\x0a\x09\x09add: 'sh ./foo' ;\x0a\x09\x09add: 'ssh root@zypher' ;\x0a\x09\x09add: 'rsync -avusz' ;\x0a\x09\x09add: 'Smalltalk:' ;\x0a\x09\x09add: 'a == 1 ifTrue: [ Transcript show: a]' ;\x0a\x09\x09add: '^ self . \x22 ^ measns return ' ;\x0a\x09\x09add: 'a := [:i | ^ self.]' ;\x0a\x09\x09\x0a\x09\x09add: 'lessonIndex := 1.' ;\x0a\x09\x09add: 'lessons := Array new ' ;\x0a\x09\x09add: 'Programming Chars' ;\x0a\x09\x09add: '<>/\x5c|,>//??\x5c/[]{}[];:<\x22;:;</<' ;\x0a\x09\x09add: '~@:.#@$:.~^&()@#$~()-_=++=()*_*&^%^' ;\x0a\x09\x09add: 'Numbers' ;\x0a\x09\x09add: '1234 23 14 42 12 34 321 4 3 22 12 32 4134';  \x0a\x09\x09add: '12 23 41 14 24 213 12 43 21 231 4 12 324 212 21 231 4 ' ;\x0a\x09\x09add: '5678 56 78 85 68 785 67 687 567 58 78 768 58 68 56 8' ;\x0a\x09\x09add: '90-= 0-=9 90-= 90 - 09 =- 89 80 -9 =0 89 90 0- -= =- 90 89' ;\x0a\x09\x09add: '09 67 89 06 578  256 198 78 567 456 908 7368';\x0a\x09\x09add: '.,;: ;:., ;:;,,. (()) ,,.;:' ;\x0a\x09\x09add: '.,-.,)-(),\x22''''..-(),(({},}{-(.;:$]}_' ;\x0a\x09\x09yourself.\x0a\x0a\x09lessonIndex := 1.\x0a\x09typedString := '' .\x0a\x09",
 messageSends: ["add:", "new", "yourself"],
 referencedClasses: ["Array"]
 }),
@@ -313,29 +346,26 @@ selector: "handleControlKey:",
 category: 'not yet classified',
 fn: function (event){
 var self=this;
-function $Transcript(){return smalltalk.Transcript||(typeof Transcript=="undefined"?nil:Transcript)}
 return smalltalk.withContext(function($ctx1) { 
-var $1,$2,$3,$4,$5,$6;
-$1=event;
-_st($1)._stopPropagation();
-$2=_st($1)._preventDefault();
-$3=$Transcript();
-_st($3)._show_("key event");
-_st($3)._show_(_st(event)._keyCode());
-$4=_st($3)._cr();
-$5=_st(_st(event)._keyCode()).__eq_eq((8));
-if(smalltalk.assert($5)){
+var $1,$3,$2,$4;
+_st(event)._stopPropagation();
+$1=_st(event)._preventDefault();
+$3=_st(event)._keyCode();
+$ctx1.sendIdx["keyCode"]=1;
+$2=_st($3).__eq_eq((8));
+$ctx1.sendIdx["=="]=1;
+if(smalltalk.assert($2)){
 _st(self["@lesson"])._backspace();
 };
-$6=_st(_st(event)._keyCode()).__eq_eq((13));
-if(smalltalk.assert($6)){
+$4=_st(_st(event)._keyCode()).__eq_eq((13));
+if(smalltalk.assert($4)){
 _st(self["@lesson"])._nextLesson();
 };
 return self}, function($ctx1) {$ctx1.fill(self,"handleControlKey:",{event:event},smalltalk.Tutor)})},
 args: ["event"],
-source: "handleControlKey: event\x0a\x0a\x09event stopPropagation; preventDefault.\x0a\x09\x0a\x09Transcript show: 'key event'; show: event keyCode; cr.\x0a\x09event keyCode == 8 \x0a\x09\x09ifTrue: [\x0a\x09\x09\x09lesson backspace.\x0a\x09\x09].\x0a\x09event keyCode == 13\x0a\x09\x09ifTrue: [\x0a\x09\x09\x09lesson nextLesson.\x0a\x09\x09].\x0a\x0a\x09",
-messageSends: ["stopPropagation", "preventDefault", "show:", "keyCode", "cr", "ifTrue:", "==", "backspace", "nextLesson"],
-referencedClasses: ["Transcript"]
+source: "handleControlKey: event\x0a\x0a\x09event stopPropagation; preventDefault.\x0a\x09\x0a\x09event keyCode == 8 \x0a\x09\x09ifTrue: [\x0a\x09\x09\x09lesson backspace.\x0a\x09\x09].\x0a\x09event keyCode == 13\x0a\x09\x09ifTrue: [\x0a\x09\x09\x09lesson nextLesson.\x0a\x09\x09].\x0a\x0a\x09",
+messageSends: ["stopPropagation", "preventDefault", "ifTrue:", "==", "keyCode", "backspace", "nextLesson"],
+referencedClasses: []
 }),
 smalltalk.Tutor);
 
@@ -418,89 +448,116 @@ selector: "renderOn:",
 category: 'not yet classified',
 fn: function (html){
 var self=this;
-function $Transcript(){return smalltalk.Transcript||(typeof Transcript=="undefined"?nil:Transcript)}
 function $Tutor(){return smalltalk.Tutor||(typeof Tutor=="undefined"?nil:Tutor)}
 return smalltalk.withContext(function($ctx1) { 
-var $1,$3,$5,$6,$7,$8,$9,$10,$4,$11,$12,$13,$14,$2;
+var $1,$2,$4,$6,$7,$8,$11,$10,$9,$12,$13,$14,$17,$16,$15,$18,$5,$19,$20,$21,$22,$23,$3;
 $1=_st(html)._div();
+$ctx1.sendIdx["div"]=1;
 _st($1)._tabindex_((0));
 _st($1)._onFocus_((function(){
 return smalltalk.withContext(function($ctx2) {
-_st($Transcript())._show_("app focus");
-return _st(_st(self["@inputArea"])._asJQuery())._focus();
+$2=_st(self["@inputArea"])._asJQuery();
+$ctx2.sendIdx["asJQuery"]=1;
+return _st($2)._focus();
+$ctx2.sendIdx["focus"]=1;
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
-$2=_st($1)._with_((function(){
+$ctx1.sendIdx["onFocus:"]=1;
+$3=_st($1)._with_((function(){
 return smalltalk.withContext(function($ctx2) {
 _st(html)._style_(" .menu-bar {\x0a\x09\x09\x09\x09}\x0a\x09\x09\x09\x09\x0a\x09\x09\x09\x09.input-area {\x0a\x09\x09\x09\x09\x09position: relative;\x0a\x09\x09\x09\x09\x09left: -200px;\x0a\x09\x09\x09\x09\x09height: 20px;\x0a\x09\x09\x09\x09\x09margin: 0;\x0a\x09\x09\x09\x09\x09padding: 0;\x0a\x09\x09\x09\x09\x09top: -20px;\x0a\x09\x09\x09\x09}\x0a\x09\x09\x09\x09");
-$3=_st(html)._div();
-_st($3)._class_("menu-bar");
-$4=_st($3)._with_((function(){
+$ctx2.sendIdx["style:"]=1;
+$4=_st(html)._div();
+$ctx2.sendIdx["div"]=2;
+_st($4)._class_("menu-bar");
+$ctx2.sendIdx["class:"]=1;
+$5=_st($4)._with_((function(){
 return smalltalk.withContext(function($ctx3) {
-$5=_st(html)._button();
-_st($5)._with_("Recreate App");
-$6=_st($5)._onClick_((function(){
+$6=_st(html)._button();
+_st($6)._with_("Recreate App");
+$ctx3.sendIdx["with:"]=3;
+$7=_st($6)._onClick_((function(){
 return smalltalk.withContext(function($ctx4) {
 return _st($Tutor())._begin();
 }, function($ctx4) {$ctx4.fillBlock({},$ctx3,4)})}));
-$6;
-$7=_st(html)._select();
-_st($7)._with_((function(){
+$7;
+$8=_st(html)._select();
+_st($8)._with_((function(){
 return smalltalk.withContext(function($ctx4) {
-return _st(_st(_st(_st($Tutor())._instance())._lesson())._lessons())._withIndexDo_((function(item,index){
+$11=_st($Tutor())._instance();
+$ctx4.sendIdx["instance"]=1;
+$10=_st($11)._lesson();
+$ctx4.sendIdx["lesson"]=1;
+$9=_st($10)._lessons();
+return _st($9)._withIndexDo_((function(item,index){
 return smalltalk.withContext(function($ctx5) {
-$8=_st(html)._option();
-_st($8)._with_("lesson ".__comma(_st(index)._asString()));
-$9=_st($8)._value_(_st(index)._asString());
-return $9;
+$12=_st(html)._option();
+_st($12)._with_(item);
+$ctx5.sendIdx["with:"]=5;
+$13=_st($12)._value_(_st(index)._asString());
+return $13;
 }, function($ctx5) {$ctx5.fillBlock({item:item,index:index},$ctx4,6)})}));
 }, function($ctx4) {$ctx4.fillBlock({},$ctx3,5)})}));
-_st($7)._onChange_((function(){
+$ctx3.sendIdx["with:"]=4;
+_st($8)._onChange_((function(){
 return smalltalk.withContext(function($ctx4) {
-return _st(_st(_st($Tutor())._instance())._lesson())._lessonIndex_(_st(_st(_st(self["@lessonPicker"])._asJQuery())._val())._asNumber());
+$14=_st(_st($Tutor())._instance())._lesson();
+$17=_st(self["@lessonPicker"])._asJQuery();
+$ctx4.sendIdx["asJQuery"]=2;
+$16=_st($17)._val();
+$15=_st($16)._asNumber();
+return _st($14)._lessonIndex_($15);
 }, function($ctx4) {$ctx4.fillBlock({},$ctx3,7)})}));
-$10=_st($7)._onFocus_((function(){
+$18=_st($8)._onFocus_((function(){
 return smalltalk.withContext(function($ctx4) {
 return _st(_st(self["@inputArea"])._asJQuery())._focus();
 }, function($ctx4) {$ctx4.fillBlock({},$ctx3,8)})}));
-self["@lessonPicker"]=$10;
+self["@lessonPicker"]=$18;
 return self["@lessonPicker"];
 }, function($ctx3) {$ctx3.fillBlock({},$ctx2,3)})}));
-$4;
+$ctx2.sendIdx["with:"]=2;
+$5;
 _st(html)._hr();
-_st(_st(html)._div())._with_((function(){
+$19=_st(html)._div();
+$ctx2.sendIdx["div"]=3;
+_st($19)._with_((function(){
 return smalltalk.withContext(function($ctx3) {
 _st(html)._with_(self["@twiddlerKeypad"]);
+$ctx3.sendIdx["with:"]=7;
 return _st(html)._with_(self["@lesson"]);
 }, function($ctx3) {$ctx3.fillBlock({},$ctx2,9)})}));
-$11=_st(html)._div();
-_st($11)._style_("clear: both");
-$12=_st($11)._class_("clearfix");
-$12;
-$13=_st(html)._input();
-_st($13)._type_("text");
-_st($13)._class_("input-area");
-_st($13)._onKeyDown_((function(event){
+$ctx2.sendIdx["with:"]=6;
+$20=_st(html)._div();
+_st($20)._style_("clear: both");
+$21=_st($20)._class_("clearfix");
+$ctx2.sendIdx["class:"]=2;
+$21;
+$22=_st(html)._input();
+_st($22)._type_("text");
+_st($22)._class_("input-area");
+_st($22)._onKeyDown_((function(event){
 return smalltalk.withContext(function($ctx3) {
 return _st((function(){
 return smalltalk.withContext(function($ctx4) {
 return self._handleControlKey_(event);
 }, function($ctx4) {$ctx4.fillBlock({},$ctx3,11)})}))._valueWithTimeout_((0));
+$ctx3.sendIdx["valueWithTimeout:"]=1;
 }, function($ctx3) {$ctx3.fillBlock({event:event},$ctx2,10)})}));
-$14=_st($13)._onKeyPress_((function(event){
+$23=_st($22)._onKeyPress_((function(event){
 return smalltalk.withContext(function($ctx3) {
 return _st((function(){
 return smalltalk.withContext(function($ctx4) {
 return self._handleCharKey_(event);
 }, function($ctx4) {$ctx4.fillBlock({},$ctx3,13)})}))._valueWithTimeout_((0));
 }, function($ctx3) {$ctx3.fillBlock({event:event},$ctx2,12)})}));
-self["@inputArea"]=$14;
+self["@inputArea"]=$23;
 return self["@inputArea"];
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,2)})}));
+$ctx1.sendIdx["with:"]=1;
 return self}, function($ctx1) {$ctx1.fill(self,"renderOn:",{html:html},smalltalk.Tutor)})},
 args: ["html"],
-source: "renderOn: html\x0a\x09\x22render the whole application\x22\x0a\x0a\x09html div\x0a\x09\x09tabindex: 0;\x0a\x09\x09onFocus: [Transcript show: 'app focus'. inputArea asJQuery focus. ];\x0a\x09\x09with: [\x0a\x09\x09\x09html style: \x0a\x09\x09\x09\x09' .menu-bar {\x0a\x09\x09\x09\x09}\x0a\x09\x09\x09\x09\x0a\x09\x09\x09\x09.input-area {\x0a\x09\x09\x09\x09\x09position: relative;\x0a\x09\x09\x09\x09\x09left: -200px;\x0a\x09\x09\x09\x09\x09height: 20px;\x0a\x09\x09\x09\x09\x09margin: 0;\x0a\x09\x09\x09\x09\x09padding: 0;\x0a\x09\x09\x09\x09\x09top: -20px;\x0a\x09\x09\x09\x09}\x0a\x09\x09\x09\x09'.\x0a\x09\x09\x09\x0a\x09\x09\x09html div\x0a\x09\x09\x09\x09class: 'menu-bar';\x0a\x09\x09\x09\x09with: [ \x0a\x09\x09\x09\x09\x09html button \x0a\x09\x09\x09\x09\x09\x09with: 'Recreate App';\x0a\x09\x09\x09\x09\x09\x09onClick: [Tutor begin].\x0a\x09\x09\x09\x09\x09\x09\x09\x09\x09\x09\x09\x0a\x09\x09\x09\x09\x09lessonPicker := html select\x0a\x09\x09\x09\x09\x09\x09with: [\x0a\x09\x09\x09\x09\x09\x09\x09Tutor instance lesson lessons withIndexDo: [:item :index | \x0a\x09\x09\x09\x09\x09\x09\x09\x09html option with: 'lesson ' , index asString ;  value: index asString.\x0a\x09\x09\x09\x09\x09\x09\x09].\x0a\x09\x09\x09\x09\x09\x09];\x0a\x09\x09\x09\x09\x09\x09onChange: [ Tutor instance lesson lessonIndex: lessonPicker asJQuery val asNumber.] ;\x0a\x09\x09\x09\x09\x09\x09onFocus: [  inputArea asJQuery focus. ].\x0a\x09\x09\x09\x09\x09].\x0a\x09\x09\x09\x09\x09\x0a\x09\x09\x09\x09\x09html hr.\x0a\x09\x09\x09\x09\x09\x0a\x09\x09\x09\x09\x09html div\x0a\x09\x09\x09\x09\x09\x09with: [\x0a\x09\x09\x09\x09\x09\x09\x09html with: twiddlerKeypad.\x0a\x09\x09\x09\x09\x09\x09\x09html with: lesson.\x0a\x09\x09\x09\x09\x09\x09].\x0a\x09\x09\x09\x09\x09html div style: 'clear: both'; class: 'clearfix'.\x0a\x09\x09\x09\x09\x09\x0a\x09\x09\x09\x09\x09inputArea := html input \x0a\x09\x09\x09\x09\x09\x09type:'text'; \x0a\x09\x09\x09\x09\x09\x09class: 'input-area';\x0a\x09\x09\x09\x09\x09\x09onKeyDown: [:event | [ self handleControlKey: event ] valueWithTimeout: 0  ] ;\x0a\x09\x09\x09\x09\x09\x09onKeyPress: [:event | [ self handleCharKey: event ] valueWithTimeout: 0  ].\x0a\x09\x09]",
-messageSends: ["tabindex:", "div", "onFocus:", "show:", "focus", "asJQuery", "with:", "style:", "class:", "button", "onClick:", "begin", "select", "withIndexDo:", "lessons", "lesson", "instance", "option", ",", "asString", "value:", "onChange:", "lessonIndex:", "asNumber", "val", "hr", "type:", "input", "onKeyDown:", "valueWithTimeout:", "handleControlKey:", "onKeyPress:", "handleCharKey:"],
-referencedClasses: ["Transcript", "Tutor"]
+source: "renderOn: html\x0a\x09\x22render the whole application\x22\x0a\x0a\x09html div\x0a\x09\x09tabindex: 0;\x0a\x09\x09onFocus: [ inputArea asJQuery focus. ];\x0a\x09\x09with: [\x0a\x09\x09\x09html style: \x0a\x09\x09\x09\x09' .menu-bar {\x0a\x09\x09\x09\x09}\x0a\x09\x09\x09\x09\x0a\x09\x09\x09\x09.input-area {\x0a\x09\x09\x09\x09\x09position: relative;\x0a\x09\x09\x09\x09\x09left: -200px;\x0a\x09\x09\x09\x09\x09height: 20px;\x0a\x09\x09\x09\x09\x09margin: 0;\x0a\x09\x09\x09\x09\x09padding: 0;\x0a\x09\x09\x09\x09\x09top: -20px;\x0a\x09\x09\x09\x09}\x0a\x09\x09\x09\x09'.\x0a\x09\x09\x09\x0a\x09\x09\x09html div\x0a\x09\x09\x09\x09class: 'menu-bar';\x0a\x09\x09\x09\x09with: [ \x0a\x09\x09\x09\x09\x09html button \x0a\x09\x09\x09\x09\x09\x09with: 'Recreate App';\x0a\x09\x09\x09\x09\x09\x09onClick: [Tutor begin].\x0a\x09\x09\x09\x09\x09\x09\x09\x09\x09\x09\x09\x0a\x09\x09\x09\x09\x09lessonPicker := html select\x0a\x09\x09\x09\x09\x09\x09with: [\x0a\x09\x09\x09\x09\x09\x09\x09Tutor instance lesson lessons withIndexDo: [:item :index | \x0a\x09\x09\x09\x09\x09\x09\x09\x09html option with: item ;  value: index asString.\x0a\x09\x09\x09\x09\x09\x09\x09].\x0a\x09\x09\x09\x09\x09\x09];\x0a\x09\x09\x09\x09\x09\x09onChange: [ Tutor instance lesson lessonIndex: lessonPicker asJQuery val asNumber.] ;\x0a\x09\x09\x09\x09\x09\x09onFocus: [  inputArea asJQuery focus. ].\x0a\x09\x09\x09\x09\x09].\x0a\x09\x09\x09\x09\x09\x0a\x09\x09\x09\x09\x09html hr.\x0a\x09\x09\x09\x09\x09\x0a\x09\x09\x09\x09\x09html div\x0a\x09\x09\x09\x09\x09\x09with: [\x0a\x09\x09\x09\x09\x09\x09\x09html with: twiddlerKeypad.\x0a\x09\x09\x09\x09\x09\x09\x09html with: lesson.\x0a\x09\x09\x09\x09\x09\x09].\x0a\x09\x09\x09\x09\x09html div style: 'clear: both'; class: 'clearfix'.\x0a\x09\x09\x09\x09\x09\x0a\x09\x09\x09\x09\x09inputArea := html input \x0a\x09\x09\x09\x09\x09\x09type:'text'; \x0a\x09\x09\x09\x09\x09\x09class: 'input-area';\x0a\x09\x09\x09\x09\x09\x09onKeyDown: [:event | [ self handleControlKey: event ] valueWithTimeout: 0  ] ;\x0a\x09\x09\x09\x09\x09\x09onKeyPress: [:event | [ self handleCharKey: event ] valueWithTimeout: 0  ].\x0a\x09\x09]",
+messageSends: ["tabindex:", "div", "onFocus:", "focus", "asJQuery", "with:", "style:", "class:", "button", "onClick:", "begin", "select", "withIndexDo:", "lessons", "lesson", "instance", "option", "value:", "asString", "onChange:", "lessonIndex:", "asNumber", "val", "hr", "type:", "input", "onKeyDown:", "valueWithTimeout:", "handleControlKey:", "onKeyPress:", "handleCharKey:"],
+referencedClasses: ["Tutor"]
 }),
 smalltalk.Tutor);
 
@@ -574,17 +631,15 @@ selector: "chordFor:",
 category: 'not yet classified',
 fn: function (keySequence){
 var self=this;
-function $Transcript(){return smalltalk.Transcript||(typeof Transcript=="undefined"?nil:Transcript)}
 return smalltalk.withContext(function($ctx1) { 
 var $1;
-_st($Transcript())._show_(keySequence);
 $1=_st(self["@keyToChordMap"])._at_(_st(keySequence)._asLowercase());
 return $1;
 }, function($ctx1) {$ctx1.fill(self,"chordFor:",{keySequence:keySequence},smalltalk.TwiddlerKeypad)})},
 args: ["keySequence"],
-source: "chordFor: keySequence\x0a\x09\x22Looks up the chord matching the key(s), indicated by a one or more digit string; or integer key code.\x22\x0a\x09Transcript show: keySequence.\x0a\x09\x0a\x09^ keyToChordMap at: keySequence asLowercase.",
-messageSends: ["show:", "at:", "asLowercase"],
-referencedClasses: ["Transcript"]
+source: "chordFor: keySequence\x0a\x09\x22Looks up the chord matching the key(s), indicated by a one or more digit string; or integer key code.\x22\x0a\x09\x0a\x09^ keyToChordMap at: keySequence asLowercase.",
+messageSends: ["at:", "asLowercase"],
+referencedClasses: []
 }),
 smalltalk.TwiddlerKeypad);
 
@@ -621,38 +676,64 @@ function $Dictionary(){return smalltalk.Dictionary||(typeof Dictionary=="undefin
 function $Array(){return smalltalk.Array||(typeof Array=="undefined"?nil:Array)}
 function $String(){return smalltalk.String||(typeof String=="undefined"?nil:String)}
 return smalltalk.withContext(function($ctx1) { 
-var $1,$2,$3,$4;
+var $1,$2,$3,$4,$5,$6,$8,$7,$9,$11,$10,$12,$13;
 self["@columns"]=_st($Dictionary())._new();
+$ctx1.sendIdx["new"]=1;
 $1=self["@columns"];
 _st($1)._at_put_("l",(3));
+$ctx1.sendIdx["at:put:"]=1;
 _st($1)._at_put_("m",(2));
+$ctx1.sendIdx["at:put:"]=2;
 $2=_st($1)._at_put_("r",(1));
+$ctx1.sendIdx["at:put:"]=3;
 self["@keys"]=_st($Array())._new();
+$ctx1.sendIdx["new"]=2;
 (4)._timesRepeat_((function(){
 return smalltalk.withContext(function($ctx2) {
-return _st(self["@keys"])._add_(_st($Array())._new());
+$3=self["@keys"];
+$4=_st($Array())._new();
+$ctx2.sendIdx["new"]=3;
+return _st($3)._add_($4);
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
 self["@keyToChordMap"]=_st($Dictionary())._new();
 _st(self._keyConfiguration())._linesDo_((function(line){
 var trimmedLine,tokens;
 return smalltalk.withContext(function($ctx2) {
-trimmedLine=_st(_st(_st(line)._trimBoth())._tokenize_("#"))._at_((1));
+$5=_st(_st(line)._trimBoth())._tokenize_("#");
+$ctx2.sendIdx["tokenize:"]=1;
+trimmedLine=_st($5)._at_((1));
+$ctx2.sendIdx["at:"]=1;
 trimmedLine;
-$3=_st(trimmedLine).__eq_eq("");
-if(! smalltalk.assert($3)){
+$6=_st(trimmedLine).__eq_eq("");
+if(! smalltalk.assert($6)){
 tokens=_st(trimmedLine)._tokenize_("\x5cs+"._asRegexp());
 tokens;
-$4=_st(_st(tokens)._at_((4)))._match_("\x22.+\x22");
-if(smalltalk.assert($4)){
-return _st(self["@keyToChordMap"])._at_put_(_st(_st(tokens)._at_((4)))._trimBoth_("\x22"),_st(tokens)._at_((2)));
+$8=_st(tokens)._at_((4));
+$ctx2.sendIdx["at:"]=2;
+$7=_st($8)._match_("\x22.+\x22");
+if(smalltalk.assert($7)){
+$9=self["@keyToChordMap"];
+$11=_st(tokens)._at_((4));
+$ctx2.sendIdx["at:"]=3;
+$10=_st($11)._trimBoth_("\x22");
+return _st($9)._at_put_($10,_st(tokens)._at_((2)));
+$ctx2.sendIdx["at:put:"]=4;
 };
 };
 }, function($ctx2) {$ctx2.fillBlock({line:line,trimmedLine:trimmedLine,tokens:tokens},$ctx1,2)})}));
-_st(self["@keyToChordMap"])._at_put_(" ","m000");
-_st(self["@keyToChordMap"])._at_put_(_st($String())._cr(),"mmmm");
+$12=self["@keyToChordMap"];
+_st($12)._at_put_(" ","m000");
+$ctx1.sendIdx["at:put:"]=5;
+_st($12)._at_put_(_st($String())._cr(),"mmmm");
+$ctx1.sendIdx["at:put:"]=6;
+_st($12)._at_put_("\x22","l00l");
+$ctx1.sendIdx["at:put:"]=7;
+_st($12)._at_put_("'","l00r");
+$ctx1.sendIdx["at:put:"]=8;
+$13=_st($12)._at_put_("\x5c","lml0");
 return self}, function($ctx1) {$ctx1.fill(self,"initialize",{},smalltalk.TwiddlerKeypad)})},
 args: [],
-source: "initialize\x0a\x09\x22comment stating purpose of message\x22\x0a\x09columns := Dictionary new.\x0a\x09columns\x0a\x09\x09at: 'l' put: 3;\x0a\x09\x09at: 'm' put: 2;\x0a\x09\x09at: 'r' put: 1.\x0a\x09\x0a\x09keys := Array new.\x0a\x094 timesRepeat:[keys add: Array new.].\x0a\x09\x0a\x09keyToChordMap := Dictionary new.\x0a\x09\x0a\x09self keyConfiguration linesDo: [:line | \x0a\x09\x09| trimmedLine tokens |\x0a\x09\x09trimmedLine := (line trimBoth tokenize: '#') at: 1.\x0a\x09\x09trimmedLine == '' ifFalse: [\x0a\x09\x09\x09tokens := trimmedLine tokenize: '\x5cs+' asRegexp.\x0a\x09\x09\x09((tokens at: 4) match: '\x22.+\x22') ifTrue: [\x0a\x09\x09\x09\x09keyToChordMap at: ((tokens at: 4)trimBoth: '\x22') put: (tokens at: 2 ).\x0a\x09\x09\x09]\x0a\x09\x09]\x0a\x09].\x0a\x09\x0a\x09\x22parser does not yet support parsing non-quoted non-whitespace chars, so I added space manually.\x22\x0a\x09keyToChordMap at: ' ' put: 'm000'.\x0a\x09keyToChordMap at: (String cr) put: 'mmmm'.",
+source: "initialize\x0a\x09\x22comment stating purpose of message\x22\x0a\x09columns := Dictionary new.\x0a\x09columns\x0a\x09\x09at: 'l' put: 3;\x0a\x09\x09at: 'm' put: 2;\x0a\x09\x09at: 'r' put: 1.\x0a\x09\x0a\x09keys := Array new.\x0a\x094 timesRepeat:[keys add: Array new.].\x0a\x09\x0a\x09keyToChordMap := Dictionary new.\x0a\x09\x0a\x09self keyConfiguration linesDo: [:line | \x0a\x09\x09| trimmedLine tokens |\x0a\x09\x09trimmedLine := (line trimBoth tokenize: '#') at: 1.\x0a\x09\x09trimmedLine == '' ifFalse: [\x0a\x09\x09\x09tokens := trimmedLine tokenize: '\x5cs+' asRegexp.\x0a\x09\x09\x09((tokens at: 4) match: '\x22.+\x22') ifTrue: [\x0a\x09\x09\x09\x09keyToChordMap at: ((tokens at: 4)trimBoth: '\x22') put: (tokens at: 2 ).\x0a\x09\x09\x09]\x0a\x09\x09]\x0a\x09].\x0a\x09\x0a\x09\x22parser does not yet support parsing non-quoted non-whitespace chars, so I added space manually.\x22\x0a\x09keyToChordMap \x0a\x09\x09at: ' ' put: 'm000' ;\x0a\x09\x09at: (String cr) put: 'mmmm' ;\x0a\x09\x09at: '\x22' put: 'l00l' ;\x0a\x09\x09at: '''' put: 'l00r'; \x0a\x09\x09at: '\x5c' put: 'lml0'.\x0a\x09\x09\x0a\x09\x09\x0a\x09\x09",
 messageSends: ["new", "at:put:", "timesRepeat:", "add:", "linesDo:", "keyConfiguration", "at:", "tokenize:", "trimBoth", "ifFalse:", "==", "asRegexp", "ifTrue:", "match:", "trimBoth:", "cr"],
 referencedClasses: ["Dictionary", "Array", "String"]
 }),
@@ -836,63 +917,5 @@ referencedClasses: []
 }),
 smalltalk.TwiddlerKeypad);
 
-
-smalltalk.TwiddlerKeypad.klass.iVarNames = ['instance'];
-smalltalk.addMethod(
-smalltalk.method({
-selector: "begin",
-category: 'not yet classified',
-fn: function (){
-var self=this;
-return smalltalk.withContext(function($ctx1) { 
-_st("#tutor"._asJQuery())._empty();
-self["@instance"]=self._new();
-self._appendToJQuery_("#tutor"._asJQuery());
-return self}, function($ctx1) {$ctx1.fill(self,"begin",{},smalltalk.TwiddlerKeypad.klass)})},
-args: [],
-source: "begin\x0a\x09\x22create the button, keypad and lesson and embed them into the page\x22\x0a\x0a\x09'#tutor' asJQuery empty.\x0a\x09\x0a\x09instance := self new.\x0a\x09\x0a\x09self appendToJQuery: '#tutor' asJQuery.",
-messageSends: ["empty", "asJQuery", "new", "appendToJQuery:"],
-referencedClasses: []
-}),
-smalltalk.TwiddlerKeypad.klass);
-
-smalltalk.addMethod(
-smalltalk.method({
-selector: "instance",
-category: 'not yet classified',
-fn: function (){
-var self=this;
-return smalltalk.withContext(function($ctx1) { 
-var $1;
-$1=self["@instance"];
-return $1;
-}, function($ctx1) {$ctx1.fill(self,"instance",{},smalltalk.TwiddlerKeypad.klass)})},
-args: [],
-source: "instance\x0a\x09^ instance",
-messageSends: [],
-referencedClasses: []
-}),
-smalltalk.TwiddlerKeypad.klass);
-
-smalltalk.addMethod(
-smalltalk.method({
-selector: "renderOn:",
-category: 'not yet classified',
-fn: function (html){
-var self=this;
-function $Transcript(){return smalltalk.Transcript||(typeof Transcript=="undefined"?nil:Transcript)}
-return smalltalk.withContext(function($ctx1) { 
-var $1,$2;
-$1=_st(html)._div();
-_st($1)._with_(_st(html)._button());
-_st($1)._with_("Recreate App");
-$2=_st($1)._click_show_($Transcript(),"clicked");
-return self}, function($ctx1) {$ctx1.fill(self,"renderOn:",{html:html},smalltalk.TwiddlerKeypad.klass)})},
-args: ["html"],
-source: "renderOn: html\x0a\x09\x22render the whole application\x22\x0a\x0a\x09html div \x0a\x09\x09with: html button; \x0a\x09\x09\x09with: 'Recreate App';\x0a\x09\x09\x09click: Transcript show: 'clicked'.\x0a\x09\x09\x09",
-messageSends: ["with:", "div", "button", "click:show:"],
-referencedClasses: ["Transcript"]
-}),
-smalltalk.TwiddlerKeypad.klass);
 
 });

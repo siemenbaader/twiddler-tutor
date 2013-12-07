@@ -17,18 +17,30 @@ backspace
 
 initialize
 	lessons := Array new 
-		add: 'ssh root@zypher' ;
+		add: 'Shell Commands:' ;
 		add: 'rsync -avuz file.txt siba@ssh.itu.dk:/home/siba/web' ;
 		add: 'cd ~/home/siemen' ;
 		add: 'sh ./foo' ;
-		add: 'a := [:i | ^ self.]' ;
 		add: 'ssh root@zypher' ;
 		add: 'rsync -avusz' ;
-		add: 'cd ~/home/siemen' ;
-		add: 'sh ./foo' ;
-		add: 'We used to cut the green green grass' ;
-		add: 'The force of the USA is mighty' ;
-		add: 'Slimane the Slimey Pig sledged the slider' ;
+		add: 'Smalltalk:' ;
+		add: 'a == 1 ifTrue: [ Transcript show: a]' ;
+		add: '^ self . " ^ measns return ' ;
+		add: 'a := [:i | ^ self.]' ;
+		
+		add: 'lessonIndex := 1.' ;
+		add: 'lessons := Array new ' ;
+		add: 'Programming Chars' ;
+		add: '<>/\|,>//??\/[]{}[];:<";:;</<' ;
+		add: '~@:.#@$:.~^&()@#$~()-_=++=()*_*&^%^' ;
+		add: 'Numbers' ;
+		add: '1234 23 14 42 12 34 321 4 3 22 12 32 4134';  
+		add: '12 23 41 14 24 213 12 43 21 231 4 12 324 212 21 231 4 ' ;
+		add: '5678 56 78 85 68 785 67 687 567 58 78 768 58 68 56 8' ;
+		add: '90-= 0-=9 90-= 90 - 09 =- 89 80 -9 =0 89 90 0- -= =- 90 89' ;
+		add: '09 67 89 06 578  256 198 78 567 456 908 7368';
+		add: '.,;: ;:., ;:;,,. (()) ,,.;:' ;
+		add: '.,-.,)-(),"''''..-(),(({},}{-(.;:$]}_' ;
 		yourself.
 
 	lessonIndex := 1.
@@ -176,7 +188,6 @@ handleControlKey: event
 
 	event stopPropagation; preventDefault.
 	
-	Transcript show: 'key event'; show: event keyCode; cr.
 	event keyCode == 8 
 		ifTrue: [
 			lesson backspace.
@@ -210,7 +221,7 @@ renderOn: html
 
 	html div
 		tabindex: 0;
-		onFocus: [Transcript show: 'app focus'. inputArea asJQuery focus. ];
+		onFocus: [ inputArea asJQuery focus. ];
 		with: [
 			html style: 
 				' .menu-bar {
@@ -236,7 +247,7 @@ renderOn: html
 					lessonPicker := html select
 						with: [
 							Tutor instance lesson lessons withIndexDo: [:item :index | 
-								html option with: 'lesson ' , index asString ;  value: index asString.
+								html option with: item ;  value: index asString.
 							].
 						];
 						onChange: [ Tutor instance lesson lessonIndex: lessonPicker asJQuery val asNumber.] ;
@@ -292,7 +303,6 @@ Widget subclass: #TwiddlerKeypad
 
 chordFor: keySequence
 	"Looks up the chord matching the key(s), indicated by a one or more digit string; or integer key code."
-	Transcript show: keySequence.
 	
 	^ keyToChordMap at: keySequence asLowercase.
 !
@@ -334,8 +344,12 @@ initialize
 	].
 	
 	"parser does not yet support parsing non-quoted non-whitespace chars, so I added space manually."
-	keyToChordMap at: ' ' put: 'm000'.
-	keyToChordMap at: (String cr) put: 'mmmm'.
+	keyToChordMap 
+		at: ' ' put: 'm000' ;
+		at: (String cr) put: 'mmmm' ;
+		at: '"' put: 'l00l' ;
+		at: '''' put: 'l00r'; 
+		at: '\' put: 'lml0'.
 !
 
 keyConfiguration
@@ -673,32 +687,5 @@ showChordFor: keySequence
 		ifTrue: [
 			shiftButton asJQuery addClass: 'pressed'.
 		].
-! !
-
-TwiddlerKeypad class instanceVariableNames: 'instance'!
-
-!TwiddlerKeypad class methodsFor: 'not yet classified'!
-
-begin
-	"create the button, keypad and lesson and embed them into the page"
-
-	'#tutor' asJQuery empty.
-	
-	instance := self new.
-	
-	self appendToJQuery: '#tutor' asJQuery.
-!
-
-instance
-	^ instance
-!
-
-renderOn: html
-	"render the whole application"
-
-	html div 
-		with: html button; 
-			with: 'Recreate App';
-			click: Transcript show: 'clicked'.
 ! !
 
